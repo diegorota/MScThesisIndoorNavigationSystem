@@ -1,14 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rgB-m4-K3z">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Hospital" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +21,87 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Codice paziente" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JkL-1h-D2C">
+                                <rect key="frame" x="16" y="219" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qgU-Wd-j61">
+                                <rect key="frame" x="16" y="264" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" secureTextEntry="YES"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ricordami" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Inx-BI-wyQ">
+                                <rect key="frame" x="16" y="309" width="72.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35w-1m-RFW">
+                                <rect key="frame" x="16" y="343.5" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.84174233675003052" green="0.34967362880706787" blue="0.28627505898475647" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Accedi"/>
+                                <connections>
+                                    <action selector="doLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uo3-5W-oNx"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bXD-Oy-abO">
+                                <rect key="frame" x="310" y="303" width="51" height="31"/>
+                                <connections>
+                                    <action selector="changeSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="abY-Mj-snp"/>
+                                </connections>
+                            </switch>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="leadingMargin" secondItem="JkL-1h-D2C" secondAttribute="leading" id="3oc-PX-iOP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JkL-1h-D2C" secondAttribute="trailing" id="FXT-TC-hnH"/>
+                            <constraint firstItem="qgU-Wd-j61" firstAttribute="top" secondItem="JkL-1h-D2C" secondAttribute="bottom" constant="15" id="WjH-7C-RrQ"/>
+                            <constraint firstItem="Inx-BI-wyQ" firstAttribute="top" secondItem="qgU-Wd-j61" secondAttribute="bottom" constant="15" id="ZHR-1Y-Opo"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Inx-BI-wyQ" secondAttribute="leading" id="cWS-JY-Wdu"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="qgU-Wd-j61" secondAttribute="leading" id="gYw-pG-TOR"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="35w-1m-RFW" secondAttribute="leading" id="l3u-HD-v62"/>
+                            <constraint firstItem="35w-1m-RFW" firstAttribute="top" secondItem="Inx-BI-wyQ" secondAttribute="bottom" constant="15" id="mQI-73-4O9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="35w-1m-RFW" secondAttribute="trailing" id="nvV-vM-zKH"/>
+                            <constraint firstItem="JkL-1h-D2C" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="155" id="omt-Wi-0Wf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bXD-Oy-abO" secondAttribute="trailing" id="plz-v5-DTZ"/>
+                            <constraint firstItem="bXD-Oy-abO" firstAttribute="top" secondItem="qgU-Wd-j61" secondAttribute="bottom" constant="9" id="u1A-S7-cww"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qgU-Wd-j61" secondAttribute="trailing" id="wiE-xj-fTv"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="yMV-wy-aBJ"/>
+                    <connections>
+                        <outlet property="password" destination="qgU-Wd-j61" id="vhD-cb-ai7"/>
+                        <outlet property="patientCode" destination="JkL-1h-D2C" id="dpe-a2-0MC"/>
+                        <outlet property="rememberMeSwitch" destination="bXD-Oy-abO" id="UrE-24-jdp"/>
+                        <outlet property="signinButton" destination="35w-1m-RFW" id="M75-Ab-lG5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1076" y="137.18140929535232"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="h8L-7c-Zlh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rgB-m4-K3z" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hfw-ks-O9f">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="dxL-yw-W9j"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gLz-iQ-iBX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-146" y="137"/>
         </scene>
     </scenes>
 </document>

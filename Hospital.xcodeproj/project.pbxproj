@@ -264,7 +264,7 @@
 				DEVELOPMENT_TEAM = EDG8TGNYUA;
 				INFOPLIST_FILE = Hospital/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = it.polimi.Hospital;
+				PRODUCT_BUNDLE_IDENTIFIER = it.polimi.tesi.hospital;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -277,7 +277,7 @@
 				DEVELOPMENT_TEAM = EDG8TGNYUA;
 				INFOPLIST_FILE = Hospital/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = it.polimi.Hospital;
+				PRODUCT_BUNDLE_IDENTIFIER = it.polimi.tesi.hospital;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
