@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var patientCode: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -19,9 +19,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        rememberMe = rememberMeSwitch.isOn
-        
         title = "Login"
+        rememberMe = rememberMeSwitch.isOn
         
         signinButton.layer.cornerRadius = 5
         patientCode.layer.cornerRadius = 5
@@ -33,11 +32,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // funzione che cambia lo stato di rememberMe quando l'utente preme lo switch per memorizzare o meno i dati di login
+    // Funzione che cambia lo stato di rememberMe quando l'utente preme lo switch per memorizzare o meno i dati di login
     @IBAction func changeSwitch(_ sender: Any) {
         rememberMe = rememberMeSwitch.isOn
     }
     
+    // Funzione che controlla se sono stati compilati i campi di login e chiama la funzione checkLogin() per verificare la validità delle credenziali.
+    // Se le credenziali sono corrette, crea la schermata di Home, altrimenti mostra un messaggio di errore.
     @IBAction func doLogin(_ sender: Any) {
         
         if patientCode.text == "" || password.text == "" {
@@ -47,7 +48,9 @@ class ViewController: UIViewController {
         }
         
         if checkLogin() {
-            // passa alla schermata Home
+            if let home = storyboard?.instantiateViewController(withIdentifier: "HomeNavigation") {
+                present(home, animated: true)
+            }
         } else {
             let ac = UIAlertController(title: "Errore login", message: "Codice paziente o password errati. Inserisci nuovamente le tue credenziali.", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "Continua", style: .default))
@@ -56,8 +59,25 @@ class ViewController: UIViewController {
         
     }
     
+    // Funziona che verifica che le credenzuali siano corrette. Ritorna true in caso affermativo, altrimenti false.
     // Da implementare controllo validità patientCode e Passeord. Allo stato attuale, questo metodo ritorna sempre true.
     func checkLogin() -> Bool {
+        if let path = Bundle.main.path(forResource: "json/login", ofType: "json") {
+            if let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped) {
+                let json = JSON(data: data)
+                if json["login_response"].boolValue == true {
+                    PersonLogged.name = json["name"].stringValue
+                    PersonLogged.surname = json["surname"].stringValue
+                    PersonLogged.fiscalCode = json["fiscalcode"].stringValue
+                    PersonLogged.hospitalized = json["hospitalized"].boolValue
+                    PersonLogged.keepLogin = rememberMe
+                    return true
+                }
+            }
+        } else {
+            let ac = UIAlertController(title: "Errore", message: "Si è verificato un errore di connessione. Riprova.", preferredStyle: .alert)
+            present(ac,animated: true)
+        }
         return false
     }
 }
