@@ -8,16 +8,20 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var surname: UILabel!
     @IBOutlet weak var fiscalCode: UILabel!
+    @IBOutlet weak var settingsTableView: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        settingsTableView.delegate = self
+        settingsTableView.dataSource = self
         
         name.text = PersonLogged.name
         surname.text = PersonLogged.surname
@@ -29,6 +33,30 @@ class SettingsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath)
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "Logout"
+        } else if indexPath.row == 1 {
+            cell.textLabel?.text = "Support"
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            if let login = storyboard?.instantiateViewController(withIdentifier: "LoginNavigation") {
+                PersonLogged.clearAll()
+                present(login,animated: true)
+            }
+        }
     }
     
 

@@ -15,5 +15,14 @@ class PersonLogged: NSObject {
     static var fiscalCode: String = ""
     static var hospitalized: Bool = false
     static var keepLogin: Bool = false
+    
+    static func clearAll() {
+        name = ""
+        surname = ""
+        fiscalCode = ""
+        hospitalized = false
+        keepLogin = false
+        
+    }
 
 }

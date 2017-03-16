@@ -12,15 +12,13 @@ class HomeTile: NSObject {
     
     var titleTile: String
     var descriptionTile: String
-    var callToActionTile: String
     var logoTile: String
     var dimensionTile: Int
     
-    init(titleTile: String, descriptionTile: String, callToActionTile: String, logoTile: String, dimensionTile: Int) {
+    init(titleTile: String, descriptionTile: String, logoTile: String, dimensionTile: Int) {
         
         self.titleTile = titleTile
         self.descriptionTile = descriptionTile
-        self.callToActionTile = callToActionTile
         self.logoTile = logoTile
         self.dimensionTile = dimensionTile
         

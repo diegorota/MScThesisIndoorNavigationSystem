@@ -21,6 +21,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         title = "Login"
         rememberMe = rememberMeSwitch.isOn
+//        navigationController?.navigationBar.barTintColor = UIColor(red:0.85, green:0.35, blue:0.29, alpha:1.0)
+//        navigationController?.navigationBar.isTranslucent = false
         
         signinButton.layer.cornerRadius = 5
         patientCode.layer.cornerRadius = 5
