@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
+    let defaults = UserDefaults.standard
+    
     @IBOutlet weak var helloLabel: UILabel!
     @IBOutlet weak var hourLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -22,7 +24,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.dataSource = self
         title = "Hospital"
-        helloLabel.text = "Hello, \(PersonLogged.name)"
+        helloLabel.text = "Hello, \(defaults.string(forKey: UserDefaultsKeys.nameKey)!)"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Settings"), style: .plain, target: self, action: #selector(openSettings))
         loadTiles()
 

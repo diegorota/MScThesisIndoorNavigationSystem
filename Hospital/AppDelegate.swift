@@ -12,11 +12,21 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let tabBarController = UITabBarController()
+    let defaults = UserDefaults.standard
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        var initialviewController: UINavigationController
+        if defaults.bool(forKey: UserDefaultsKeys.rememberMeKey) {
+            initialviewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeNavigation") as! UINavigationController
+        } else {
+            initialviewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginNavigation") as! UINavigationController
+        }
+        
+        self.window?.rootViewController = initialviewController
+        self.window?.makeKeyAndVisible()
         return true
     }
 

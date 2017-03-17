@@ -9,6 +9,8 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    let defaults = UserDefaults.standard
 
     @IBOutlet weak var patientCode: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -21,8 +23,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         title = "Login"
         rememberMe = rememberMeSwitch.isOn
-//        navigationController?.navigationBar.barTintColor = UIColor(red:0.85, green:0.35, blue:0.29, alpha:1.0)
-//        navigationController?.navigationBar.isTranslucent = false
         
         signinButton.layer.cornerRadius = 5
         patientCode.layer.cornerRadius = 5
@@ -31,7 +31,6 @@ class LoginViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // Funzione che cambia lo stato di rememberMe quando l'utente preme lo switch per memorizzare o meno i dati di login
@@ -68,11 +67,12 @@ class LoginViewController: UIViewController {
             if let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped) {
                 let json = JSON(data: data)
                 if json["login_response"].boolValue == true {
-                    PersonLogged.name = json["name"].stringValue
-                    PersonLogged.surname = json["surname"].stringValue
-                    PersonLogged.fiscalCode = json["fiscalcode"].stringValue
-                    PersonLogged.hospitalized = json["hospitalized"].boolValue
-                    PersonLogged.keepLogin = rememberMe
+                    defaults.setValue(json["name"].stringValue, forKey: UserDefaultsKeys.nameKey)
+                    defaults.setValue(json["surname"].stringValue, forKey: UserDefaultsKeys.surnameKey)
+                    defaults.setValue(json["fiscalcode"].stringValue, forKey: UserDefaultsKeys.fiscalCodeKey)
+                    defaults.setValue(json["hospitalized"].stringValue, forKey: UserDefaultsKeys.hospitalizedKey)
+                    defaults.setValue(rememberMe, forKey: UserDefaultsKeys.rememberMeKey)
+                    defaults.synchronize()
                     return true
                 }
             }

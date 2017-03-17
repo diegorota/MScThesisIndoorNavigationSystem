@@ -10,6 +10,8 @@ import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    let defaults = UserDefaults.standard
+    
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var surname: UILabel!
@@ -22,12 +24,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
+        settingsTableView.isScrollEnabled = false
         
         title = "Settings"
         
-        name.text = PersonLogged.name
-        surname.text = PersonLogged.surname
-        fiscalCode.text = PersonLogged.fiscalCode
+        name.text = defaults.string(forKey: UserDefaultsKeys.nameKey)!
+        surname.text = defaults.string(forKey: UserDefaultsKeys.surnameKey)!
+        fiscalCode.text = defaults.string(forKey: UserDefaultsKeys.fiscalCodeKey)!
         image.image = UIImage(named: "User_logo")
         
     }
@@ -55,10 +58,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             if let login = storyboard?.instantiateViewController(withIdentifier: "LoginNavigation") {
-                PersonLogged.clearAll()
+                defaults.setValue(false, forKey: UserDefaultsKeys.rememberMeKey)
+                defaults.synchronize()
                 present(login,animated: true)
             }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 
