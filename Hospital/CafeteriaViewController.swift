@@ -76,10 +76,14 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func changeSwitch(_ sender: UISwitch) {
         if sender.tag == 0 {
             firstChoosen = firstDishSwitch.isOn
-            firstDishTableView.isHidden = !firstChoosen   
+            firstDishTableView.isHidden = !firstChoosen
+            defaults.setValue(firstChoosen, forKey: UserDefaultsKeys.firstChoosenBoolKey)
+            defaults.synchronize()
         } else if sender.tag == 1 {
             secondChoosen = secondDishSwitch.isOn
             secondDishTableView.isHidden = !secondChoosen
+            defaults.setValue(secondChoosen, forKey: UserDefaultsKeys.secondChoosenBoolKey)
+            defaults.synchronize()
         }
     }
     
@@ -132,7 +136,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
                 oldCell?.accessoryType = UITableViewCellAccessoryType.none
             }
             selectedFirstIndexPath = indexPath
-            defaults.setValue(selectedFirstIndexPath?.row, forKey: UserDefaultsKeys.selectedFirstDishIndexPath)
+            defaults.setValue(selectedFirstIndexPath?.row, forKey: UserDefaultsKeys.selectedFirstDishIndexPathKey)
             defaults.synchronize()
         } else if tableView.tag == 1 {
             tableView.deselectRow(at: selectedSecondIndexPath!, animated: true)
@@ -148,7 +152,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
                 oldCell?.accessoryType = UITableViewCellAccessoryType.none
             }
             selectedSecondIndexPath = indexPath
-            defaults.setValue(selectedSecondIndexPath?.row, forKey: UserDefaultsKeys.selectedSecondDishIndexPath)
+            defaults.setValue(selectedSecondIndexPath?.row, forKey: UserDefaultsKeys.selectedSecondDishIndexPathKey)
             defaults.synchronize()
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -161,9 +165,14 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadDishes()
-        selectedFirstIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedFirstDishIndexPath), section: 0)
-        selectedSecondIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedSecondDishIndexPath), section: 0)
-
+        selectedFirstIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedFirstDishIndexPathKey), section: 0)
+        selectedSecondIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedSecondDishIndexPathKey), section: 0)
+        firstChoosen = defaults.bool(forKey: UserDefaultsKeys.firstChoosenBoolKey)
+        secondChoosen = defaults.bool(forKey: UserDefaultsKeys.secondChoosenBoolKey)
+        firstDishSwitch.isOn = firstChoosen
+        secondDishSwitch.isOn = secondChoosen
+        firstDishTableView.isHidden = !firstChoosen
+        secondDishTableView.isHidden = !secondChoosen
     }
     
 }
