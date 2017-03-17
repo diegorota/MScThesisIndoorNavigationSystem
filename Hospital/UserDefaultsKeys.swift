@@ -19,5 +19,6 @@ struct UserDefaultsKeys {
     static let rememberMeKey = "remembermekey"
     
     // Cafeteria view data
-    
+    static let selectedFirstDishIndexPath = "selectedfirstdishindexpath"
+    static let selectedSecondDishIndexPath = "selectedseconddishindexpath"
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    let defaults = UserDefaults.standard
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var secondDishTableView: UITableView!
     @IBOutlet weak var firstDishTableView: UITableView!
@@ -130,6 +132,8 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
                 oldCell?.accessoryType = UITableViewCellAccessoryType.none
             }
             selectedFirstIndexPath = indexPath
+            defaults.setValue(selectedFirstIndexPath?.row, forKey: UserDefaultsKeys.selectedFirstDishIndexPath)
+            defaults.synchronize()
         } else if tableView.tag == 1 {
             tableView.deselectRow(at: selectedSecondIndexPath!, animated: true)
             if indexPath == selectedSecondIndexPath {
@@ -144,6 +148,8 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
                 oldCell?.accessoryType = UITableViewCellAccessoryType.none
             }
             selectedSecondIndexPath = indexPath
+            defaults.setValue(selectedSecondIndexPath?.row, forKey: UserDefaultsKeys.selectedSecondDishIndexPath)
+            defaults.synchronize()
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -155,6 +161,9 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadDishes()
+        selectedFirstIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedFirstDishIndexPath), section: 0)
+        selectedSecondIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedSecondDishIndexPath), section: 0)
+
     }
     
 }
