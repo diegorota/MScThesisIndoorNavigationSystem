@@ -138,4 +138,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         hourLabel.text = composeHour()
     }
     
+    @IBAction func but(_ sender: Any) {
+        if let settings = storyboard?.instantiateViewController(withIdentifier: "TabBar") as? UITabBarController {
+            navigationController?.pushViewController(settings, animated: true)
+        }
+    }
+    
 }

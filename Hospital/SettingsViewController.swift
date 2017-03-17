@@ -23,6 +23,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         settingsTableView.delegate = self
         settingsTableView.dataSource = self
         
+        title = "Settings"
+        
         name.text = PersonLogged.name
         surname.text = PersonLogged.surname
         fiscalCode.text = PersonLogged.fiscalCode

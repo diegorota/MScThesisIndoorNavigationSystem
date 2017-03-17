@@ -15,6 +15,7 @@
 		480510AF1E7952EB003B4014 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480510AE1E7952EB003B4014 /* HomeViewController.swift */; };
 		480510B11E79B086003B4014 /* TileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480510B01E79B086003B4014 /* TileCell.swift */; };
 		480510B31E79DABB003B4014 /* HomeTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480510B21E79DABB003B4014 /* HomeTile.swift */; };
+		48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */; };
 		48F2A1381E7A92F7002A8DC0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */; };
 		48F2A13A1E7A9A31002A8DC0 /* json in Resources */ = {isa = PBXBuildFile; fileRef = 48F2A1391E7A9A31002A8DC0 /* json */; };
 		48F2A13C1E7A9C5B002A8DC0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */; };
@@ -32,6 +33,7 @@
 		480510AE1E7952EB003B4014 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		480510B01E79B086003B4014 /* TileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCell.swift; sourceTree = "<group>"; };
 		480510B21E79DABB003B4014 /* HomeTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTile.swift; sourceTree = "<group>"; };
+		48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaViewController.swift; sourceTree = "<group>"; };
 		48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		48F2A1391E7A9A31002A8DC0 /* json */ = {isa = PBXFileReference; lastKnownFileType = folder; path = json; sourceTree = "<group>"; };
 		48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -70,9 +72,10 @@
 			children = (
 				4805109C1E793D2B003B4014 /* AppDelegate.swift */,
 				4805109E1E793D2B003B4014 /* LoginViewController.swift */,
-				48F2A13D1E7AA095002A8DC0 /* PersonLogged.swift */,
 				480510AE1E7952EB003B4014 /* HomeViewController.swift */,
 				48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */,
+				48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */,
+				48F2A13D1E7AA095002A8DC0 /* PersonLogged.swift */,
 				480510B01E79B086003B4014 /* TileCell.swift */,
 				480510A01E793D2B003B4014 /* Main.storyboard */,
 				480510B21E79DABB003B4014 /* HomeTile.swift */,
@@ -165,6 +168,7 @@
 				4805109D1E793D2B003B4014 /* AppDelegate.swift in Sources */,
 				480510AF1E7952EB003B4014 /* HomeViewController.swift in Sources */,
 				48F2A13C1E7A9C5B002A8DC0 /* SwiftyJSON.swift in Sources */,
+				48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */,
 				48F2A13E1E7AA095002A8DC0 /* PersonLogged.swift in Sources */,
 				480510B11E79B086003B4014 /* TileCell.swift in Sources */,
 			);
