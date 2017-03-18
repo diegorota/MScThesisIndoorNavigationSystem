@@ -74,6 +74,21 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.25, delay: 0, options: [], animations: { [unowned self] in
+            let cell = collectionView.cellForItem(at: indexPath)
+            cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }) { [unowned self] (finished: Bool) in
+            if let newView = self.storyboard?.instantiateViewController(withIdentifier: "TabBar") as? UITabBarController {
+                newView.selectedIndex = indexPath.row
+                self.navigationController?.pushViewController(newView, animated: true)
+            }
+            let cell = collectionView.cellForItem(at: indexPath)
+            cell?.transform = CGAffineTransform.identity
+        }
+
+    }
+    
     func monthConverter(_ monthNumber: Int) -> String {
         switch monthNumber {
         case 01:
@@ -138,12 +153,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewWillAppear(animated)
         dateLabel.text = composeDate()
         hourLabel.text = composeHour()
-    }
-    
-    @IBAction func but(_ sender: Any) {
-        if let settings = storyboard?.instantiateViewController(withIdentifier: "TabBar") as? UITabBarController {
-            navigationController?.pushViewController(settings, animated: true)
-        }
     }
     
 }
