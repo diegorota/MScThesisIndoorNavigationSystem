@@ -23,4 +23,5 @@ struct UserDefaultsKeys {
     static let selectedSecondDishIndexPathKey = "selectedseconddishindexpathkey"
     static let firstChoosenBoolKey = "firstchoosenboolkey"
     static let secondChoosenBoolKey = "secondchoosenboolkey"
+    static let confirmationMenuBoolKey = "confirmationmenuboolkey"
 }

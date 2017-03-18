@@ -83,7 +83,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="814" y="136"/>
+            <point key="canvasLocation" x="813.60000000000002" y="135.38230884557723"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="kzD-am-0k6">
@@ -407,7 +407,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ii8-Fc-Dp9" id="uNc-Re-qG6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -422,7 +422,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mzc-xy-fX6" id="4rt-Z5-Vfu">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -435,14 +435,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Npy-I3-HEr">
+                                <rect key="frame" x="16" y="503" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.84174233679999999" green="0.34967362880000002" blue="0.286275059" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Confirm"/>
+                                <connections>
+                                    <action selector="confirmButtonAction:" destination="U0O-Yo-sNj" eventType="touchUpInside" id="AWZ-YA-Ewe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Cafeteria" image="cafeteria" id="Dt0-a6-qad"/>
                     <connections>
+                        <outlet property="confirmButton" destination="Npy-I3-HEr" id="WHP-zg-WS9"/>
                         <outlet property="dateLabel" destination="PA4-F9-GQ5" id="AjW-pE-nOL"/>
+                        <outlet property="firstDishLabel" destination="Gmw-sA-J7g" id="FSs-tL-D5a"/>
                         <outlet property="firstDishSwitch" destination="aKl-lB-Iav" id="N8m-ep-G8i"/>
                         <outlet property="firstDishTableView" destination="6QS-N2-U4X" id="buU-xR-2gK"/>
+                        <outlet property="informationLabel" destination="DAd-Ei-bWL" id="U68-Rm-o3W"/>
+                        <outlet property="secondDishLabel" destination="BFk-IS-RAM" id="qHd-xw-3WK"/>
                         <outlet property="secondDishSwitch" destination="JOa-g3-dsb" id="38P-cp-I8v"/>
                         <outlet property="secondDishTableView" destination="AGY-5A-ahF" id="nwS-1Y-wXk"/>
                     </connections>

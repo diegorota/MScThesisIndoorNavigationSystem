@@ -17,6 +17,13 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var firstDishTableView: UITableView!
     @IBOutlet weak var secondDishSwitch: UISwitch!
     @IBOutlet weak var firstDishSwitch: UISwitch!
+    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var firstDishLabel: UILabel!
+    @IBOutlet weak var secondDishLabel: UILabel!
+    @IBOutlet weak var informationLabel: UILabel!
+    
+    var confirmationView: UILabel? = nil
+    var confirmationMenuBool = false
     
     var firstDishes = [String]()
     var secondDishes = [String]()
@@ -32,6 +39,8 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.visibleViewController?.title = "Cafeteria"
+        
+        confirmButton.layer.cornerRadius = 5
         
         firstChoosen = firstDishSwitch.isOn
         secondChoosen = secondDishSwitch.isOn
@@ -84,6 +93,87 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             secondDishTableView.isHidden = !secondChoosen
             defaults.setValue(secondChoosen, forKey: UserDefaultsKeys.secondChoosenBoolKey)
             defaults.synchronize()
+        }
+    }
+    
+    @IBAction func confirmButtonAction(_ sender: UIButton) {
+        
+        if confirmButton.currentTitle == "Confirm" {
+            hideView(duration: 0.5, confirmation: true)
+            confirmationMenuBool = true
+            
+        } else {
+            showView(duration: 0.5, confirmation: true)
+            confirmationMenuBool = false
+        }
+        defaults.setValue(confirmationMenuBool, forKey: UserDefaultsKeys.confirmationMenuBoolKey)
+        defaults.synchronize()
+    }
+    
+    func hideView(duration: Double, confirmation: Bool) {
+        UIView.animate(withDuration: duration, delay: 0, options: [], animations: { [unowned self] in
+            self.firstDishLabel.alpha = 0
+            self.firstDishSwitch.alpha = 0
+            self.firstDishTableView.alpha = 0
+            
+            self.secondDishLabel.alpha = 0
+            self.secondDishSwitch.alpha = 0
+            self.secondDishTableView.alpha = 0
+            
+            self.informationLabel.alpha = 0
+        }){[unowned self] (finished: Bool) in
+            self.firstDishLabel.isHidden = true
+            self.firstDishSwitch.isHidden = true
+            self.firstDishTableView.isHidden = true
+            
+            self.secondDishLabel.isHidden = true
+            self.secondDishSwitch.isHidden = true
+            self.secondDishTableView.isHidden = true
+            
+            self.informationLabel.isHidden = true
+            
+            if confirmation {
+                self.confirmationView = UILabel(frame: CGRect(origin: CGPoint(x: self.view.frame.width/2-300/2, y: self.view.frame.height/2-100/2), size: CGSize(width: 300, height: 100)))
+                self.confirmationView?.text = "You have choosen the menu."
+                self.confirmationView?.font = UIFont.boldSystemFont(ofSize: 24)
+                self.confirmationView?.numberOfLines = 2
+                self.confirmationView?.lineBreakMode = NSLineBreakMode.byWordWrapping
+                self.confirmationView?.adjustsFontSizeToFitWidth = true
+                self.confirmationView?.textAlignment = NSTextAlignment.center
+                self.view.addSubview(self.confirmationView!)
+            }
+            
+            self.confirmButton.setTitle("Modify", for: .normal)
+        }
+    }
+    
+    func showView(duration: Double, confirmation: Bool) {
+        UIView.animate(withDuration: duration, delay: 0, options: [], animations: { [unowned self] in
+            self.firstDishLabel.alpha = 1
+            self.firstDishSwitch.alpha = 1
+            self.firstDishTableView.alpha = 1
+            
+            self.secondDishLabel.alpha = 1
+            self.secondDishSwitch.alpha = 1
+            self.secondDishTableView.alpha = 1
+            
+            self.informationLabel.alpha = 1
+        }){[unowned self] (finished: Bool) in
+            self.firstDishLabel.isHidden = false
+            self.firstDishSwitch.isHidden = false
+            self.firstDishTableView.isHidden = !self.firstChoosen
+            
+            self.secondDishLabel.isHidden = false
+            self.secondDishSwitch.isHidden = false
+            self.secondDishTableView.isHidden = !self.secondChoosen
+            
+            self.informationLabel.isHidden = false
+            
+            if confirmation {
+                self.confirmationView?.removeFromSuperview()
+            }
+            
+            self.confirmButton.setTitle("Confirm", for: .normal)
         }
     }
     
@@ -169,10 +259,16 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
         selectedSecondIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedSecondDishIndexPathKey), section: 0)
         firstChoosen = defaults.bool(forKey: UserDefaultsKeys.firstChoosenBoolKey)
         secondChoosen = defaults.bool(forKey: UserDefaultsKeys.secondChoosenBoolKey)
+        confirmationMenuBool = defaults.bool(forKey: UserDefaultsKeys.confirmationMenuBoolKey)
         firstDishSwitch.isOn = firstChoosen
         secondDishSwitch.isOn = secondChoosen
         firstDishTableView.isHidden = !firstChoosen
         secondDishTableView.isHidden = !secondChoosen
+        
+        if confirmationMenuBool {
+            hideView(duration: 0.5, confirmation: true)
+        }
+        
     }
     
 }
