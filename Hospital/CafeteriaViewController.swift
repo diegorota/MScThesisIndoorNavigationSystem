@@ -21,6 +21,8 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var firstDishLabel: UILabel!
     @IBOutlet weak var secondDishLabel: UILabel!
     @IBOutlet weak var informationLabel: UILabel!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var confirmationView: UILabel? = nil
     var confirmationMenuBool = false
@@ -55,7 +57,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
         
         firstDishTableView.isScrollEnabled = false
         secondDishTableView.isScrollEnabled = false
-        
+
     }
     
     // Funzione che carica il file JSON contenente le informazioni dei pasti
@@ -139,7 +141,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.confirmationView?.lineBreakMode = NSLineBreakMode.byWordWrapping
                 self.confirmationView?.adjustsFontSizeToFitWidth = true
                 self.confirmationView?.textAlignment = NSTextAlignment.center
-                self.view.addSubview(self.confirmationView!)
+                self.contentView.addSubview(self.confirmationView!)
             }
             
             self.confirmButton.setTitle("Modify", for: .normal)
