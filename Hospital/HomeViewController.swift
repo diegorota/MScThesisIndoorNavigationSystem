@@ -67,7 +67,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Tile", for: indexPath) as! TileCell
         cell.titleLabel.text = tiles[indexPath.item].titleTile.uppercased()
         cell.descriptionLabel.text = tiles[indexPath.item].descriptionTile
-        cell.iconImage.image = UIImage(named: "Settings")
+        cell.iconImage.image = UIImage(named: tiles[indexPath.item].logoTile)
         cell.layer.cornerRadius = 10
         cell.layer.borderWidth = 0.5
         cell.layer.borderColor = UIColor.black.cgColor
@@ -75,7 +75,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        UIView.animate(withDuration: 0.25, delay: 0, options: [], animations: { [unowned self] in
+        UIView.animate(withDuration: 0.25, delay: 0, options: [], animations: {
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }) { [unowned self] (finished: Bool) in

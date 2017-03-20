@@ -38,7 +38,6 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.visibleViewController?.title = "Cafeteria"
         
         confirmButton.layer.cornerRadius = 5
         
@@ -56,7 +55,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
         
         firstDishTableView.isScrollEnabled = false
         secondDishTableView.isScrollEnabled = false
-
+        
     }
     
     // Funzione che carica il file JSON contenente le informazioni dei pasti
@@ -254,6 +253,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.visibleViewController?.title = "Cafeteria"
         loadDishes()
         selectedFirstIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedFirstDishIndexPathKey), section: 0)
         selectedSecondIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedSecondDishIndexPathKey), section: 0)
