@@ -55,6 +55,28 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
         header.textLabel?.font = UIFont.boldSystemFont(ofSize: 24)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let ed = storyboard?.instantiateViewController(withIdentifier: "ExaminationDetail") as? ExaminationDetailViewController {
+            let info1 = ExaminationInformation(title: "Examination:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).name)
+            let info2 = ExaminationInformation(title: "Day:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).date)
+            let info3 = ExaminationInformation(title: "Hour:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).hour)
+            let descriptionText = (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).examinationDescription
+            let info4 = ExaminationInformation(title: "Doctor:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).doctor)
+            let info5 = ExaminationInformation(title: "Building:", information: "Edificio 27")
+            ed.upperExaminationDetail.append(info1)
+            ed.upperExaminationDetail.append(info2)
+            ed.upperExaminationDetail.append(info3)
+            ed.examinationDescriptionText = descriptionText
+            ed.bottomExaminationDetail.append(info4)
+            ed.bottomExaminationDetail.append(info5)
+            
+            
+            navigationController?.pushViewController(ed, animated: true)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.visibleViewController?.title = "Medical Examinations"

@@ -24,7 +24,8 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var confirmationView: UILabel? = nil
+    var confirmationView1: UILabel? = nil
+    @IBOutlet weak var confirmationView: UILabel!
     var confirmationMenuBool = false
     
     var firstDishes = [String]()
@@ -42,6 +43,9 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         
         confirmButton.layer.cornerRadius = 5
+        
+        confirmationView.isHidden = true
+        confirmationView.adjustsFontSizeToFitWidth = true
         
         firstChoosen = firstDishSwitch.isOn
         secondChoosen = secondDishSwitch.isOn
@@ -134,14 +138,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             self.informationLabel.isHidden = true
             
             if confirmation {
-                self.confirmationView = UILabel(frame: CGRect(origin: CGPoint(x: self.view.frame.width/2-300/2, y: self.view.frame.height/2-100/2), size: CGSize(width: 300, height: 100)))
-                self.confirmationView?.text = "You have choosen the menu."
-                self.confirmationView?.font = UIFont.boldSystemFont(ofSize: 24)
-                self.confirmationView?.numberOfLines = 2
-                self.confirmationView?.lineBreakMode = NSLineBreakMode.byWordWrapping
-                self.confirmationView?.adjustsFontSizeToFitWidth = true
-                self.confirmationView?.textAlignment = NSTextAlignment.center
-                self.contentView.addSubview(self.confirmationView!)
+                self.confirmationView.isHidden = false
             }
             
             self.confirmButton.setTitle("Modify", for: .normal)
@@ -171,7 +168,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             self.informationLabel.isHidden = false
             
             if confirmation {
-                self.confirmationView?.removeFromSuperview()
+                self.confirmationView.isHidden = true
             }
             
             self.confirmButton.setTitle("Confirm", for: .normal)

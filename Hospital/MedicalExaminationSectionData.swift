@@ -66,7 +66,7 @@ class MedicalExaminationSectionData {
     
     static func parse(json: JSON) {
         for examination in json.arrayValue {
-            let examinationDetail = ExaminationDetail(name: examination["name"].stringValue, date: examination["date"].stringValue, hour: examination["hour"].stringValue, examinationDescription: examination["description"].stringValue, doctor: examination["doctor"].stringValue)
+            let examinationDetail = ExaminationDetail(name: examination["name"].stringValue, date: examination["date"].stringValue, hour: examination["hour"].stringValue, examinationDescription: examination["examinationDescription"].stringValue, doctor: examination["doctor"].stringValue)
             rawExaminationList.append(examinationDetail)
         }
     }
