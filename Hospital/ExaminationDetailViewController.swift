@@ -29,8 +29,8 @@ class ExaminationDetailViewController: UIViewController, UITableViewDelegate, UI
         upperTableView.dataSource = self
         descriptionText.text = examinationDescriptionText
         if checkinDone {
-            checkinExaminationView.checkinImage.image = UIImage(named: "check")
             loadCheckinDetails()
+            loadExaminationCheckinView()
         }
 
     }
@@ -85,8 +85,15 @@ class ExaminationDetailViewController: UIViewController, UITableViewDelegate, UI
     }
     
     func parse(json: JSON) {
-        checkinExaminationView.queueLabel.text = "People in queue: \(json["queue"])"
+        checkinExaminationView.queueLabel.text = "Queue: \(json["queue"])"
         checkinExaminationView.waitingLabel.text = "Waiting time: \(json["waiting_time"])"
         checkinExaminationView.ticketLabel.text = "Your ticket: \(json["ticket"])"
+    }
+    
+    func loadExaminationCheckinView() {
+        checkinExaminationView.checkinImage.image = UIImage(named: "check")
+        checkinExaminationView.ticketImage.image = UIImage(named: "Settings")
+        checkinExaminationView.queueImage.image = UIImage(named: "Settings")
+        checkinExaminationView.waitingImage.image = UIImage(named: "Settings")
     }
 }
