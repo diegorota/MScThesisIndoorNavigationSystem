@@ -86,7 +86,7 @@ class ExaminationDetailViewController: UIViewController, UITableViewDelegate, UI
     
     func parse(json: JSON) {
         checkinExaminationView.queueLabel.text = "Queue: \(json["queue"])"
-        checkinExaminationView.waitingLabel.text = "Waiting time: \(json["waiting_time"])"
+        checkinExaminationView.waitingLabel.text = "Waiting time: \(json["waiting_time"])min"
         checkinExaminationView.ticketLabel.text = "Your ticket: \(json["ticket"])"
     }
     
@@ -95,5 +95,9 @@ class ExaminationDetailViewController: UIViewController, UITableViewDelegate, UI
         checkinExaminationView.ticketImage.image = UIImage(named: "Settings")
         checkinExaminationView.queueImage.image = UIImage(named: "Settings")
         checkinExaminationView.waitingImage.image = UIImage(named: "Settings")
+        
+        checkinExaminationView.queueLabel.adjustsFontSizeToFitWidth = true
+        checkinExaminationView.waitingLabel.adjustsFontSizeToFitWidth = true
+        checkinExaminationView.ticketLabel.adjustsFontSizeToFitWidth = true
     }
 }
