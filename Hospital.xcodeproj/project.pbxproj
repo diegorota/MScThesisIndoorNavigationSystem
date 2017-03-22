@@ -24,12 +24,14 @@
 		48CDE7141E7FCE8E00092D93 /* ExaminationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDE7131E7FCE8E00092D93 /* ExaminationDetail.swift */; };
 		48CDE7161E7FD10A00092D93 /* PointOfInterestDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDE7151E7FD10A00092D93 /* PointOfInterestDetail.swift */; };
 		48D371F91E8120F2008E3A40 /* CheckinExamination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D371F81E8120F2008E3A40 /* CheckinExamination.swift */; };
-		48D371FB1E81267E008E3A40 /* ExaminationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D371FA1E81267E008E3A40 /* ExaminationCell.swift */; };
-		48D371FD1E812726008E3A40 /* ExaminationInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D371FC1E812726008E3A40 /* ExaminationInformation.swift */; };
+		48D371FB1E81267E008E3A40 /* InformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D371FA1E81267E008E3A40 /* InformationCell.swift */; };
+		48D371FD1E812726008E3A40 /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D371FC1E812726008E3A40 /* Information.swift */; };
 		48E536EF1E826CC600E03F77 /* POIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536EE1E826CC600E03F77 /* POIViewController.swift */; };
 		48E536F11E826D6F00E03F77 /* POIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536F01E826D6F00E03F77 /* POIData.swift */; };
 		48E536F31E826DB500E03F77 /* POIDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536F21E826DB500E03F77 /* POIDetail.swift */; };
 		48E536F51E82879600E03F77 /* POIDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536F41E82879600E03F77 /* POIDetailViewController.swift */; };
+		48E536F91E82F98B00E03F77 /* TwoButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536F81E82F98B00E03F77 /* TwoButtonsCell.swift */; };
+		48E536FB1E82F9EC00E03F77 /* DescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536FA1E82F9EC00E03F77 /* DescriptionCell.swift */; };
 		48F2A1381E7A92F7002A8DC0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */; };
 		48F2A13A1E7A9A31002A8DC0 /* json in Resources */ = {isa = PBXBuildFile; fileRef = 48F2A1391E7A9A31002A8DC0 /* json */; };
 		48F2A13C1E7A9C5B002A8DC0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */; };
@@ -55,12 +57,14 @@
 		48CDE7131E7FCE8E00092D93 /* ExaminationDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExaminationDetail.swift; sourceTree = "<group>"; };
 		48CDE7151E7FD10A00092D93 /* PointOfInterestDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointOfInterestDetail.swift; sourceTree = "<group>"; };
 		48D371F81E8120F2008E3A40 /* CheckinExamination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinExamination.swift; sourceTree = "<group>"; };
-		48D371FA1E81267E008E3A40 /* ExaminationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExaminationCell.swift; sourceTree = "<group>"; };
-		48D371FC1E812726008E3A40 /* ExaminationInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExaminationInformation.swift; sourceTree = "<group>"; };
+		48D371FA1E81267E008E3A40 /* InformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationCell.swift; sourceTree = "<group>"; };
+		48D371FC1E812726008E3A40 /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		48E536EE1E826CC600E03F77 /* POIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIViewController.swift; sourceTree = "<group>"; };
 		48E536F01E826D6F00E03F77 /* POIData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIData.swift; sourceTree = "<group>"; };
 		48E536F21E826DB500E03F77 /* POIDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIDetail.swift; sourceTree = "<group>"; };
 		48E536F41E82879600E03F77 /* POIDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIDetailViewController.swift; sourceTree = "<group>"; };
+		48E536F81E82F98B00E03F77 /* TwoButtonsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoButtonsCell.swift; sourceTree = "<group>"; };
+		48E536FA1E82F9EC00E03F77 /* DescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionCell.swift; sourceTree = "<group>"; };
 		48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		48F2A1391E7A9A31002A8DC0 /* json */ = {isa = PBXFileReference; lastKnownFileType = folder; path = json; sourceTree = "<group>"; };
 		48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -114,8 +118,10 @@
 				486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */,
 				480510B21E79DABB003B4014 /* HomeTile.swift */,
 				480510B01E79B086003B4014 /* TileCell.swift */,
-				48D371FA1E81267E008E3A40 /* ExaminationCell.swift */,
-				48D371FC1E812726008E3A40 /* ExaminationInformation.swift */,
+				48E536F81E82F98B00E03F77 /* TwoButtonsCell.swift */,
+				48D371FA1E81267E008E3A40 /* InformationCell.swift */,
+				48E536FA1E82F9EC00E03F77 /* DescriptionCell.swift */,
+				48D371FC1E812726008E3A40 /* Information.swift */,
 				4852ABB01E7E7449005734A3 /* TableViewSection.swift */,
 				48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */,
 				480510A01E793D2B003B4014 /* Main.storyboard */,
@@ -201,8 +207,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48D371FD1E812726008E3A40 /* ExaminationInformation.swift in Sources */,
+				48D371FD1E812726008E3A40 /* Information.swift in Sources */,
 				4805109F1E793D2B003B4014 /* LoginViewController.swift in Sources */,
+				48E536F91E82F98B00E03F77 /* TwoButtonsCell.swift in Sources */,
 				4852ABB31E7E7642005734A3 /* MedicalExaminationSectionData.swift in Sources */,
 				48CDE7161E7FD10A00092D93 /* PointOfInterestDetail.swift in Sources */,
 				480510B31E79DABB003B4014 /* HomeTile.swift in Sources */,
@@ -214,12 +221,13 @@
 				481FBBBB1E803FE100184EF7 /* ExaminationDetailViewController.swift in Sources */,
 				486C6EF91E7C54580036B363 /* UserDefaultsKeys.swift in Sources */,
 				4852ABB11E7E7449005734A3 /* TableViewSection.swift in Sources */,
-				48D371FB1E81267E008E3A40 /* ExaminationCell.swift in Sources */,
+				48D371FB1E81267E008E3A40 /* InformationCell.swift in Sources */,
 				4852ABAF1E7E6F26005734A3 /* MedicalExaminationViewController.swift in Sources */,
 				48E536F11E826D6F00E03F77 /* POIData.swift in Sources */,
 				48F2A13C1E7A9C5B002A8DC0 /* SwiftyJSON.swift in Sources */,
 				48CDE7141E7FCE8E00092D93 /* ExaminationDetail.swift in Sources */,
 				48E536F51E82879600E03F77 /* POIDetailViewController.swift in Sources */,
+				48E536FB1E82F9EC00E03F77 /* DescriptionCell.swift in Sources */,
 				48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */,
 				48E536EF1E826CC600E03F77 /* POIViewController.swift in Sources */,
 				480510B11E79B086003B4014 /* TileCell.swift in Sources */,

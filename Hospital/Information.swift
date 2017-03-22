@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExaminationInformation: NSObject {
+class Information: NSObject {
 
     var title: String
     var information: String

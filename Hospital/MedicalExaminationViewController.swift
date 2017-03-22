@@ -57,22 +57,22 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let ed = storyboard?.instantiateViewController(withIdentifier: "ExaminationDetail") as? ExaminationDetailViewController {
-            let info1 = ExaminationInformation(title: "Examination:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).name)
-            let info2 = ExaminationInformation(title: "Day:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).date)
-            let info3 = ExaminationInformation(title: "Hour:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).hour)
+            let info1 = Information(title: "Examination:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).name)
+            let info2 = Information(title: "Day:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).date)
+            let info3 = Information(title: "Hour:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).hour)
             let descriptionText = (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).examinationDescription
-            let info4 = ExaminationInformation(title: "Doctor:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).doctor)
+            let info4 = Information(title: "Doctor:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).doctor)
             
-            var info5: ExaminationInformation?
+            var info5: Information?
             for poi in POIData.getData() {
                 if poi.ID == (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).POI_ID {
-                    info5 = ExaminationInformation(title: "Building:", information: poi.name)
+                    info5 = Information(title: "Building:", information: poi.name)
                     ed.POICoordinates = poi.coordinates
                 }
             }
             
             if info5 == nil {
-                info5 = ExaminationInformation(title: "Building:", information: "Missing Information")
+                info5 = Information(title: "Building:", information: "Missing Information")
             }
             ed.upperExaminationDetail.append(info1)
             ed.upperExaminationDetail.append(info2)

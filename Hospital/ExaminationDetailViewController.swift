@@ -15,8 +15,8 @@ class ExaminationDetailViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var upperTableView: UITableView!
     
-    var upperExaminationDetail = [ExaminationInformation]()
-    var bottomExaminationDetail = [ExaminationInformation]()
+    var upperExaminationDetail = [Information]()
+    var bottomExaminationDetail = [Information]()
     var examinationDescriptionText = String()
     var checkinDone = true
     var POICoordinates: CGPoint? = nil
@@ -47,12 +47,12 @@ class ExaminationDetailViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView.tag == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "UpperExaminationCell") as! ExaminationCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "UpperExaminationCell") as! InformationCell
             cell.titleLabel.text = upperExaminationDetail[indexPath.row].title
             cell.informationLabel.text = upperExaminationDetail[indexPath.row].information
             return cell
         } else if tableView.tag == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BottomExaminationCell") as! ExaminationCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BottomExaminationCell") as! InformationCell
             cell.titleLabel.text = bottomExaminationDetail[indexPath.row].title
             cell.informationLabel.text = bottomExaminationDetail[indexPath.row].information
             return cell
