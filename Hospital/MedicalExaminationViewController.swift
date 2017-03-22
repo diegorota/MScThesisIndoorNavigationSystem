@@ -62,13 +62,24 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
             let info3 = ExaminationInformation(title: "Hour:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).hour)
             let descriptionText = (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).examinationDescription
             let info4 = ExaminationInformation(title: "Doctor:", information: (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).doctor)
-            let info5 = ExaminationInformation(title: "Building:", information: "Edificio 27")
+            
+            var info5: ExaminationInformation?
+            for poi in POIData.getData() {
+                if poi.ID == (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).POI_ID {
+                    info5 = ExaminationInformation(title: "Building:", information: poi.name)
+                    ed.POICoordinates = poi.coordinates
+                }
+            }
+            
+            if info5 == nil {
+                info5 = ExaminationInformation(title: "Building:", information: "Missing Information")
+            }
             ed.upperExaminationDetail.append(info1)
             ed.upperExaminationDetail.append(info2)
             ed.upperExaminationDetail.append(info3)
             ed.examinationDescriptionText = descriptionText
             ed.bottomExaminationDetail.append(info4)
-            ed.bottomExaminationDetail.append(info5)
+            ed.bottomExaminationDetail.append(info5!)
             
             
             navigationController?.pushViewController(ed, animated: true)

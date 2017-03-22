@@ -19,6 +19,7 @@ class ExaminationDetailViewController: UIViewController, UITableViewDelegate, UI
     var bottomExaminationDetail = [ExaminationInformation]()
     var examinationDescriptionText = String()
     var checkinDone = true
+    var POICoordinates: CGPoint? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
