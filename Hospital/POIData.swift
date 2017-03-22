@@ -33,7 +33,7 @@ class POIData {
     
     static func parse(json: JSON) {
         for poi in json.arrayValue {
-            let newPOI = POIDetail(ID: poi["ID"].stringValue, name: poi["name"].stringValue, hour: poi["hour"].stringValue, description: poi["description"].stringValue, manager: poi["manager"].stringValue, building: poi["building"].stringValue, coordinates: CGPoint(x: poi["x_coordinate"].intValue, y: poi["y_coordinate"].intValue))
+            let newPOI = POIDetail(ID: poi["ID"].stringValue, name: poi["name"].stringValue, hour: poi["hour"].stringValue, description: poi["description"].stringValue, manager: poi["manager"].stringValue, building: poi["building"].stringValue, phoneNumber: poi["phone_number"].stringValue, coordinates: CGPoint(x: poi["x_coordinate"].intValue, y: poi["y_coordinate"].intValue))
             POIList?.append(newPOI)
         }
     }

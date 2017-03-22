@@ -21,6 +21,7 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     var informationList = [Information]()
     var placeCoordinates: CGPoint?
     var placeDescription: String?
+    var phoneNumber: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,15 +38,17 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return informationList.count + 20
+
+        return informationList.count + 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! TwoButtonsCell
-            cell.leftButton.setImage(UIImage(named: "Settings"), for: .normal)
-            cell.rightButton.setImage(UIImage(named: "Settings"), for: .normal)
+            cell.leftButton.setImage(UIImage(named: "phone"), for: .normal)
+            cell.rightButton.setImage(UIImage(named: "navigate"), for: .normal)
+            cell.backgroundColor = UIColor(red:0.85, green:0.35, blue:0.29, alpha:1.0)
             return cell
             
         } else if (indexPath.row > 0) && (indexPath.row < (informationList.count+1)) {
@@ -55,28 +58,40 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.informationLabel.text = informationList[indexPath.row-1].information
             return cell
             
-        } else {
+        } else if indexPath.row == (informationList.count+1) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DescriptionCell", for: indexPath) as! DescriptionCell
             cell.descriptionText.text = placeDescription
             return cell
 
+        } else {
+            return UITableViewCell()
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 88
+            return 68
             
         } else if (indexPath.row > 0) && (indexPath.row < (informationList.count+1)) {
             return 44
-        } else {
+        } else if indexPath.row == (informationList.count+1) {
             return 132
+        } else {
+            let actualSize = 132+44+88+200
+            let deviceHeight = Int(self.view.bounds.size.height)
+            let plusCell = Int((deviceHeight-actualSize))
+            if plusCell > 0 {
+                return CGFloat(plusCell)
+            } else {
+                return 1
+            }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         headerHeightConstraint.constant = maxHeaderHeight
+        navigationController?.visibleViewController?.title = "Details"
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -144,6 +159,26 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             // Manipulate UI elements within the header here
             self.view.layoutIfNeeded()
         })
+    }
+    
+    private func callNumber(phoneNumber:String) {
+        if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL)) {
+                application.open(phoneCallURL, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
+    @IBAction func POIAction(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            callNumber(phoneNumber: phoneNumber!)
+        case 1:
+            print("naviga")
+        default:
+            print("errore")
+        }
     }
 
 }

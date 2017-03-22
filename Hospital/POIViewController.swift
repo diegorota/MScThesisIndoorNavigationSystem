@@ -74,12 +74,15 @@ class POIViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             let info2 = Information(title: "Hour:", information: list[indexPath.row].hour)
             let info3 = Information(title: "Manager:", information: list[indexPath.row].manager)
             let info4 = Information(title: "Place:", information: list[indexPath.row].building)
+            let info5 = Information(title: "Phone number:", information: list[indexPath.row].phoneNumber)
             poiView.informationList.append(info1)
             poiView.informationList.append(info2)
             poiView.informationList.append(info3)
             poiView.informationList.append(info4)
+            poiView.informationList.append(info5)
             poiView.placeCoordinates = list[indexPath.row].coordinates
             poiView.placeDescription = list[indexPath.row].POIDescription
+            poiView.phoneNumber = list[indexPath.row].phoneNumber
             navigationController?.pushViewController(poiView, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)

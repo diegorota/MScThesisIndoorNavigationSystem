@@ -17,14 +17,16 @@ class POIDetail {
     var manager: String
     var building: String
     var coordinates: CGPoint
+    var phoneNumber: String
     
-    init(ID: String, name: String, hour: String, description: String, manager: String, building: String, coordinates: CGPoint) {
+    init(ID: String, name: String, hour: String, description: String, manager: String, building: String, phoneNumber: String, coordinates: CGPoint) {
         self.ID = ID
         self.name = name
         self.hour = hour
         self.POIDescription = description
         self.manager = manager
         self.building = building
+        self.phoneNumber = phoneNumber
         self.coordinates = coordinates
     }
     

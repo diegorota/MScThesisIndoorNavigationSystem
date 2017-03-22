@@ -752,6 +752,8 @@
                                                 <constraint firstItem="5ul-kb-5aI" firstAttribute="width" secondItem="vOe-Zq-Cqe" secondAttribute="width" id="Oc1-ro-J3t"/>
                                                 <constraint firstItem="5ul-kb-5aI" firstAttribute="centerY" secondItem="vOe-Zq-Cqe" secondAttribute="centerY" id="Rjv-Zh-vLA"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="5ul-kb-5aI" secondAttribute="leading" id="S9S-IL-HvR"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="5ul-kb-5aI" secondAttribute="bottom" constant="3" id="b4q-IT-8Os"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="vOe-Zq-Cqe" secondAttribute="bottom" constant="3" id="dUd-Rg-Gsk"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="vOe-Zq-Cqe" secondAttribute="trailing" id="nvx-yi-928"/>
                                                 <constraint firstItem="5ul-kb-5aI" firstAttribute="top" secondItem="PsM-x5-QfN" secondAttribute="topMargin" constant="3" id="oaX-Wh-VEl"/>
                                             </constraints>
@@ -761,42 +763,45 @@
                                             <outlet property="titleLabel" destination="5ul-kb-5aI" id="d62-Ec-V9n"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ButtonCell" rowHeight="88" id="Dg1-Dc-Urp" customClass="TwoButtonsCell" customModule="Hospital" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="88"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ButtonCell" rowHeight="68" id="Dg1-Dc-Urp" customClass="TwoButtonsCell" customModule="Hospital" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dg1-Dc-Urp" id="AT7-2f-PaT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESA-zz-Ien">
-                                                    <rect key="frame" x="243" y="3" width="80" height="80"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jw-ZZ-0Qg">
+                                                    <rect key="frame" x="96" y="3" width="60" height="60"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="ABK-80-w4s"/>
+                                                        <constraint firstAttribute="width" constant="60" id="AHL-Rw-GT5"/>
+                                                        <constraint firstAttribute="width" secondItem="0jw-ZZ-0Qg" secondAttribute="height" multiplier="1:1" id="zsD-Ed-di4"/>
+                                                    </constraints>
+                                                    <state key="normal" image="phone"/>
+                                                    <connections>
+                                                        <action selector="POIAction:" destination="aQj-zB-qca" eventType="touchUpInside" id="9iG-9G-MVT"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESA-zz-Ien">
+                                                    <rect key="frame" x="219" y="3" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="ABK-80-w4s"/>
                                                         <constraint firstAttribute="width" secondItem="ESA-zz-Ien" secondAttribute="height" multiplier="1:1" id="HsH-c0-s6J"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jw-ZZ-0Qg">
-                                                    <rect key="frame" x="52" y="3" width="80" height="80"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="KMP-60-sRM"/>
-                                                        <constraint firstAttribute="width" secondItem="0jw-ZZ-0Qg" secondAttribute="height" multiplier="1:1" id="kPV-Cw-4DI"/>
-                                                    </constraints>
-                                                    <state key="normal" title="Button"/>
+                                                    <state key="normal" image="navigate"/>
+                                                    <connections>
+                                                        <action selector="POIAction:" destination="aQj-zB-qca" eventType="touchUpInside" id="h3F-hv-8EK"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="height" secondItem="ESA-zz-Ien" secondAttribute="height" id="9OI-0t-pww"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ESA-zz-Ien" secondAttribute="trailing" constant="44" id="C66-WT-qeg"/>
-                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="leading" secondItem="AT7-2f-PaT" secondAttribute="leadingMargin" constant="44" id="FQB-wa-9MF"/>
-                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="width" secondItem="ESA-zz-Ien" secondAttribute="width" id="IhP-1S-DFL"/>
-                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="centerY" secondItem="ESA-zz-Ien" secondAttribute="centerY" id="Mdz-8S-kSu"/>
-                                                <constraint firstItem="ESA-zz-Ien" firstAttribute="top" secondItem="AT7-2f-PaT" secondAttribute="topMargin" constant="-5" id="OZQ-ho-PT1"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="0jw-ZZ-0Qg" secondAttribute="bottom" constant="-4" id="SyZ-XD-nHQ"/>
-                                                <constraint firstItem="ESA-zz-Ien" firstAttribute="leading" secondItem="0jw-ZZ-0Qg" secondAttribute="trailing" constant="111" id="T1W-ra-rq0"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="ESA-zz-Ien" secondAttribute="bottom" constant="-4" id="kod-hA-7xO"/>
-                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="top" secondItem="AT7-2f-PaT" secondAttribute="topMargin" constant="-5" id="ncL-vy-KQL"/>
-                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="width" secondItem="ESA-zz-Ien" secondAttribute="height" multiplier="1:1" id="sSX-w5-kri"/>
+                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="centerY" secondItem="ESA-zz-Ien" secondAttribute="centerY" id="5EB-nZ-HfY"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="0jw-ZZ-0Qg" secondAttribute="bottom" constant="-4" id="E9P-do-ay2"/>
+                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="width" secondItem="ESA-zz-Ien" secondAttribute="height" multiplier="1:1" id="O3a-7D-abt"/>
+                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="leading" secondItem="AT7-2f-PaT" secondAttribute="leadingMargin" constant="88" id="Y67-iC-1u9"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ESA-zz-Ien" secondAttribute="trailing" constant="88" id="h4g-MB-60P"/>
+                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="top" secondItem="AT7-2f-PaT" secondAttribute="topMargin" constant="-5" id="hMY-eu-EMj"/>
+                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="height" secondItem="ESA-zz-Ien" secondAttribute="height" id="ouN-eJ-8F9"/>
+                                                <constraint firstItem="0jw-ZZ-0Qg" firstAttribute="width" secondItem="ESA-zz-Ien" secondAttribute="width" id="zBT-kC-cIL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -805,7 +810,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DescriptionCell" rowHeight="176" id="uaf-al-xly" customClass="DescriptionCell" customModule="Hospital" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160" width="375" height="176"/>
+                                        <rect key="frame" x="0.0" y="140" width="375" height="176"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uaf-al-xly" id="Xr0-I3-peE">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
@@ -1095,6 +1100,8 @@
         <image name="cafeteria" width="22" height="22"/>
         <image name="city" width="375" height="200"/>
         <image name="examinations" width="22" height="22"/>
+        <image name="navigate" width="40" height="40"/>
+        <image name="phone" width="40" height="40"/>
         <image name="pin" width="22" height="22"/>
     </resources>
 </document>
