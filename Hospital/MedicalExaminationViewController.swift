@@ -45,7 +45,7 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MedicalExaminationCell", for: indexPath)
         cell.textLabel?.text = (medicalExaminationSection[indexPath.section].items[indexPath.row] as? ExaminationDetail)?.name
-        cell.detailTextLabel?.text = "Hour: \((medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).date). Building: Edificio 27"
+        cell.detailTextLabel?.text = "Hour: \((medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).hour). Building: Edificio 27"
         return cell
     }
     

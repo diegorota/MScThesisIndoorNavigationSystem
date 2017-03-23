@@ -656,11 +656,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wya-PG-Vya" id="u1d-xf-o1G">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HaU-Om-oBb">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -688,6 +688,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rBn-7p-e8Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4928.8000000000002" y="173.16341829085459"/>
+        </scene>
+        <!--Prescription-->
+        <scene sceneID="wgU-lg-1XY">
+            <objects>
+                <viewController storyboardIdentifier="Prescription" id="wjK-oJ-aOl" customClass="PrescriptionViewController" customModule="Hospital" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HQq-Mr-Ul4"/>
+                        <viewControllerLayoutGuide type="bottom" id="p7H-0j-HFI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Byy-yr-vNR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5ge-bk-Pri">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PrescriptionCell" textLabel="XZ7-YL-X1y" detailTextLabel="RiM-ZY-LXG" style="IBUITableViewCellStyleSubtitle" id="Afu-sp-QDX">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Afu-sp-QDX" id="8JO-ci-ESe">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XZ7-YL-X1y">
+                                                    <rect key="frame" x="15" y="4" width="34" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RiM-ZY-LXG">
+                                                    <rect key="frame" x="15" y="25" width="44" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="p7H-0j-HFI" firstAttribute="top" secondItem="5ge-bk-Pri" secondAttribute="bottom" id="KFW-GZ-aVY"/>
+                            <constraint firstItem="5ge-bk-Pri" firstAttribute="leading" secondItem="Byy-yr-vNR" secondAttribute="leading" id="b76-RL-bry"/>
+                            <constraint firstItem="5ge-bk-Pri" firstAttribute="top" secondItem="Byy-yr-vNR" secondAttribute="top" id="sZq-r4-yha"/>
+                            <constraint firstAttribute="trailing" secondItem="5ge-bk-Pri" secondAttribute="trailing" id="wAP-w9-qFY"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Prescription" image="pill" id="qPt-Hi-ZL2"/>
+                    <connections>
+                        <outlet property="tableView" destination="5ge-bk-Pri" id="nT4-oV-PfA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DTD-hL-EVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4957.6000000000004" y="914.392803598201"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="1AJ-1H-Jkp">
@@ -727,7 +787,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QU9-gc-TLH" id="PsM-x5-QfN">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOe-Zq-Cqe">
@@ -767,7 +827,7 @@
                                         <rect key="frame" x="0.0" y="72" width="375" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dg1-Dc-Urp" id="AT7-2f-PaT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jw-ZZ-0Qg">
@@ -813,7 +873,7 @@
                                         <rect key="frame" x="0.0" y="140" width="375" height="176"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uaf-al-xly" id="Xr0-I3-peE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="175.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZn-cb-wiu">
@@ -1053,6 +1113,7 @@
                         <segue destination="U0O-Yo-sNj" kind="relationship" relationship="viewControllers" id="b6U-H3-Esk"/>
                         <segue destination="3xR-TB-rM9" kind="relationship" relationship="viewControllers" id="3jR-U5-2LV"/>
                         <segue destination="flB-4v-8BU" kind="relationship" relationship="viewControllers" id="BWD-H1-qsk"/>
+                        <segue destination="wjK-oJ-aOl" kind="relationship" relationship="viewControllers" id="O7l-e3-JbB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Goy-KA-XXs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1102,6 +1163,7 @@
         <image name="examinations" width="22" height="22"/>
         <image name="navigate" width="40" height="40"/>
         <image name="phone" width="40" height="40"/>
+        <image name="pill" width="22" height="22"/>
         <image name="pin" width="22" height="22"/>
     </resources>
 </document>
