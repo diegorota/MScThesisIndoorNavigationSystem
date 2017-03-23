@@ -79,9 +79,15 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }) { [unowned self] (finished: Bool) in
-            if let newView = self.storyboard?.instantiateViewController(withIdentifier: "TabBar") as? UITabBarController {
-                newView.selectedIndex = indexPath.row
-                self.navigationController?.pushViewController(newView, animated: true)
+            if self.tiles[indexPath.row].titleTile.lowercased() != "notizie" {
+                if let newView = self.storyboard?.instantiateViewController(withIdentifier: "TabBar") as? UITabBarController {
+                    newView.selectedIndex = indexPath.row
+                    self.navigationController?.pushViewController(newView, animated: true)
+                }
+            } else {
+                if let newView = self.storyboard?.instantiateViewController(withIdentifier: "News") as? NewsViewController {
+                    self.navigationController?.pushViewController(newView, animated: true)
+                }
             }
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.transform = CGAffineTransform.identity
