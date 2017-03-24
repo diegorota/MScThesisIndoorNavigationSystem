@@ -780,42 +780,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="71" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TkI-rd-Nn0">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="119" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TkI-rd-Nn0">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NewsCell" rowHeight="70" id="2cQ-Bw-EJj" customClass="NewsCell" customModule="Hospital" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="NewsCell" rowHeight="119" id="2cQ-Bw-EJj" customClass="NewsCell" customModule="Hospital" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="119"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2cQ-Bw-EJj" id="99o-8C-0Gh">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="69"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="118"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oax-SS-Ogq">
-                                                    <rect key="frame" x="8" y="8" width="326" height="21"/>
+                                                    <rect key="frame" x="116" y="8" width="218" height="100"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEe-4c-lxe">
-                                                    <rect key="frame" x="8" y="40" width="326" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbnail_image" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-fB-Y6d">
+                                                    <rect key="frame" x="8" y="8" width="100" height="100.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="Dlr-iw-PwF"/>
+                                                        <constraint firstAttribute="width" secondItem="YW0-fB-Y6d" secondAttribute="height" multiplier="1:1" id="Ux5-Py-8xs"/>
+                                                        <constraint firstAttribute="width" constant="100" id="ZEN-8Y-tFU"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="dEe-4c-lxe" firstAttribute="top" secondItem="oax-SS-Ogq" secondAttribute="bottom" constant="11" id="2BS-bo-mdY"/>
-                                                <constraint firstItem="dEe-4c-lxe" firstAttribute="bottom" secondItem="99o-8C-0Gh" secondAttribute="bottomMargin" id="37E-u0-G5j"/>
-                                                <constraint firstItem="dEe-4c-lxe" firstAttribute="trailing" secondItem="99o-8C-0Gh" secondAttribute="trailingMargin" id="L9F-Ca-dJc"/>
-                                                <constraint firstItem="oax-SS-Ogq" firstAttribute="leading" secondItem="99o-8C-0Gh" secondAttribute="leadingMargin" id="OA5-gT-lGW"/>
-                                                <constraint firstItem="oax-SS-Ogq" firstAttribute="trailing" secondItem="99o-8C-0Gh" secondAttribute="trailingMargin" id="QZo-rL-7iX"/>
-                                                <constraint firstItem="oax-SS-Ogq" firstAttribute="top" secondItem="99o-8C-0Gh" secondAttribute="topMargin" id="eCU-Vo-jDZ"/>
-                                                <constraint firstItem="dEe-4c-lxe" firstAttribute="leading" secondItem="99o-8C-0Gh" secondAttribute="leadingMargin" id="nli-ct-KOr"/>
+                                                <constraint firstAttribute="topMargin" secondItem="oax-SS-Ogq" secondAttribute="top" id="3p8-Qp-vC5"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="YW0-fB-Y6d" secondAttribute="bottom" constant="1.5" id="4bm-DR-eOk"/>
+                                                <constraint firstAttribute="topMargin" secondItem="YW0-fB-Y6d" secondAttribute="top" id="Xbc-50-bgD"/>
+                                                <constraint firstItem="oax-SS-Ogq" firstAttribute="centerY" secondItem="YW0-fB-Y6d" secondAttribute="centerY" id="boc-IH-Iso"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="oax-SS-Ogq" secondAttribute="trailing" id="fka-lD-CF0"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="YW0-fB-Y6d" secondAttribute="leading" id="pCu-tU-lfQ"/>
+                                                <constraint firstItem="oax-SS-Ogq" firstAttribute="leading" secondItem="YW0-fB-Y6d" secondAttribute="trailing" constant="8" id="uIk-IN-fMh"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="descriptionLabel" destination="dEe-4c-lxe" id="XEG-NQ-T4Z"/>
+                                            <outlet property="postImage" destination="YW0-fB-Y6d" id="5Zn-Vh-qak"/>
                                             <outlet property="titleLabel" destination="oax-SS-Ogq" id="lp1-p5-duH"/>
                                         </connections>
                                     </tableViewCell>
@@ -1256,5 +1258,6 @@
         <image name="phone" width="40" height="40"/>
         <image name="pill" width="22" height="22"/>
         <image name="pin" width="22" height="22"/>
+        <image name="thumbnail_image" width="100" height="100"/>
     </resources>
 </document>

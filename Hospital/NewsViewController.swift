@@ -46,8 +46,14 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as! NewsCell
-        cell.titleLabel.text = newsList[indexPath.row].title
-        cell.descriptionLabel.text = newsList[indexPath.row].description
+        cell.titleLabel.text = self.newsList[indexPath.row].title
+        //cell.descriptionLabel.text = self.newsList[indexPath.row].description
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: self.newsList[indexPath.row].urlImage)
+            DispatchQueue.main.async {
+                cell.postImage?.image = UIImage(data: data!)
+            }
+        }
         return cell
     }
     
@@ -85,5 +91,5 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
     }
-
+    
 }
