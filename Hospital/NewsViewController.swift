@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class NewsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -47,7 +48,6 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as! NewsCell
         cell.titleLabel.text = self.newsList[indexPath.row].title
-        //cell.descriptionLabel.text = self.newsList[indexPath.row].description
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: self.newsList[indexPath.row].urlImage)
             DispatchQueue.main.async {
@@ -58,11 +58,17 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        
+        return max(UITableViewAutomaticDimension, 160.00)
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return max(UITableViewAutomaticDimension, 160.00)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let svc = SFSafariViewController(url: newsList[indexPath.row].urlSite)
+        self.present(svc, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,5 +97,5 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
     }
-    
+
 }
