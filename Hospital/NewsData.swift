@@ -16,8 +16,6 @@ class NewsData {
     static func getData(refreshData: Bool) -> [News]? {
         if newsList == nil || refreshData {
             getNewsData()
-            print("Scarico nuovi dati")
-            
             return newsList
         } else {
             return newsList
