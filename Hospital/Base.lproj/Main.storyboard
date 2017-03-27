@@ -689,7 +689,7 @@
             </objects>
             <point key="canvasLocation" x="4929" y="-90"/>
         </scene>
-        <!--Prescription-->
+        <!--Prescriptions-->
         <scene sceneID="wgU-lg-1XY">
             <objects>
                 <viewController storyboardIdentifier="Prescription" id="wjK-oJ-aOl" customClass="PrescriptionViewController" customModule="Hospital" customModuleProvider="target" sceneMemberID="viewController">
@@ -740,7 +740,7 @@
                             <constraint firstAttribute="trailing" secondItem="5ge-bk-Pri" secondAttribute="trailing" id="wAP-w9-qFY"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Prescription" image="pill" id="qPt-Hi-ZL2"/>
+                    <tabBarItem key="tabBarItem" title="Prescriptions" image="pill" id="qPt-Hi-ZL2"/>
                     <connections>
                         <outlet property="tableView" destination="5ge-bk-Pri" id="nT4-oV-PfA"/>
                     </connections>

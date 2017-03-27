@@ -16,10 +16,10 @@ class NewsData {
     static func getData(refreshData: Bool) -> [News]? {
         if newsList == nil || refreshData {
             getNewsData()
-        
+            print("Scarico nuovi dati")
+            
             return newsList
         } else {
-            
             return newsList
         }
     }
@@ -41,7 +41,9 @@ class NewsData {
     static func parse(json: JSON) {
         newsList = [News]()
         for news in json.arrayValue {
-            let newsDetail = News(author: news["author"].stringValue, title: news["title"].stringValue, description: news["description"].stringValue, urlSite: URL(string: news["url"].stringValue)!, urlImage: URL(string: news["urlToImage"].stringValue)!, publishedAt: news["publishedAt"].stringValue)
+            let data = try? Data(contentsOf: URL(string: news["urlToImage"].stringValue)!)
+            
+            let newsDetail = News(author: news["author"].stringValue, title: news["title"].stringValue, description: news["description"].stringValue, urlSite: URL(string: news["url"].stringValue)!, postImage: UIImage(data: data!)!, publishedAt: news["publishedAt"].stringValue)
             newsList?.append(newsDetail)
         }
     }

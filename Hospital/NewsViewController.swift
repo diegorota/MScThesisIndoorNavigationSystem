@@ -27,18 +27,23 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
-        
+
+        self.view.layoutIfNeeded()
+        self.tableView.contentOffset = CGPoint(x:0, y:-self.refreshControl.frame.size.height);
+        self.refreshControl.beginRefreshing()
         DispatchQueue.global(qos: .userInitiated).async {
             let list = NewsData.getData(refreshData: false)
             DispatchQueue.main.async {
                 if list != nil {
                     self.newsList = list!
+                    self.refreshControl.endRefreshing()
                     self.tableView.reloadData()
                 } else {
                     self.showError()
                 }
             }
         }
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,12 +53,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as! NewsCell
         cell.titleLabel.text = self.newsList[indexPath.row].title
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: self.newsList[indexPath.row].urlImage)
-            DispatchQueue.main.async {
-                cell.postImage?.image = UIImage(data: data!)
-            }
-        }
+        cell.postImage?.image = self.newsList[indexPath.row].postImage
         return cell
     }
     
@@ -76,7 +76,6 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func refreshData(sender: UIRefreshControl) {
-        
         DispatchQueue.global(qos: .userInitiated).async {
             let list = NewsData.getData(refreshData: true)
             DispatchQueue.main.async {
