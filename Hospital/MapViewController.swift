@@ -11,7 +11,7 @@ import CoreBluetooth
 
 class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var mapScrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     
     // View della freccia
@@ -47,7 +47,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.scrollView.delegate = self
+        self.mapScrollView.delegate = self
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         
         // Memorizzo altezza e larghezza dell'immagine. Verranno usate per le proporzioni dello zoom della mappa
@@ -60,7 +60,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         // Setto riconoscimento doppio tocco per effettuare zoom
         let tap = UITapGestureRecognizer(target: self, action: #selector(zoom))
         tap.numberOfTapsRequired = 2
-        scrollView.addGestureRecognizer(tap)
+        mapScrollView.addGestureRecognizer(tap)
 
     }
     
@@ -112,10 +112,10 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     
     // Funzione chiamata quando si effettua un dippio tocco sulla mappa. Gestisce lo zoom.
     func zoom(sender: UIGestureRecognizer) {
-        if (scrollView.zoomScale < 1.5) {
-            scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
+        if (mapScrollView.zoomScale < 1.5) {
+            mapScrollView.setZoomScale(mapScrollView.maximumZoomScale, animated: true)
         } else {
-            scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+            mapScrollView.setZoomScale(mapScrollView.minimumZoomScale, animated: true)
         }
     }
     
@@ -128,14 +128,14 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     func setMapZoom(size: CGSize) {
         minZoom = Double(size.width.divided(by: CGFloat(imageWidth!)))
         maxZoom = 3*minZoom
-        self.scrollView.minimumZoomScale = CGFloat(minZoom)
-        self.scrollView.maximumZoomScale = CGFloat(maxZoom)
-        self.scrollView.zoomScale = CGFloat(minZoom)
+        self.mapScrollView.minimumZoomScale = CGFloat(minZoom)
+        self.mapScrollView.maximumZoomScale = CGFloat(maxZoom)
+        self.mapScrollView.zoomScale = CGFloat(minZoom)
     }
 
     // Funzione che centra la mappa nel punto in cui si trova l'utente.
     @IBAction func centerView(_ sender: UIButton) {
-        self.scrollView.zoom(to: CGRect(origin: CGPoint(x:(lastPosition?.x)!-50,y:(lastPosition?.y)!-50), size: CGSize(width: 100, height: 100)), animated: true)
+        self.mapScrollView.zoom(to: CGRect(origin: CGPoint(x:(lastPosition?.x)!-50,y:(lastPosition?.y)!-50), size: CGSize(width: 100, height: 100)), animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -149,8 +149,11 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        self.scrollView.zoomScale = CGFloat(1)
-        setMapZoom(size: size)
+        if navigationController?.visibleViewController?.title == "Map" {
+            super.viewWillTransition(to: size, with: coordinator)
+            self.mapScrollView.zoomScale = CGFloat(1)
+            setMapZoom(size: size)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

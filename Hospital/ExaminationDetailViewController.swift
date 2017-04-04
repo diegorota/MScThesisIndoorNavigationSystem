@@ -8,56 +8,165 @@
 
 import UIKit
 
-class ExaminationDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ExaminationDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    @IBOutlet weak var checkinExaminationView: CheckinExamination!
-    @IBOutlet weak var bottomTableView: UITableView!
-    @IBOutlet weak var descriptionText: UITextView!
-    @IBOutlet weak var upperTableView: UITableView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var upperExaminationDetail = [Information]()
     var bottomExaminationDetail = [Information]()
     var examinationDescriptionText = String()
-    var checkinDone = true
+    var checkinDone = false
     var POICoordinates: CGPoint? = nil
+    
+    var queueLabel: String?
+    var waitingLabel: String?
+    var ticketLabel: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        bottomTableView.delegate = self
-        upperTableView.delegate = self
-        bottomTableView.dataSource = self
-        upperTableView.dataSource = self
-        descriptionText.text = examinationDescriptionText
-        if checkinDone {
-            loadCheckinDetails()
-            loadExaminationCheckinView()
-        }
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
 
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.tag == 0 {
-            return upperExaminationDetail.count
-        } else if tableView.tag == 1 {
-            return bottomExaminationDetail.count
+    // Ritorno 8, che è il numero di elementi che devono essere visualizzati nella pagina
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 8
+    }
+    // Funzione che crea a runtime il contenuto delle celle della colle tion view
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.item {
+        case 0:
+            var reusableIdentifier: String!
+            
+            if checkinDone {
+                reusableIdentifier = "MedicalExaminationCheckinOKCell"
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! MedicalExaminationCheckinOKCell
+                
+                if queueLabel == nil || ticketLabel == nil || waitingLabel == nil {
+                    self.loadCheckinDetails()
+                }
+                cell.checkinImage.image = UIImage(named: "check")
+                cell.ticketImage.image = UIImage(named: "Settings")
+                cell.queueImage.image = UIImage(named: "Settings")
+                cell.waitingImage.image = UIImage(named: "Settings")
+                
+                cell.ticketLabel.text = ticketLabel!
+                cell.queueLabel.text = queueLabel!
+                cell.waitingLabel.text = waitingLabel!
+                
+                cell.queueLabel.adjustsFontSizeToFitWidth = true
+                cell.waitingLabel.adjustsFontSizeToFitWidth = true
+                cell.ticketLabel.adjustsFontSizeToFitWidth = true
+                
+                cell.layer.borderWidth = 0.5
+                cell.layer.borderColor = Colors.darkColor.cgColor
+                
+                return cell
+            } else {
+                reusableIdentifier = "MedicalExaminationCheckinKOCell"
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! MedicalExaminationCheckinKOCell
+                cell.checkinImage.image = UIImage(named: "check")
+                
+                cell.layer.borderWidth = 0.5
+                cell.layer.borderColor = Colors.darkColor.cgColor
+                return cell
+            }
+        case 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
+            cell.titleLabel.text = upperExaminationDetail[0].title
+            cell.informationLabel.text = upperExaminationDetail[0].information
+            
+            cell.layer.borderWidth = 0.5
+            cell.layer.borderColor = Colors.darkColor.cgColor
+            return cell
+        case 2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
+            cell.titleLabel.text = upperExaminationDetail[1].title
+            cell.informationLabel.text = upperExaminationDetail[1].information
+            
+            cell.layer.borderWidth = 0.5
+            cell.layer.borderColor = Colors.darkColor.cgColor
+            return cell
+        case 3:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
+            cell.titleLabel.text = upperExaminationDetail[2].title
+            cell.informationLabel.text = upperExaminationDetail[2].information
+            
+            cell.layer.borderWidth = 0.5
+            cell.layer.borderColor = Colors.darkColor.cgColor
+            return cell
+        case 4:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationDescriptionCell", for: indexPath) as! MedicalExaminationDescriptionCell
+            cell.descriptionTextView.text = examinationDescriptionText
+            
+            cell.layer.borderWidth = 0.5
+            cell.layer.borderColor = Colors.darkColor.cgColor
+            return cell
+        case 5:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
+            cell.titleLabel.text = bottomExaminationDetail[0].title
+            cell.informationLabel.text = bottomExaminationDetail[0].information
+            
+            cell.layer.borderWidth = 0.5
+            cell.layer.borderColor = Colors.darkColor.cgColor
+            return cell
+        case 6:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
+            cell.titleLabel.text = bottomExaminationDetail[1].title
+            cell.informationLabel.text = bottomExaminationDetail[1].information
+            
+            cell.layer.borderWidth = 0.5
+            cell.layer.borderColor = Colors.darkColor.cgColor
+            return cell
+        case 7:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationButtonCell", for: indexPath) as! MedicalExaminationButtonCell
+            cell.button.layer.backgroundColor = Colors.mediumColor.cgColor
+            
+            cell.layer.borderWidth = 0.5
+            cell.layer.borderColor = Colors.darkColor.cgColor
+            return cell
+        default:
+            let cell = UICollectionViewCell()
+            return cell
         }
-        return 0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView.tag == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "UpperExaminationCell") as! InformationCell
-            cell.titleLabel.text = upperExaminationDetail[indexPath.row].title
-            cell.informationLabel.text = upperExaminationDetail[indexPath.row].information
-            return cell
-        } else if tableView.tag == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "BottomExaminationCell") as! InformationCell
-            cell.titleLabel.text = bottomExaminationDetail[indexPath.row].title
-            cell.informationLabel.text = bottomExaminationDetail[indexPath.row].information
-            return cell
-        } else {
-            return UITableViewCell()
+    // Funzione che setta a runtime le dimensioni delle celle
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let maxHeight: CGFloat = 144
+        let mediumHeight: CGFloat = 44
+        let littleHeight: CGFloat = 40
+        var width: CGFloat
+        
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            width = view.bounds.size.width-20
+        case .pad:
+            width = view.bounds.size.width-20
+        default:
+            width = view.bounds.size.width-20
+        }
+        
+        switch indexPath.item {
+        case 0:
+            return CGSize(width: width, height: maxHeight)
+        case 1:
+            return CGSize(width: width, height: mediumHeight)
+        case 2:
+            return CGSize(width: width, height: mediumHeight)
+        case 3:
+            return CGSize(width: width, height: mediumHeight)
+        case 4:
+            return CGSize(width: width, height: maxHeight)
+        case 5:
+            return CGSize(width: width, height: mediumHeight)
+        case 6:
+            return CGSize(width: width, height: mediumHeight)
+        case 7:
+            return CGSize(width: width, height: littleHeight)
+        default:
+            return CGSize(width: width, height: littleHeight)
         }
     }
 
@@ -71,9 +180,16 @@ class ExaminationDetailViewController: UIViewController, UITableViewDelegate, UI
         navigationController?.visibleViewController?.title = "Details"
     }
     
+    // Funzione che ridimensiona le celle quando si ruota lo schermo
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView.reloadData()
+    }
+    
+    
     @IBAction func navigate(_ sender: Any) {
     }
     
+    // Funzione che scarica il file JSON dal server
     func loadCheckinDetails() {
         if checkinDone {
             if let path = Bundle.main.path(forResource: "json/checkin", ofType: "json") {
@@ -85,20 +201,10 @@ class ExaminationDetailViewController: UIViewController, UITableViewDelegate, UI
         }
     }
     
+    // Funzione che salva il contenuto del file JSON
     func parse(json: JSON) {
-        checkinExaminationView.queueLabel.text = "Queue: \(json["queue"])"
-        checkinExaminationView.waitingLabel.text = "Waiting time: \(json["waiting_time"])min"
-        checkinExaminationView.ticketLabel.text = "Your ticket: \(json["ticket"])"
-    }
-    
-    func loadExaminationCheckinView() {
-        checkinExaminationView.checkinImage.image = UIImage(named: "check")
-        checkinExaminationView.ticketImage.image = UIImage(named: "Settings")
-        checkinExaminationView.queueImage.image = UIImage(named: "Settings")
-        checkinExaminationView.waitingImage.image = UIImage(named: "Settings")
-        
-        checkinExaminationView.queueLabel.adjustsFontSizeToFitWidth = true
-        checkinExaminationView.waitingLabel.adjustsFontSizeToFitWidth = true
-        checkinExaminationView.ticketLabel.adjustsFontSizeToFitWidth = true
+        queueLabel = "Queue: \(json["queue"])"
+        waitingLabel = "Waiting time: \(json["waiting_time"])min"
+        ticketLabel = "Your ticket: \(json["ticket"])"
     }
 }

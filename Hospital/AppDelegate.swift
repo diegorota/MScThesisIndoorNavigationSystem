@@ -19,14 +19,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         var initialviewController: UINavigationController
-        if defaults.bool(forKey: UserDefaultsKeys.rememberMeKey) {
-            initialviewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeNavigation") as! UINavigationController
-        } else {
+        if defaults.bool(forKey: UserDefaultsKeys.rememberMeKey) && defaults.bool(forKey: UserDefaultsKeys.touchIDKey) || !defaults.bool(forKey: UserDefaultsKeys.rememberMeKey) {
             initialviewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginNavigation") as! UINavigationController
+        } else {
+            initialviewController = mainStoryboard.instantiateViewController(withIdentifier: "HomeNavigation") as! UINavigationController
         }
         
         self.window?.rootViewController = initialviewController
         self.window?.makeKeyAndVisible()
+        
+        // Configura colore della navigation bar
+        UINavigationBar.appearance().barTintColor = Colors.mediumColor
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+        
+        // Configura colore della tab bar
+        UITabBar.appearance().barTintColor = Colors.mediumColor
+        UITabBar.appearance().tintColor = UIColor.white
+        UITabBar.appearance().unselectedItemTintColor = Colors.darkColor
+        
         return true
     }
 

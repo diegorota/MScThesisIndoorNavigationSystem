@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CheckinExamination: UIView {
+class MedicalExaminationCheckinOKCell: UICollectionViewCell {
 
     @IBOutlet weak var checkinImage: UIImageView!
     @IBOutlet weak var queueLabel: UILabel!

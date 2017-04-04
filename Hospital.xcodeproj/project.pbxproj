@@ -16,6 +16,10 @@
 		480510B11E79B086003B4014 /* TileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480510B01E79B086003B4014 /* TileCell.swift */; };
 		480510B31E79DABB003B4014 /* HomeTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480510B21E79DABB003B4014 /* HomeTile.swift */; };
 		481FBBBB1E803FE100184EF7 /* ExaminationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481FBBBA1E803FE100184EF7 /* ExaminationDetailViewController.swift */; };
+		482802551E92C24F002C3665 /* MedicalExaminationCheckinKOCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482802541E92C24F002C3665 /* MedicalExaminationCheckinKOCell.swift */; };
+		482802571E92C36C002C3665 /* MedicalExaminationInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482802561E92C36C002C3665 /* MedicalExaminationInformationCell.swift */; };
+		482802591E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482802581E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift */; };
+		4828025B1E92C44D002C3665 /* MedicalExaminationButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828025A1E92C44D002C3665 /* MedicalExaminationButtonCell.swift */; };
 		4852ABAF1E7E6F26005734A3 /* MedicalExaminationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852ABAE1E7E6F26005734A3 /* MedicalExaminationViewController.swift */; };
 		4852ABB11E7E7449005734A3 /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852ABB01E7E7449005734A3 /* TableViewSection.swift */; };
 		4852ABB31E7E7642005734A3 /* MedicalExaminationSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852ABB21E7E7642005734A3 /* MedicalExaminationSectionData.swift */; };
@@ -31,7 +35,7 @@
 		48C6EE6E1E84162B004F403B /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C6EE6D1E84162B004F403B /* NewsCell.swift */; };
 		48CDE7141E7FCE8E00092D93 /* ExaminationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDE7131E7FCE8E00092D93 /* ExaminationDetail.swift */; };
 		48CDE7161E7FD10A00092D93 /* PointOfInterestDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDE7151E7FD10A00092D93 /* PointOfInterestDetail.swift */; };
-		48D371F91E8120F2008E3A40 /* CheckinExamination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D371F81E8120F2008E3A40 /* CheckinExamination.swift */; };
+		48D371F91E8120F2008E3A40 /* MedicalExaminationCheckinOKCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D371F81E8120F2008E3A40 /* MedicalExaminationCheckinOKCell.swift */; };
 		48D371FB1E81267E008E3A40 /* InformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D371FA1E81267E008E3A40 /* InformationCell.swift */; };
 		48D371FD1E812726008E3A40 /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D371FC1E812726008E3A40 /* Information.swift */; };
 		48E536EF1E826CC600E03F77 /* POIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536EE1E826CC600E03F77 /* POIViewController.swift */; };
@@ -40,6 +44,7 @@
 		48E536F51E82879600E03F77 /* POIDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536F41E82879600E03F77 /* POIDetailViewController.swift */; };
 		48E536F91E82F98B00E03F77 /* TwoButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536F81E82F98B00E03F77 /* TwoButtonsCell.swift */; };
 		48E536FB1E82F9EC00E03F77 /* DescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536FA1E82F9EC00E03F77 /* DescriptionCell.swift */; };
+		48E7CCBF1E923B2C00103509 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E7CCBE1E923B2C00103509 /* Colors.swift */; };
 		48F2A1381E7A92F7002A8DC0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */; };
 		48F2A13A1E7A9A31002A8DC0 /* json in Resources */ = {isa = PBXBuildFile; fileRef = 48F2A1391E7A9A31002A8DC0 /* json */; };
 		48F2A13C1E7A9C5B002A8DC0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */; };
@@ -49,14 +54,16 @@
 		480510991E793D2B003B4014 /* Hospital.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hospital.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4805109C1E793D2B003B4014 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4805109E1E793D2B003B4014 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		480510A11E793D2B003B4014 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		480510A31E793D2B003B4014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		480510A61E793D2B003B4014 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		480510A81E793D2B003B4014 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		480510AE1E7952EB003B4014 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		480510B01E79B086003B4014 /* TileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCell.swift; sourceTree = "<group>"; };
 		480510B21E79DABB003B4014 /* HomeTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTile.swift; sourceTree = "<group>"; };
 		481FBBBA1E803FE100184EF7 /* ExaminationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExaminationDetailViewController.swift; sourceTree = "<group>"; };
+		482802541E92C24F002C3665 /* MedicalExaminationCheckinKOCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationCheckinKOCell.swift; sourceTree = "<group>"; };
+		482802561E92C36C002C3665 /* MedicalExaminationInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationInformationCell.swift; sourceTree = "<group>"; };
+		482802581E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationDescriptionCell.swift; sourceTree = "<group>"; };
+		4828025A1E92C44D002C3665 /* MedicalExaminationButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationButtonCell.swift; sourceTree = "<group>"; };
 		4852ABAE1E7E6F26005734A3 /* MedicalExaminationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationViewController.swift; sourceTree = "<group>"; };
 		4852ABB01E7E7449005734A3 /* TableViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		4852ABB21E7E7642005734A3 /* MedicalExaminationSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationSectionData.swift; sourceTree = "<group>"; };
@@ -72,7 +79,7 @@
 		48C6EE6D1E84162B004F403B /* NewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		48CDE7131E7FCE8E00092D93 /* ExaminationDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExaminationDetail.swift; sourceTree = "<group>"; };
 		48CDE7151E7FD10A00092D93 /* PointOfInterestDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointOfInterestDetail.swift; sourceTree = "<group>"; };
-		48D371F81E8120F2008E3A40 /* CheckinExamination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinExamination.swift; sourceTree = "<group>"; };
+		48D371F81E8120F2008E3A40 /* MedicalExaminationCheckinOKCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationCheckinOKCell.swift; sourceTree = "<group>"; };
 		48D371FA1E81267E008E3A40 /* InformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationCell.swift; sourceTree = "<group>"; };
 		48D371FC1E812726008E3A40 /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		48E536EE1E826CC600E03F77 /* POIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +88,9 @@
 		48E536F41E82879600E03F77 /* POIDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POIDetailViewController.swift; sourceTree = "<group>"; };
 		48E536F81E82F98B00E03F77 /* TwoButtonsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoButtonsCell.swift; sourceTree = "<group>"; };
 		48E536FA1E82F9EC00E03F77 /* DescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionCell.swift; sourceTree = "<group>"; };
+		48E7CCBE1E923B2C00103509 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		48E7CCCA1E9244D200103509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		48E7CCCB1E9244D200103509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		48F2A1391E7A9A31002A8DC0 /* json */ = {isa = PBXFileReference; lastKnownFileType = folder; path = json; sourceTree = "<group>"; };
 		48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -118,35 +128,21 @@
 			children = (
 				4805109C1E793D2B003B4014 /* AppDelegate.swift */,
 				4805109E1E793D2B003B4014 /* LoginViewController.swift */,
-				480510AE1E7952EB003B4014 /* HomeViewController.swift */,
 				48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */,
 				48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */,
-				4852ABB21E7E7642005734A3 /* MedicalExaminationSectionData.swift */,
-				4852ABAE1E7E6F26005734A3 /* MedicalExaminationViewController.swift */,
-				481FBBBA1E803FE100184EF7 /* ExaminationDetailViewController.swift */,
-				48E536F01E826D6F00E03F77 /* POIData.swift */,
-				48E536F21E826DB500E03F77 /* POIDetail.swift */,
-				48E536EE1E826CC600E03F77 /* POIViewController.swift */,
-				48E536F41E82879600E03F77 /* POIDetailViewController.swift */,
-				48CDE7131E7FCE8E00092D93 /* ExaminationDetail.swift */,
-				48D371F81E8120F2008E3A40 /* CheckinExamination.swift */,
-				48CDE7151E7FD10A00092D93 /* PointOfInterestDetail.swift */,
-				48C6EE5D1E83D044004F403B /* PrescriptionViewController.swift */,
-				48C6EE631E83E902004F403B /* PrescriptionSectionData.swift */,
-				48C6EE611E83E5CA004F403B /* Prescription.swift */,
-				48C6EE651E84139A004F403B /* NewsViewController.swift */,
-				48C6EE691E8415E8004F403B /* News.swift */,
-				48C6EE6B1E8415FD004F403B /* NewsData.swift */,
-				48C6EE6D1E84162B004F403B /* NewsCell.swift */,
+				4828024F1E929CEC002C3665 /* Home */,
+				4828024B1E929C7B002C3665 /* Medical Examinations */,
+				4828024C1E929CAF002C3665 /* POI */,
+				4828024D1E929CCD002C3665 /* Prescriptions */,
+				4828024E1E929CD9002C3665 /* News */,
 				48C6EE671E84154B004F403B /* MapViewController.swift */,
-				486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */,
-				480510B21E79DABB003B4014 /* HomeTile.swift */,
-				480510B01E79B086003B4014 /* TileCell.swift */,
 				48E536F81E82F98B00E03F77 /* TwoButtonsCell.swift */,
 				48D371FA1E81267E008E3A40 /* InformationCell.swift */,
 				48E536FA1E82F9EC00E03F77 /* DescriptionCell.swift */,
 				48D371FC1E812726008E3A40 /* Information.swift */,
 				4852ABB01E7E7449005734A3 /* TableViewSection.swift */,
+				48E7CCBE1E923B2C00103509 /* Colors.swift */,
+				486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */,
 				48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */,
 				480510A01E793D2B003B4014 /* Main.storyboard */,
 				480510A31E793D2B003B4014 /* Assets.xcassets */,
@@ -155,6 +151,65 @@
 				48F2A1391E7A9A31002A8DC0 /* json */,
 			);
 			path = Hospital;
+			sourceTree = "<group>";
+		};
+		4828024B1E929C7B002C3665 /* Medical Examinations */ = {
+			isa = PBXGroup;
+			children = (
+				48D371F81E8120F2008E3A40 /* MedicalExaminationCheckinOKCell.swift */,
+				482802541E92C24F002C3665 /* MedicalExaminationCheckinKOCell.swift */,
+				482802561E92C36C002C3665 /* MedicalExaminationInformationCell.swift */,
+				482802581E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift */,
+				4828025A1E92C44D002C3665 /* MedicalExaminationButtonCell.swift */,
+				48CDE7131E7FCE8E00092D93 /* ExaminationDetail.swift */,
+				4852ABB21E7E7642005734A3 /* MedicalExaminationSectionData.swift */,
+				4852ABAE1E7E6F26005734A3 /* MedicalExaminationViewController.swift */,
+				481FBBBA1E803FE100184EF7 /* ExaminationDetailViewController.swift */,
+			);
+			name = "Medical Examinations";
+			sourceTree = "<group>";
+		};
+		4828024C1E929CAF002C3665 /* POI */ = {
+			isa = PBXGroup;
+			children = (
+				48CDE7151E7FD10A00092D93 /* PointOfInterestDetail.swift */,
+				48E536F01E826D6F00E03F77 /* POIData.swift */,
+				48E536F21E826DB500E03F77 /* POIDetail.swift */,
+				48E536EE1E826CC600E03F77 /* POIViewController.swift */,
+				48E536F41E82879600E03F77 /* POIDetailViewController.swift */,
+			);
+			name = POI;
+			sourceTree = "<group>";
+		};
+		4828024D1E929CCD002C3665 /* Prescriptions */ = {
+			isa = PBXGroup;
+			children = (
+				48C6EE5D1E83D044004F403B /* PrescriptionViewController.swift */,
+				48C6EE631E83E902004F403B /* PrescriptionSectionData.swift */,
+				48C6EE611E83E5CA004F403B /* Prescription.swift */,
+			);
+			name = Prescriptions;
+			sourceTree = "<group>";
+		};
+		4828024E1E929CD9002C3665 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				48C6EE651E84139A004F403B /* NewsViewController.swift */,
+				48C6EE691E8415E8004F403B /* News.swift */,
+				48C6EE6B1E8415FD004F403B /* NewsData.swift */,
+				48C6EE6D1E84162B004F403B /* NewsCell.swift */,
+			);
+			name = News;
+			sourceTree = "<group>";
+		};
+		4828024F1E929CEC002C3665 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				480510AE1E7952EB003B4014 /* HomeViewController.swift */,
+				480510B21E79DABB003B4014 /* HomeTile.swift */,
+				480510B01E79B086003B4014 /* TileCell.swift */,
+			);
+			name = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,15 +293,17 @@
 				48CDE7161E7FD10A00092D93 /* PointOfInterestDetail.swift in Sources */,
 				480510B31E79DABB003B4014 /* HomeTile.swift in Sources */,
 				48C6EE6E1E84162B004F403B /* NewsCell.swift in Sources */,
+				4828025B1E92C44D002C3665 /* MedicalExaminationButtonCell.swift in Sources */,
 				48F2A1381E7A92F7002A8DC0 /* SettingsViewController.swift in Sources */,
 				48E536F31E826DB500E03F77 /* POIDetail.swift in Sources */,
-				48D371F91E8120F2008E3A40 /* CheckinExamination.swift in Sources */,
+				48D371F91E8120F2008E3A40 /* MedicalExaminationCheckinOKCell.swift in Sources */,
 				48C6EE641E83E902004F403B /* PrescriptionSectionData.swift in Sources */,
 				4805109D1E793D2B003B4014 /* AppDelegate.swift in Sources */,
 				48C6EE661E84139A004F403B /* NewsViewController.swift in Sources */,
 				480510AF1E7952EB003B4014 /* HomeViewController.swift in Sources */,
 				481FBBBB1E803FE100184EF7 /* ExaminationDetailViewController.swift in Sources */,
 				486C6EF91E7C54580036B363 /* UserDefaultsKeys.swift in Sources */,
+				482802571E92C36C002C3665 /* MedicalExaminationInformationCell.swift in Sources */,
 				4852ABB11E7E7449005734A3 /* TableViewSection.swift in Sources */,
 				48D371FB1E81267E008E3A40 /* InformationCell.swift in Sources */,
 				4852ABAF1E7E6F26005734A3 /* MedicalExaminationViewController.swift in Sources */,
@@ -260,8 +317,11 @@
 				48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */,
 				48E536EF1E826CC600E03F77 /* POIViewController.swift in Sources */,
 				480510B11E79B086003B4014 /* TileCell.swift in Sources */,
+				482802591E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift in Sources */,
 				48C6EE681E84154B004F403B /* MapViewController.swift in Sources */,
 				48C6EE5E1E83D044004F403B /* PrescriptionViewController.swift in Sources */,
+				48E7CCBF1E923B2C00103509 /* Colors.swift in Sources */,
+				482802551E92C24F002C3665 /* MedicalExaminationCheckinKOCell.swift in Sources */,
 				48C6EE6C1E8415FD004F403B /* NewsData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,7 +332,7 @@
 		480510A01E793D2B003B4014 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				480510A11E793D2B003B4014 /* Base */,
+				48E7CCCA1E9244D200103509 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -280,7 +340,7 @@
 		480510A51E793D2B003B4014 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				480510A61E793D2B003B4014 /* Base */,
+				48E7CCCB1E9244D200103509 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -292,6 +352,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -328,7 +389,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -342,6 +403,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -372,7 +434,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

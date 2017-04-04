@@ -28,6 +28,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         title = "Settings"
         
+        name.textColor = Colors.darkColor
+        surname.textColor = Colors.darkColor
+        fiscalCode.textColor = Colors.darkColor
+        
         name.text = defaults.string(forKey: UserDefaultsKeys.nameKey)!
         surname.text = defaults.string(forKey: UserDefaultsKeys.surnameKey)!
         fiscalCode.text = defaults.string(forKey: UserDefaultsKeys.fiscalCodeKey)!
@@ -46,6 +50,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath)
+        cell.textLabel?.textColor = Colors.darkColor
         if indexPath.row == 0 {
             cell.textLabel?.text = "Logout"
         } else if indexPath.row == 1 {

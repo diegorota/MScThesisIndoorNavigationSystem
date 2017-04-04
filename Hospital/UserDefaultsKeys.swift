@@ -17,6 +17,7 @@ struct UserDefaultsKeys {
     static let hospitalizedKey = "hospitalizedkey"
     static let keepLoginKey = "keeploginkey"
     static let rememberMeKey = "remembermekey"
+    static let touchIDKey = "touchidkey"
     
     // Cafeteria view data
     static let selectedFirstDishIndexPathKey = "selectedfirstdishindexpathkey"
