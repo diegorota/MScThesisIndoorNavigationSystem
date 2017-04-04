@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ExaminationDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ExaminationDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -22,10 +23,17 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
     var waitingLabel: String?
     var ticketLabel: String?
     
+    var locationManager: CLLocationManager!
+    let beaconuuid = "8492E75F-4FD6-469D-B132-043FE94921D8"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
 
     }
     
@@ -201,10 +209,57 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
         }
     }
     
-    // Funzione che salva il contenuto del file JSON
+    // Funzione che parsa e salva il contenuto del file JSON
     func parse(json: JSON) {
         queueLabel = "Queue: \(json["queue"])"
         waitingLabel = "Waiting time: \(json["waiting_time"])min"
         ticketLabel = "Your ticket: \(json["ticket"])"
     }
+    
+    
+    // Inizio funzioni utili per la gestione del beacon
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
+                if CLLocationManager.isRangingAvailable() {
+                    if !checkinDone {
+                        startScanning()
+                    }
+                }
+            }
+        }
+    }
+    
+    func startScanning() {
+        let uuid = UUID(uuidString: beaconuuid)!
+        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "MyBeacon")
+        
+        locationManager.startMonitoring(for: beaconRegion)
+        locationManager.startRangingBeacons(in: beaconRegion)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+        if beacons.count > 0 {
+            for beacon in beacons {
+                if beacon.proximityUUID.uuidString == beaconuuid && beacon.proximity == CLProximity.immediate {
+                    let ac = UIAlertController(title: "Checkin", message: "Would you like to check-in?", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "Ckeck-in", style: .default, handler: reloadCheckin))
+                    ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                    present(ac, animated: true)
+                }
+            }
+        }
+    }
+    
+    func reloadCheckin(_ sender: UIAlertAction) {
+        checkinDone = true
+        collectionView.reloadData()
+        
+        let uuid = UUID(uuidString: beaconuuid)!
+        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "MyBeacon")
+        
+        locationManager.stopMonitoring(for: beaconRegion)
+        locationManager.stopRangingBeacons(in: beaconRegion)
+    }
+    
 }
