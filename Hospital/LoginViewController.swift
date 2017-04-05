@@ -31,9 +31,9 @@ class LoginViewController: UIViewController {
         touchIDButton.isEnabled = touchIDEnabled
         signinButton.layer.backgroundColor = Colors.mediumColor.cgColor
         touchIDButton.tintColor = Colors.mediumColor
-        patientCode.attributedPlaceholder = NSAttributedString(string: "Patient code", attributes: [NSForegroundColorAttributeName:Colors.darkColor, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
-        password.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSForegroundColorAttributeName:Colors.darkColor, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
         rememberMeLabel.textColor = Colors.mediumColor
+        patientCode.underlined()
+        password.underlined()
         
         if touchIDEnabled {
             self.touchIDAccess()
@@ -130,6 +130,27 @@ class LoginViewController: UIViewController {
     
     @IBAction func useTouchID(_ sender: UIButton) {
         touchIDAccess()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        patientCode.underlined()
+        password.underlined()
+    }
+    
+    
+}
+
+extension UITextField {
+    
+    func underlined(){
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = UIColor.lightGray.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
     }
 }
 
