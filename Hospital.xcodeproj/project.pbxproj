@@ -13,8 +13,8 @@
 		480510A41E793D2B003B4014 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 480510A31E793D2B003B4014 /* Assets.xcassets */; };
 		480510A71E793D2B003B4014 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 480510A51E793D2B003B4014 /* LaunchScreen.storyboard */; };
 		480510AF1E7952EB003B4014 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480510AE1E7952EB003B4014 /* HomeViewController.swift */; };
-		480510B11E79B086003B4014 /* TileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480510B01E79B086003B4014 /* TileCell.swift */; };
-		480510B31E79DABB003B4014 /* HomeTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480510B21E79DABB003B4014 /* HomeTile.swift */; };
+		480510B11E79B086003B4014 /* HomeButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480510B01E79B086003B4014 /* HomeButtonCell.swift */; };
+		480510B31E79DABB003B4014 /* HomeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480510B21E79DABB003B4014 /* HomeButton.swift */; };
 		481FBBBB1E803FE100184EF7 /* ExaminationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481FBBBA1E803FE100184EF7 /* ExaminationDetailViewController.swift */; };
 		482802551E92C24F002C3665 /* MedicalExaminationCheckinKOCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482802541E92C24F002C3665 /* MedicalExaminationCheckinKOCell.swift */; };
 		482802571E92C36C002C3665 /* MedicalExaminationInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482802561E92C36C002C3665 /* MedicalExaminationInformationCell.swift */; };
@@ -24,6 +24,7 @@
 		4852ABB11E7E7449005734A3 /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852ABB01E7E7449005734A3 /* TableViewSection.swift */; };
 		4852ABB31E7E7642005734A3 /* MedicalExaminationSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852ABB21E7E7642005734A3 /* MedicalExaminationSectionData.swift */; };
 		486C6EF91E7C54580036B363 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */; };
+		486D55C51E94F08B00FD824C /* HomeInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D55C41E94F08B00FD824C /* HomeInfoCell.swift */; };
 		48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */; };
 		48C6EE5E1E83D044004F403B /* PrescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C6EE5D1E83D044004F403B /* PrescriptionViewController.swift */; };
 		48C6EE621E83E5CA004F403B /* Prescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C6EE611E83E5CA004F403B /* Prescription.swift */; };
@@ -57,8 +58,8 @@
 		480510A31E793D2B003B4014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		480510A81E793D2B003B4014 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		480510AE1E7952EB003B4014 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		480510B01E79B086003B4014 /* TileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCell.swift; sourceTree = "<group>"; };
-		480510B21E79DABB003B4014 /* HomeTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTile.swift; sourceTree = "<group>"; };
+		480510B01E79B086003B4014 /* HomeButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeButtonCell.swift; sourceTree = "<group>"; };
+		480510B21E79DABB003B4014 /* HomeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeButton.swift; sourceTree = "<group>"; };
 		481FBBBA1E803FE100184EF7 /* ExaminationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExaminationDetailViewController.swift; sourceTree = "<group>"; };
 		482802541E92C24F002C3665 /* MedicalExaminationCheckinKOCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationCheckinKOCell.swift; sourceTree = "<group>"; };
 		482802561E92C36C002C3665 /* MedicalExaminationInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationInformationCell.swift; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 		4852ABB01E7E7449005734A3 /* TableViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		4852ABB21E7E7642005734A3 /* MedicalExaminationSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationSectionData.swift; sourceTree = "<group>"; };
 		486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		486D55C41E94F08B00FD824C /* HomeInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInfoCell.swift; sourceTree = "<group>"; };
 		48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaViewController.swift; sourceTree = "<group>"; };
 		48C6EE5D1E83D044004F403B /* PrescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrescriptionViewController.swift; sourceTree = "<group>"; };
 		48C6EE611E83E5CA004F403B /* Prescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prescription.swift; sourceTree = "<group>"; };
@@ -206,8 +208,9 @@
 			isa = PBXGroup;
 			children = (
 				480510AE1E7952EB003B4014 /* HomeViewController.swift */,
-				480510B21E79DABB003B4014 /* HomeTile.swift */,
-				480510B01E79B086003B4014 /* TileCell.swift */,
+				480510B21E79DABB003B4014 /* HomeButton.swift */,
+				480510B01E79B086003B4014 /* HomeButtonCell.swift */,
+				486D55C41E94F08B00FD824C /* HomeInfoCell.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -291,11 +294,12 @@
 				48E536F91E82F98B00E03F77 /* TwoButtonsCell.swift in Sources */,
 				4852ABB31E7E7642005734A3 /* MedicalExaminationSectionData.swift in Sources */,
 				48CDE7161E7FD10A00092D93 /* PointOfInterestDetail.swift in Sources */,
-				480510B31E79DABB003B4014 /* HomeTile.swift in Sources */,
+				480510B31E79DABB003B4014 /* HomeButton.swift in Sources */,
 				48C6EE6E1E84162B004F403B /* NewsCell.swift in Sources */,
 				4828025B1E92C44D002C3665 /* MedicalExaminationButtonCell.swift in Sources */,
 				48F2A1381E7A92F7002A8DC0 /* SettingsViewController.swift in Sources */,
 				48E536F31E826DB500E03F77 /* POIDetail.swift in Sources */,
+				486D55C51E94F08B00FD824C /* HomeInfoCell.swift in Sources */,
 				48D371F91E8120F2008E3A40 /* MedicalExaminationCheckinOKCell.swift in Sources */,
 				48C6EE641E83E902004F403B /* PrescriptionSectionData.swift in Sources */,
 				4805109D1E793D2B003B4014 /* AppDelegate.swift in Sources */,
@@ -316,7 +320,7 @@
 				48E536FB1E82F9EC00E03F77 /* DescriptionCell.swift in Sources */,
 				48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */,
 				48E536EF1E826CC600E03F77 /* POIViewController.swift in Sources */,
-				480510B11E79B086003B4014 /* TileCell.swift in Sources */,
+				480510B11E79B086003B4014 /* HomeButtonCell.swift in Sources */,
 				482802591E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift in Sources */,
 				48C6EE681E84154B004F403B /* MapViewController.swift in Sources */,
 				48C6EE5E1E83D044004F403B /* PrescriptionViewController.swift in Sources */,

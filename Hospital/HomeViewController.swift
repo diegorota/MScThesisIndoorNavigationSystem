@@ -8,23 +8,20 @@
 
 import UIKit
 
-class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     let defaults = UserDefaults.standard
-    
-    @IBOutlet weak var helloLabel: UILabel!
-    @IBOutlet weak var hourLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var tiles = [HomeTile]()
+    var tiles = [HomeButton]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
         title = "Hospital"
-        helloLabel.text = "Hello, \(defaults.string(forKey: UserDefaultsKeys.nameKey)!)"
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Settings"), style: .plain, target: self, action: #selector(openSettings))
         loadTiles()
 
@@ -60,18 +57,36 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tiles.count
+        return tiles.count+1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Tile", for: indexPath) as! TileCell
-        cell.titleLabel.text = tiles[indexPath.item].titleTile.uppercased()
-        cell.descriptionLabel.text = tiles[indexPath.item].descriptionTile
-        cell.iconImage.image = UIImage(named: tiles[indexPath.item].logoTile)
-        cell.layer.cornerRadius = 10
-        cell.layer.borderWidth = 0.5
-        cell.layer.borderColor = UIColor.black.cgColor
-        return cell
+        
+        if indexPath.item == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeInfoCell", for: indexPath) as! HomeInfoCell
+            cell.helloLabel.text = "Hello, \(defaults.string(forKey: UserDefaultsKeys.nameKey)!)"
+            cell.dateLabel.text = composeDate()
+            cell.hourLabel.text = composeHour()
+            cell.helloLabel.textColor = Colors.darkColor
+            cell.hourLabel.textColor = Colors.darkColor
+            cell.dateLabel.textColor = Colors.darkColor
+            cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+            cell.layoutIfNeeded()
+            return cell
+            
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeButtonCell", for: indexPath) as! HomeButtonCell
+            cell.titleLabel.text = tiles[indexPath.item-1].titleTile.uppercased()
+            cell.titleLabel.textColor = Colors.darkColor
+            cell.titleLabel.underlined()
+            cell.descriptionLabel.text = tiles[indexPath.item-1].descriptionTile
+            cell.descriptionLabel.textColor = Colors.darkColor
+            cell.iconImage.image = UIImage(named: tiles[indexPath.item-1].logoTile)?.withRenderingMode(.alwaysTemplate)
+            cell.iconImage.tintColor = Colors.darkColor
+            cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+            cell.layoutIfNeeded()
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -79,9 +94,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }) { [unowned self] (finished: Bool) in
-            if self.tiles[indexPath.row].titleTile.lowercased() != "notizie" {
+            if self.tiles[indexPath.row-1].titleTile.lowercased() != "notizie" {
                 if let newView = self.storyboard?.instantiateViewController(withIdentifier: "TabBar") as? UITabBarController {
-                    newView.selectedIndex = indexPath.row
+                    newView.selectedIndex = indexPath.row-1
                     self.navigationController?.pushViewController(newView, animated: true)
                 }
             } else {
@@ -93,6 +108,40 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             cell?.transform = CGAffineTransform.identity
         }
 
+    }
+    
+    // Funzione che setta a runtime le dimensioni delle celle
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height: CGFloat = 120
+        var width: CGFloat
+        
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            if indexPath.item == 0 {
+                width = view.bounds.size.width
+            } else {
+                width = view.bounds.size.width/2-3
+            }
+        case .pad:
+            if indexPath.item == 0 {
+                width = view.bounds.size.width/3*2-3
+            } else {
+                width = view.bounds.size.width/3-4
+            }
+        default:
+            if indexPath.item == 0 {
+                width = view.bounds.size.width
+            } else {
+                width = view.bounds.size.width/2-3
+            }
+        }
+        
+        return CGSize(width: width, height: height)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        collectionView.reloadData()
     }
     
     func monthConverter(_ monthNumber: Int) -> String {
@@ -146,7 +195,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func parse(json: JSON) {
         for tile in json.arrayValue {
-            let homeTile = HomeTile(titleTile: tile["tilename"].stringValue, descriptionTile: "Questa è una descrizione.", logoTile: tile["logo"].stringValue, dimensionTile: tile["dimension"].intValue)
+            let homeTile = HomeButton(titleTile: tile["tilename"].stringValue, descriptionTile: "Questa è una descrizione.", logoTile: tile["logo"].stringValue, dimensionTile: tile["dimension"].intValue)
             tiles.append(homeTile)
         }
     }
@@ -157,8 +206,19 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        dateLabel.text = composeDate()
-        hourLabel.text = composeHour()
     }
     
+}
+
+extension UILabel {
+    
+    func underlined(){
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = Colors.darkColor.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width, height: self.frame.size.height)
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
 }

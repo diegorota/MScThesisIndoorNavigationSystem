@@ -72,26 +72,27 @@ class LoginViewController: UIViewController {
     }
     
     // Funzione che verifica che le credenzuali siano corrette. Ritorna true in caso affermativo, altrimenti false.
-    // Da implementare controllo validità patientCode e Password. Allo stato attuale, questo metodo ritorna sempre true.
     func checkLogin() -> Bool {
         if let path = Bundle.main.path(forResource: "json/login", ofType: "json") {
             if let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped) {
                 let json = JSON(data: data)
-                if json["login_response"].boolValue == true {
-                    defaults.setValue(json["name"].stringValue, forKey: UserDefaultsKeys.nameKey)
-                    defaults.setValue(json["surname"].stringValue, forKey: UserDefaultsKeys.surnameKey)
-                    defaults.setValue(json["fiscalcode"].stringValue, forKey: UserDefaultsKeys.fiscalCodeKey)
-                    defaults.setValue(json["hospitalized"].stringValue, forKey: UserDefaultsKeys.hospitalizedKey)
-                    defaults.setValue(rememberMe, forKey: UserDefaultsKeys.rememberMeKey)
-                    
-                    let context = LAContext()
-                    var error: NSError?
-                    if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-                        defaults.set(true, forKey: UserDefaultsKeys.touchIDKey)
+                for patient in json.arrayValue {
+                    if patient["fiscal_code"].stringValue == patientCode.text! && patient["password"].stringValue == password.text! {
+                        defaults.setValue(patient["name"].stringValue, forKey: UserDefaultsKeys.nameKey)
+                        defaults.setValue(patient["surname"].stringValue, forKey: UserDefaultsKeys.surnameKey)
+                        defaults.setValue(patient["fiscal_code"].stringValue, forKey: UserDefaultsKeys.fiscalCodeKey)
+                        defaults.setValue(patient["hospitalized"].stringValue, forKey: UserDefaultsKeys.hospitalizedKey)
+                        defaults.setValue(rememberMe, forKey: UserDefaultsKeys.rememberMeKey)
+                        
+                        let context = LAContext()
+                        var error: NSError?
+                        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+                            defaults.set(true, forKey: UserDefaultsKeys.touchIDKey)
+                        }
+                        
+                        defaults.synchronize()
+                        return true
                     }
-                    
-                    defaults.synchronize()
-                    return true
                 }
             }
         } else {

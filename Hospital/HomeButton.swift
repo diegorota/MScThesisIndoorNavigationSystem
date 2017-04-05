@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeTile: NSObject {
+class HomeButton: NSObject {
     
     var titleTile: String
     var descriptionTile: String

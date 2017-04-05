@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TileCell: UICollectionViewCell {
+class HomeButtonCell: UICollectionViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!

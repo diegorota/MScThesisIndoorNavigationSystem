@@ -1,1 +1,16 @@
-{"login_response":true,"name":"Simone","surname":"Candle","fiscalcode":"AAABBB91C01A222Z","hospitalized":false}
+[
+	{
+		"fiscal_code":"1234",
+		"password":"simone",
+		"name":"Simone",
+		"surname":"Montalto",
+		"hospitalized":true
+	},
+	{
+		"fiscal_code":"5678",
+		"password":"diego",
+		"name":"Diego",
+		"surname":"Rota",
+		"hospitalized":false
+	}
+]
