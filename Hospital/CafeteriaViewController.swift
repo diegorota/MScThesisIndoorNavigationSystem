@@ -11,21 +11,20 @@ import UIKit
 class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let defaults = UserDefaults.standard
-    
-    @IBOutlet weak var dateLabel: UILabel!
+
     @IBOutlet weak var secondDishTableView: UITableView!
     @IBOutlet weak var firstDishTableView: UITableView!
     @IBOutlet weak var secondDishSwitch: UISwitch!
     @IBOutlet weak var firstDishSwitch: UISwitch!
     @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var firstDishLabel: UILabel!
     @IBOutlet weak var secondDishLabel: UILabel!
     @IBOutlet weak var informationLabel: UILabel!
+    @IBOutlet weak var confirmationView: UILabel!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var confirmationView1: UILabel? = nil
-    @IBOutlet weak var confirmationView: UILabel!
     var confirmationMenuBool = false
     
     var firstDishes = [String]()
@@ -42,7 +41,15 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        confirmButton.layer.cornerRadius = 5
+        //confirmButton.layer.cornerRadius = 5
+        confirmButton.backgroundColor = Colors.mediumColor
+        confirmButton.titleLabel?.textColor = UIColor.white
+        
+        dateLabel.textColor = Colors.darkColor
+        firstDishLabel.textColor = Colors.darkColor
+        secondDishLabel.textColor = Colors.darkColor
+        informationLabel.textColor = Colors.darkColor
+        confirmationView.textColor = Colors.darkColor
         
         confirmationView.isHidden = true
         confirmationView.adjustsFontSizeToFitWidth = true
@@ -206,6 +213,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
                 cell.accessoryType = UITableViewCellAccessoryType.none
             }
         }
+        cell.textLabel?.textColor = Colors.darkColor
         return cell
     }
     
