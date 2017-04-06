@@ -25,4 +25,8 @@ struct UserDefaultsKeys {
     static let firstChoosenBoolKey = "firstchoosenboolkey"
     static let secondChoosenBoolKey = "secondchoosenboolkey"
     static let confirmationMenuBoolKey = "confirmationmenuboolkey"
+    static let lastYearKey = "lastyearkey"
+    static let lastMonthKey = "lastmonthkey"
+    static let lastDayKey = "lastdaykey"
+    static let lastTypeKey = "lasttypekey"
 }

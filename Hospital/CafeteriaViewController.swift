@@ -38,13 +38,11 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     var selectedFirstIndexPath: IndexPath? = IndexPath(row: 0, section: 0)
     var selectedSecondIndexPath: IndexPath? = IndexPath(row: 0, section: 0)
     
-    var lastYear: String?
-    var lastMonth: String?
-    var lastDay: String?
+    var lastYear: Int?
+    var lastMonth: Int?
+    var lastDay: Int?
     var lastType: String?
     var newMenu = true
-    
-    var number = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +79,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     // Funzione che carica il file JSON contenente le informazioni dei pasti
     func loadDishes() {
         
-        if let path = Bundle.main.path(forResource: "json/cafeteria\(number)", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "json/cafeteria-lunch", ofType: "json") {
             if let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped) {
                 let json = JSON(data: data)
                 parse(json: json)
@@ -90,7 +88,6 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func parse(json: JSON) {
-        
         let day = json["day"].intValue
         let dayName = json["day_name"].stringValue
         let type = json["type"].stringValue
@@ -104,7 +101,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             if let lastMonth = lastMonth {
                 if let lastDay = lastDay {
                     if let lastType = lastType {
-                        if lastYear == json["year"].stringValue && lastMonth == json["month"].stringValue && lastDay == json["day"].stringValue && lastType == json["type"].stringValue {
+                        if lastYear == json["year"].intValue && lastMonth == json["month"].intValue && lastDay == json["day"].intValue && lastType == json["type"].stringValue {
                             newMenu = false
                         } else {
                             newMenu = true
@@ -113,6 +110,15 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
                 }
             }
         }
+        self.lastYear = json["year"].intValue
+        self.lastMonth = json["month"].intValue
+        self.lastDay = json["day"].intValue
+        self.lastType = json["type"].stringValue
+        defaults.setValue(lastYear, forKey: UserDefaultsKeys.lastYearKey)
+        defaults.setValue(lastMonth, forKey: UserDefaultsKeys.lastMonthKey)
+        defaults.setValue(lastDay, forKey: UserDefaultsKeys.lastDayKey)
+        defaults.setValue(lastType, forKey: UserDefaultsKeys.lastTypeKey)
+        defaults.synchronize()
     }
     
     @IBAction func changeSwitch(_ sender: UISwitch) {
@@ -285,8 +291,17 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        number = number+1
         navigationController?.visibleViewController?.title = "Cafeteria"
+        if defaults.integer(forKey: UserDefaultsKeys.lastYearKey) != 0 {
+            self.lastYear = defaults.integer(forKey: UserDefaultsKeys.lastYearKey)
+        }
+        if defaults.integer(forKey: UserDefaultsKeys.lastMonthKey) != 0 {
+            self.lastMonth = defaults.integer(forKey: UserDefaultsKeys.lastMonthKey)
+        }
+        if defaults.integer(forKey: UserDefaultsKeys.lastDayKey) != 0 {
+            self.lastDay = defaults.integer(forKey: UserDefaultsKeys.lastDayKey)
+        }
+        lastType = defaults.string(forKey: UserDefaultsKeys.lastTypeKey)
         loadDishes()
         if newMenu == false {
             selectedFirstIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedFirstDishIndexPathKey), section: 0)
