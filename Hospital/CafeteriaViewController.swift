@@ -38,10 +38,17 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     var selectedFirstIndexPath: IndexPath? = IndexPath(row: 0, section: 0)
     var selectedSecondIndexPath: IndexPath? = IndexPath(row: 0, section: 0)
     
+    var lastYear: String?
+    var lastMonth: String?
+    var lastDay: String?
+    var lastType: String?
+    var newMenu = true
+    
+    var number = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //confirmButton.layer.cornerRadius = 5
         confirmButton.backgroundColor = Colors.mediumColor
         confirmButton.titleLabel?.textColor = UIColor.white
         
@@ -74,7 +81,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     // Funzione che carica il file JSON contenente le informazioni dei pasti
     func loadDishes() {
         
-        if let path = Bundle.main.path(forResource: "json/cafeteria", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "json/cafeteria\(number)", ofType: "json") {
             if let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped) {
                 let json = JSON(data: data)
                 parse(json: json)
@@ -92,6 +99,20 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
         secondDishes = json["second_dish"].arrayObject as! [String]
         
         dateLabel.text = "\(dayName) \(day), \(type)"
+        
+        if let lastYear = lastYear {
+            if let lastMonth = lastMonth {
+                if let lastDay = lastDay {
+                    if let lastType = lastType {
+                        if lastYear == json["year"].stringValue && lastMonth == json["month"].stringValue && lastDay == json["day"].stringValue && lastType == json["type"].stringValue {
+                            newMenu = false
+                        } else {
+                            newMenu = true
+                        }
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func changeSwitch(_ sender: UISwitch) {
@@ -133,6 +154,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             self.secondDishTableView.alpha = 0
             
             self.informationLabel.alpha = 0
+            self.dateLabel.alpha = 0
         }){[unowned self] (finished: Bool) in
             self.firstDishLabel.isHidden = true
             self.firstDishSwitch.isHidden = true
@@ -143,7 +165,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             self.secondDishTableView.isHidden = true
             
             self.informationLabel.isHidden = true
-            
+            self.dateLabel.isHidden = true
             if confirmation {
                 self.confirmationView.isHidden = false
             }
@@ -163,6 +185,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             self.secondDishTableView.alpha = 1
             
             self.informationLabel.alpha = 1
+            self.dateLabel.alpha = 1
         }){[unowned self] (finished: Bool) in
             self.firstDishLabel.isHidden = false
             self.firstDishSwitch.isHidden = false
@@ -173,6 +196,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             self.secondDishTableView.isHidden = !self.secondChoosen
             
             self.informationLabel.isHidden = false
+            self.dateLabel.isHidden = false
             
             if confirmation {
                 self.confirmationView.isHidden = true
@@ -214,6 +238,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
         cell.textLabel?.textColor = Colors.darkColor
+        cell.tintColor = Colors.darkColor
         return cell
     }
     
@@ -260,22 +285,29 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        number = number+1
         navigationController?.visibleViewController?.title = "Cafeteria"
         loadDishes()
-        selectedFirstIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedFirstDishIndexPathKey), section: 0)
-        selectedSecondIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedSecondDishIndexPathKey), section: 0)
-        firstChoosen = defaults.bool(forKey: UserDefaultsKeys.firstChoosenBoolKey)
-        secondChoosen = defaults.bool(forKey: UserDefaultsKeys.secondChoosenBoolKey)
-        confirmationMenuBool = defaults.bool(forKey: UserDefaultsKeys.confirmationMenuBoolKey)
+        if newMenu == false {
+            selectedFirstIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedFirstDishIndexPathKey), section: 0)
+            selectedSecondIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedSecondDishIndexPathKey), section: 0)
+            firstChoosen = defaults.bool(forKey: UserDefaultsKeys.firstChoosenBoolKey)
+            secondChoosen = defaults.bool(forKey: UserDefaultsKeys.secondChoosenBoolKey)
+            confirmationMenuBool = defaults.bool(forKey: UserDefaultsKeys.confirmationMenuBoolKey)
+        } else {
+            selectedFirstIndexPath = IndexPath(row: 0, section: 0)
+            selectedSecondIndexPath = IndexPath(row: 0, section: 0)
+            firstChoosen = true
+            secondChoosen = true
+            confirmationMenuBool = false
+        }
         firstDishSwitch.isOn = firstChoosen
         secondDishSwitch.isOn = secondChoosen
         firstDishTableView.isHidden = !firstChoosen
         secondDishTableView.isHidden = !secondChoosen
-        
         if confirmationMenuBool {
             hideView(duration: 0.5, confirmation: true)
         }
-        
     }
     
 }
