@@ -60,79 +60,109 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
                 cell.waitingImage.image = UIImage(named: "Settings")
                 
                 cell.ticketLabel.text = ticketLabel!
+                cell.ticketLabel.textColor = Colors.darkColor
                 cell.queueLabel.text = queueLabel!
+                cell.queueLabel.textColor = Colors.darkColor
                 cell.waitingLabel.text = waitingLabel!
+                cell.waitingLabel.textColor = Colors.darkColor
                 
                 cell.queueLabel.adjustsFontSizeToFitWidth = true
                 cell.waitingLabel.adjustsFontSizeToFitWidth = true
                 cell.ticketLabel.adjustsFontSizeToFitWidth = true
                 
-                cell.layer.borderWidth = 0.5
-                cell.layer.borderColor = Colors.darkColor.cgColor
+                cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+                
+//                cell.layer.borderWidth = 0.5
+//                cell.layer.borderColor = Colors.darkColor.cgColor
                 
                 return cell
             } else {
                 reusableIdentifier = "MedicalExaminationCheckinKOCell"
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! MedicalExaminationCheckinKOCell
                 cell.checkinImage.image = UIImage(named: "check")
+                cell.textView.textColor = Colors.darkColor
                 
-                cell.layer.borderWidth = 0.5
-                cell.layer.borderColor = Colors.darkColor.cgColor
+                cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+//                cell.layer.borderWidth = 0.5
+//                cell.layer.borderColor = Colors.darkColor.cgColor
                 return cell
             }
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
             cell.titleLabel.text = upperExaminationDetail[0].title
             cell.informationLabel.text = upperExaminationDetail[0].information
+            cell.titleLabel.textColor = Colors.darkColor
+            cell.informationLabel.textColor = Colors.darkColor
             
-            cell.layer.borderWidth = 0.5
-            cell.layer.borderColor = Colors.darkColor.cgColor
+            cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+            
+//            cell.layer.borderWidth = 0.5
+//            cell.layer.borderColor = Colors.darkColor.cgColor
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
             cell.titleLabel.text = upperExaminationDetail[1].title
             cell.informationLabel.text = upperExaminationDetail[1].information
+            cell.titleLabel.textColor = Colors.darkColor
+            cell.informationLabel.textColor = Colors.darkColor
             
-            cell.layer.borderWidth = 0.5
-            cell.layer.borderColor = Colors.darkColor.cgColor
+            cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+            
+//            cell.layer.borderWidth = 0.5
+//            cell.layer.borderColor = Colors.darkColor.cgColor
             return cell
         case 3:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
             cell.titleLabel.text = upperExaminationDetail[2].title
             cell.informationLabel.text = upperExaminationDetail[2].information
+            cell.titleLabel.textColor = Colors.darkColor
+            cell.informationLabel.textColor = Colors.darkColor
             
-            cell.layer.borderWidth = 0.5
-            cell.layer.borderColor = Colors.darkColor.cgColor
+            cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+            
+//            cell.layer.borderWidth = 0.5
+//            cell.layer.borderColor = Colors.darkColor.cgColor
             return cell
         case 4:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationDescriptionCell", for: indexPath) as! MedicalExaminationDescriptionCell
             cell.descriptionTextView.text = examinationDescriptionText
+            cell.descriptionTextView.textColor = Colors.darkColor
             
-            cell.layer.borderWidth = 0.5
-            cell.layer.borderColor = Colors.darkColor.cgColor
+            cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+            
+//            cell.layer.borderWidth = 0.5
+//            cell.layer.borderColor = Colors.darkColor.cgColor
             return cell
         case 5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
             cell.titleLabel.text = bottomExaminationDetail[0].title
             cell.informationLabel.text = bottomExaminationDetail[0].information
+            cell.titleLabel.textColor = Colors.darkColor
+            cell.informationLabel.textColor = Colors.darkColor
             
-            cell.layer.borderWidth = 0.5
-            cell.layer.borderColor = Colors.darkColor.cgColor
+            cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+            
+//            cell.layer.borderWidth = 0.5
+//            cell.layer.borderColor = Colors.darkColor.cgColor
             return cell
         case 6:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
             cell.titleLabel.text = bottomExaminationDetail[1].title
             cell.informationLabel.text = bottomExaminationDetail[1].information
+            cell.titleLabel.textColor = Colors.darkColor
+            cell.informationLabel.textColor = Colors.darkColor
             
-            cell.layer.borderWidth = 0.5
-            cell.layer.borderColor = Colors.darkColor.cgColor
+            cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+            
+//            cell.layer.borderWidth = 0.5
+//            cell.layer.borderColor = Colors.darkColor.cgColor
             return cell
         case 7:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationButtonCell", for: indexPath) as! MedicalExaminationButtonCell
             cell.button.layer.backgroundColor = Colors.mediumColor.cgColor
             
-            cell.layer.borderWidth = 0.5
-            cell.layer.borderColor = Colors.darkColor.cgColor
+//            cell.layer.borderWidth = 0.5
+//            cell.layer.borderColor = Colors.darkColor.cgColor
             return cell
         default:
             let cell = UICollectionViewCell()

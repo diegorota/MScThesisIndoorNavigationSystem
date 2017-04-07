@@ -24,6 +24,7 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
         medicalExaminationTableView.addSubview(refreshControl)
+        medicalExaminationTableView.tableFooterView = UIView(frame: CGRect.zero)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,7 +46,12 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MedicalExaminationCell", for: indexPath)
         cell.textLabel?.text = (medicalExaminationSection[indexPath.section].items[indexPath.row] as? ExaminationDetail)?.name
-        cell.detailTextLabel?.text = "Hour: \((medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).hour). Building: Edificio 27"
+        cell.detailTextLabel?.text = "Hour: \((medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).hour)"
+        cell.textLabel?.textColor = Colors.darkColor
+        cell.textLabel?.backgroundColor = UIColor.clear
+        cell.detailTextLabel?.backgroundColor = UIColor.clear
+        cell.detailTextLabel?.textColor = Colors.darkColor
+        cell.tintColor = Colors.darkColor
         return cell
     }
     
@@ -53,6 +59,9 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
     {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        header.textLabel?.textColor = Colors.darkColor
+        header.backgroundView?.backgroundColor = UIColor.white
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
