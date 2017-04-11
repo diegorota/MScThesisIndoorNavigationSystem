@@ -17,6 +17,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var secondDishSwitch: UISwitch!
     @IBOutlet weak var firstDishSwitch: UISwitch!
     @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var modifyButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var firstDishLabel: UILabel!
     @IBOutlet weak var secondDishLabel: UILabel!
@@ -49,7 +50,9 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
         
         confirmButton.backgroundColor = Colors.mediumColor
         confirmButton.titleLabel?.textColor = UIColor.white
-        
+        modifyButton.backgroundColor = Colors.mediumColor
+        confirmButton.titleLabel?.tintColor = UIColor.white
+
         dateLabel.textColor = Colors.darkColor
         firstDishLabel.textColor = Colors.darkColor
         secondDishLabel.textColor = Colors.darkColor
@@ -137,7 +140,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func confirmButtonAction(_ sender: UIButton) {
         
-        if confirmButton.currentTitle == "Confirm" {
+        if sender.currentTitle == "Confirm" {
             hideView(duration: 0.5, confirmation: true)
             confirmationMenuBool = true
             
@@ -161,6 +164,10 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             
             self.informationLabel.alpha = 0
             self.dateLabel.alpha = 0
+            self.confirmButton.alpha = 0
+            
+            self.confirmationView.alpha = 1
+            self.modifyButton.alpha = 1
         }){[unowned self] (finished: Bool) in
             self.firstDishLabel.isHidden = true
             self.firstDishSwitch.isHidden = true
@@ -172,11 +179,11 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             
             self.informationLabel.isHidden = true
             self.dateLabel.isHidden = true
+            self.confirmButton.isHidden = true
             if confirmation {
                 self.confirmationView.isHidden = false
+                self.modifyButton.isHidden = false
             }
-            
-            self.confirmButton.setTitle("Modify", for: .normal)
         }
     }
     
@@ -192,6 +199,10 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             
             self.informationLabel.alpha = 1
             self.dateLabel.alpha = 1
+            self.confirmButton.alpha = 1
+            
+            self.confirmationView.alpha = 0
+            self.modifyButton.alpha = 0
         }){[unowned self] (finished: Bool) in
             self.firstDishLabel.isHidden = false
             self.firstDishSwitch.isHidden = false
@@ -203,12 +214,12 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             
             self.informationLabel.isHidden = false
             self.dateLabel.isHidden = false
+            self.confirmButton.isHidden = false
             
             if confirmation {
                 self.confirmationView.isHidden = true
+                self.modifyButton.isHidden = true
             }
-            
-            self.confirmButton.setTitle("Confirm", for: .normal)
         }
     }
     
@@ -320,8 +331,12 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
         secondDishSwitch.isOn = secondChoosen
         firstDishTableView.isHidden = !firstChoosen
         secondDishTableView.isHidden = !secondChoosen
+        confirmButton.isHidden = confirmationMenuBool
+        modifyButton.isHidden = true
         if confirmationMenuBool {
             hideView(duration: 0.5, confirmation: true)
+        } else {
+            showView(duration: 0.5, confirmation: true)
         }
     }
     

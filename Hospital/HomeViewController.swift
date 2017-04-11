@@ -90,6 +90,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 0 {
+            return
+        }
         UIView.animate(withDuration: 0.25, delay: 0, options: [], animations: {
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)

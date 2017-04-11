@@ -8,26 +8,23 @@
 
 import UIKit
 
-class POIViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
+class POIViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var POITableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     var POIList = POIData.getData()
     var filteredPOI = [POIDetail]()
-    var resultSearchController: UISearchController!
+    var isSearching = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         POITableView.delegate = self
         POITableView.dataSource = self
+        searchBar.delegate = self
         
-
-        resultSearchController = UISearchController(searchResultsController: nil)
-        resultSearchController.searchResultsUpdater = self
-        resultSearchController.dimsBackgroundDuringPresentation = false
-        resultSearchController.searchBar.searchBarStyle = UISearchBarStyle.prominent
-        resultSearchController.searchBar.sizeToFit()
-        POITableView.tableHeaderView = resultSearchController.searchBar
-        resultSearchController.loadViewIfNeeded()
+        searchBar.barTintColor = UIColor.white
+        searchBar.tintColor = Colors.darkColor
+        POITableView.tableFooterView = UIView(frame: CGRect.zero)
         
         
     }
@@ -43,7 +40,7 @@ class POIViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if resultSearchController.isActive {
+        if isSearching {
             return filteredPOI.count
         } else {
             return POIList.count
@@ -53,11 +50,12 @@ class POIViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "POICell", for: indexPath)
         
-        if resultSearchController.isActive {
+        if isSearching {
             cell.textLabel?.text = filteredPOI[indexPath.row].name
         } else {
             cell.textLabel?.text = POIList[indexPath.row].name
         }
+        cell.textLabel?.textColor = Colors.darkColor
         return cell
     }
     
@@ -65,7 +63,7 @@ class POIViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         if let poiView = storyboard?.instantiateViewController(withIdentifier: "POIDetail") as? POIDetailViewController {
             
             var list: [POIDetail]
-            if resultSearchController.isActive {
+            if isSearching {
                 list = filteredPOI
             } else {
                 list = POIList
@@ -86,20 +84,44 @@ class POIViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             navigationController?.pushViewController(poiView, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+        resetSearchBar()
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
-        if (searchController.searchBar.text?.characters.count)! > 0 {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if (searchBar.text?.isEmpty)! {
+            isSearching = false
+            filteredPOI.removeAll(keepingCapacity: false)
+            filteredPOI = POIList
+        } else {
+            isSearching = true
             filteredPOI.removeAll(keepingCapacity: false)
             for item in POIList {
-                if item.name.lowercased().contains((searchController.searchBar.text?.lowercased())!) {
+                if item.name.lowercased().contains((searchText.lowercased())) {
                     filteredPOI.append(item)
                 }
             }
-        } else {
-            filteredPOI.removeAll(keepingCapacity: false)
-            filteredPOI = POIList
         }
+        POITableView.reloadData()
+    }
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(true, animated: true)
+        return true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(false, animated: true)
+        return true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        resetSearchBar()
+    }
+    
+    func resetSearchBar() {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        filteredPOI = POIList
         POITableView.reloadData()
     }
     

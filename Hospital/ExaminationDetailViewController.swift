@@ -179,11 +179,11 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
         
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
-            width = view.bounds.size.width-20
+            width = view.bounds.size.width-40
         case .pad:
-            width = view.bounds.size.width-20
+            width = view.bounds.size.width-40
         default:
-            width = view.bounds.size.width-20
+            width = view.bounds.size.width-40
         }
         
         switch indexPath.item {
