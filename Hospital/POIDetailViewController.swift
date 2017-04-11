@@ -8,15 +8,17 @@
 
 import UIKit
 
+struct StretchyHeader {
+    let headerHeight: CGFloat = 250
+    let headerCut: CGFloat = 0
+}
+
 class POIDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var headerImage: UIImageView!
+    var headerView: UIView!
     
-    let maxHeaderHeight: CGFloat = 200
-    let minHeaderHeight: CGFloat = 44
-    var previousScrollOffset: CGFloat = 0.0
+    var newHeaderLayer: CAShapeLayer!
     
     var informationList = [Information]()
     var placeCoordinates: CGPoint?
@@ -27,6 +29,54 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        updateView()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        setNewView(width: self.view.bounds.width)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        setNewView(width: size.width)
+    }
+    
+    func updateView() {
+        headerView = tableView.tableHeaderView
+        tableView.tableHeaderView = nil
+        tableView.addSubview(headerView)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        newHeaderLayer = CAShapeLayer()
+        newHeaderLayer.fillColor = UIColor.black.cgColor
+        headerView.layer.mask = newHeaderLayer
+        
+        //let newHeight = StretchyHeader().headerHeight - StretchyHeader().headerCut/2
+        let newHeight = self.view.bounds.size.height/4 - StretchyHeader().headerCut/2
+        tableView.contentInset = UIEdgeInsets(top: newHeight, left: 0, bottom: 0, right: 0)
+        tableView.contentOffset = CGPoint(x: 0, y: -newHeight)
+        setNewView(width: self.view.bounds.width)
+    }
+    
+    func setNewView(width: CGFloat) {
+        //let newHeight = StretchyHeader().headerHeight - StretchyHeader().headerCut/2
+        let newHeight = self.view.bounds.size.height/4 - StretchyHeader().headerCut/2
+        //var getHeaderFrame = CGRect(x: 0, y: -newHeight, width: tableView.bounds.width, height: StretchyHeader().headerHeight)
+        var getHeaderFrame = CGRect(x: 0, y: -newHeight, width: width, height: self.view.bounds.size.height/4)
+        
+        if tableView.contentOffset.y < newHeight {
+            getHeaderFrame.origin.y = tableView.contentOffset.y
+            getHeaderFrame.size.height = -tableView.contentOffset.y + StretchyHeader().headerCut/2
+        }
+        
+        headerView.frame = getHeaderFrame
+        let cutDirection = UIBezierPath()
+        cutDirection.move(to: CGPoint(x: 0, y: 0))
+        cutDirection.addLine(to: CGPoint(x: getHeaderFrame.width, y: 0))
+        cutDirection.addLine(to: CGPoint(x: getHeaderFrame.width, y: getHeaderFrame.height))
+        cutDirection.addLine(to: CGPoint(x: 0, y: getHeaderFrame.height - StretchyHeader().headerCut))
+        newHeaderLayer.path = cutDirection.cgPath
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,16 +89,18 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return informationList.count + 3
+        return informationList.count + 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "ButtonCell", for: indexPath) as! TwoButtonsCell
-            cell.leftButton.setImage(UIImage(named: "phone"), for: .normal)
-            cell.rightButton.setImage(UIImage(named: "navigate"), for: .normal)
-            cell.backgroundColor = UIColor(red:0.85, green:0.35, blue:0.29, alpha:1.0)
+            cell.leftButton.setImage(UIImage(named: "phone")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            cell.leftButton.tintColor = UIColor.white
+            cell.rightButton.setImage(UIImage(named: "navigate")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            cell.rightButton.tintColor = UIColor.white
+            cell.backgroundColor = Colors.mediumColor
             return cell
             
         } else if (indexPath.row > 0) && (indexPath.row < (informationList.count+1)) {
@@ -56,11 +108,15 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             let cell = tableView.dequeueReusableCell(withIdentifier: "InformationCell", for: indexPath) as! InformationCell
             cell.titleLabel.text = informationList[indexPath.row-1].title
             cell.informationLabel.text = informationList[indexPath.row-1].information
+            cell.backgroundColor = UIColor(white: 1, alpha: 0.7)
+            cell.bounds.size.width = self.view.bounds.size.width-40
             return cell
             
         } else if indexPath.row == (informationList.count+1) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DescriptionCell", for: indexPath) as! DescriptionCell
             cell.descriptionText.text = placeDescription
+            cell.backgroundColor = UIColor(white: 1, alpha: 0.7)
+            cell.bounds.size.width = self.view.bounds.size.width-40
             return cell
 
         } else {
@@ -71,94 +127,20 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 68
-            
         } else if (indexPath.row > 0) && (indexPath.row < (informationList.count+1)) {
             return 44
-        } else if indexPath.row == (informationList.count+1) {
-            return 132
         } else {
-            let actualSize = 132+44+88+200
-            let deviceHeight = Int(self.view.bounds.size.height)
-            let plusCell = Int((deviceHeight-actualSize))
-            if plusCell > 0 {
-                return CGFloat(plusCell)
-            } else {
-                return 1
-            }
+            return 132
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        headerHeightConstraint.constant = maxHeaderHeight
         navigationController?.visibleViewController?.title = "Details"
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let scrollDiff = scrollView.contentOffset.y - previousScrollOffset
-        
-        let absoluteTop: CGFloat = 0;
-        let absoluteBottom: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height;
-        
-        let isScrollingDown = scrollDiff > 0 && scrollView.contentOffset.y > absoluteTop
-        let isScrollingUp = scrollDiff < 0 && scrollView.contentOffset.y < absoluteBottom
-        
-        var newHeight = headerHeightConstraint.constant
-        if isScrollingDown {
-            newHeight = max(self.minHeaderHeight, self.headerHeightConstraint.constant - abs(scrollDiff))
-        } else if isScrollingUp {
-            newHeight = min(self.maxHeaderHeight, self.headerHeightConstraint.constant + abs(scrollDiff))
-        }
-        
-        if newHeight != self.headerHeightConstraint.constant {
-            self.headerHeightConstraint.constant = newHeight
-            self.setScrollPosition(position: self.previousScrollOffset)
-        }
-        
-        self.previousScrollOffset = scrollView.contentOffset.y
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        scrollViewDidStopScrolling()
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            scrollViewDidStopScrolling()
-        }
-    }
-    
-    func scrollViewDidStopScrolling() {
-        let range = self.maxHeaderHeight - self.minHeaderHeight
-        let midPoint = self.minHeaderHeight + (range / 2)
-        
-        if self.headerHeightConstraint.constant > midPoint {
-            expandHeader()
-        } else {
-            collapseHeader()
-        }
-    }
-    
-    func setScrollPosition(position: CGFloat) {
-        self.tableView.contentOffset = CGPoint(x: self.tableView.contentOffset.x, y: position)
-    }
-    
-    func collapseHeader() {
-        self.view.layoutIfNeeded()
-        UIView.animate(withDuration: 0.2, animations: {
-            self.headerHeightConstraint.constant = self.minHeaderHeight
-            // Manipulate UI elements within the header here
-            self.view.layoutIfNeeded()
-        })
-    }
-    
-    func expandHeader() {
-        self.view.layoutIfNeeded()
-        UIView.animate(withDuration: 0.2, animations: {
-            self.headerHeightConstraint.constant = self.maxHeaderHeight
-            // Manipulate UI elements within the header here
-            self.view.layoutIfNeeded()
-        })
     }
     
     private func callNumber(phoneNumber:String) {
