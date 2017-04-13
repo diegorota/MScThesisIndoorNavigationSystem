@@ -256,7 +256,6 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
             self.errorMessageLabel.text = "Searching for tags..."
             self.errorMessageView.alpha = 1
-            self.errorMessageLabel.alpha = 1
             self.errorMessageView.isHidden = false
         })
         
