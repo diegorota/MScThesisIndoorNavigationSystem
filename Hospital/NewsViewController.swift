@@ -69,6 +69,7 @@ class NewsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let svc = SFSafariViewController(url: newsList[indexPath.row].urlSite)
         self.present(svc, animated: true, completion: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     override func didReceiveMemoryWarning() {

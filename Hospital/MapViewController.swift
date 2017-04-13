@@ -13,6 +13,9 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     
     @IBOutlet weak var mapScrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var centerButton: UIButton!
+    @IBOutlet weak var errorMessageView: UIView!
+    @IBOutlet weak var errorMessageLabel: UILabel!
     
     // View della freccia
     var arrowView: UIView!
@@ -50,6 +53,11 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         self.mapScrollView.delegate = self
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         
+        self.centerButton.isHidden = true
+        self.errorMessageView.isHidden = true
+        self.errorMessageView.alpha = 0
+        self.errorMessageView.backgroundColor = Colors.mediumColor
+        
         // Memorizzo altezza e larghezza dell'immagine. Verranno usate per le proporzioni dello zoom della mappa
         imageWidth = imageView.frame.width
         imageHeight = imageView.frame.height
@@ -61,21 +69,32 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         let tap = UITapGestureRecognizer(target: self, action: #selector(zoom))
         tap.numberOfTapsRequired = 2
         mapScrollView.addGestureRecognizer(tap)
+        
+        // Chiamata asincrona per vedere spostamenti su mappa quando il bluetooth non è disponibile
+        var x = 0
+        var y = 0
+        var heading = 0
+        DispatchQueue.global(qos: .userInitiated).async {
+            for _ in 0...1000 {
+                sleep(1)
+                x = x+50
+                y = y+100
+                heading = heading-1
+                DispatchQueue.main.async {
+                    self.updateMap(x: CGFloat(x), y: CGFloat(y), heading: CGFloat(heading))
+                }
+            }
+        }
 
     }
     
     func updateMap(x: CGFloat, y: CGFloat, heading: CGFloat) {
         lastPosition = normalizePosition(meterX: x, meterY: y)
-        var deltaHeading: CGFloat
         
-        if let lastHeading = lastHeading {
-            deltaHeading = heading - lastHeading
-        } else {
-            deltaHeading = 0
-        }
         lastHeading = heading
         
         if firstPosition {
+            self.centerButton.isHidden = false
             addArrowToMap()
             arrowView.center = lastPosition!
             arrowView.transform = CGAffineTransform(rotationAngle: lastHeading!)
@@ -110,13 +129,14 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         return imageView
     }
     
-    // Funzione chiamata quando si effettua un dippio tocco sulla mappa. Gestisce lo zoom.
+    // Funzione chiamata quando si effettua un doppio tocco sulla mappa. Gestisce lo zoom.
     func zoom(sender: UIGestureRecognizer) {
         if (mapScrollView.zoomScale < 1.5) {
             mapScrollView.setZoomScale(mapScrollView.maximumZoomScale, animated: true)
         } else {
             mapScrollView.setZoomScale(mapScrollView.minimumZoomScale, animated: true)
         }
+        
     }
     
     // Funzione che inverte l'asse Y
@@ -135,7 +155,9 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
 
     // Funzione che centra la mappa nel punto in cui si trova l'utente.
     @IBAction func centerView(_ sender: UIButton) {
-        self.mapScrollView.zoom(to: CGRect(origin: CGPoint(x:(lastPosition?.x)!-50,y:(lastPosition?.y)!-50), size: CGSize(width: 100, height: 100)), animated: true)
+        UIView.animate(withDuration: 2, delay: 0, options: [], animations: {
+            self.mapScrollView.zoom(to: CGRect(origin: CGPoint(x:(self.lastPosition?.x)!-100,y:(self.lastPosition?.y)!-100), size: CGSize(width: 200, height: 200)), animated: true)
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -190,7 +212,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         
-        var showAlert = true
+        var showMessage = true
         var message = ""
         
         switch central.state {
@@ -205,7 +227,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         case .unknown:
             message = "The state of the BLE Manager is unknown."
         case .poweredOn:
-            showAlert = false
+            showMessage = false
             message = "Bluetooth LE is turned on and ready for communication."
             
             print(message)
@@ -215,11 +237,17 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             centralManager.scanForPeripherals(withServices: nil, options: nil)
         }
         
-        if showAlert {
-            let alertController = UIAlertController(title: "Central Manager State", message: message, preferredStyle: UIAlertControllerStyle.alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true)
+        if showMessage {
+            self.errorMessageLabel.text = message
+            UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                self.errorMessageView.isHidden = false
+                self.errorMessageView.alpha = 1
+            })
+        } else {
+            UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                self.errorMessageView.alpha = 0
+                self.errorMessageView.isHidden = true
+            })
         }
     }
     
@@ -248,6 +276,10 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("**** SUCCESSFULLY CONNECTED TO SENSOR TAG!!!")
+        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+            self.errorMessageView.alpha = 0
+            self.errorMessageView.isHidden = true
+        })
         
         // Now that we've successfully connected to the SensorTag, let's discover the services.
         // - NOTE:  we pass nil here to request ALL services be discovered.
@@ -258,10 +290,20 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         print("**** CONNECTION TO SENSOR TAG FAILED!!!")
+        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+            self.errorMessageLabel.text = "Connection to sensor tag failed"
+            self.errorMessageView.alpha = 1
+            self.errorMessageView.isHidden = false
+        })
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("**** DISCONNECTED FROM SENSOR TAG!!!")
+        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+            self.errorMessageLabel.text = "Disconnected from sensor tag"
+            self.errorMessageView.alpha = 1
+            self.errorMessageView.isHidden = false
+        })
         if error != nil {
             print("****** DISCONNECTION DETAILS: \(error!.localizedDescription)")
         }
