@@ -24,6 +24,7 @@ class PrescriptionViewController: UIViewController, UITableViewDelegate, UITable
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -46,6 +47,8 @@ class PrescriptionViewController: UIViewController, UITableViewDelegate, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "PrescriptionCell", for: indexPath)
         cell.textLabel?.text = (prescriptionSection[indexPath.section].items[indexPath.row] as? Prescription)?.name
         cell.detailTextLabel?.text = "Hour: \((prescriptionSection[indexPath.section].items[indexPath.row] as! Prescription).hour)"
+        cell.detailTextLabel?.textColor = Colors.darkColor
+        cell.textLabel?.textColor = Colors.darkColor
         return cell
     }
     
@@ -53,6 +56,8 @@ class PrescriptionViewController: UIViewController, UITableViewDelegate, UITable
     {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        header.textLabel?.textColor = Colors.darkColor
+        header.backgroundView?.backgroundColor = UIColor.white
     }
     
     override func viewWillAppear(_ animated: Bool) {

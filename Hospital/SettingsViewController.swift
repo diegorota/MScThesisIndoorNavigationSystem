@@ -56,7 +56,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         } else if indexPath.row == 1 {
             cell.textLabel?.text = "Support"
         }
-        
+        cell.textLabel?.textColor = Colors.darkColor
         return cell
     }
     
