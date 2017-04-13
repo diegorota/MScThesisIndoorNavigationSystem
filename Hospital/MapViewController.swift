@@ -242,6 +242,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
                 self.errorMessageView.isHidden = false
                 self.errorMessageView.alpha = 1
+                self.errorMessageLabel.alpha = 1
             })
         } else {
             UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
@@ -252,7 +253,16 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        //print("centralManager didDiscoverPeripheral - CBAdvertisementDataLocalNameKey is \"\(CBAdvertisementDataLocalNameKey)\"")
+        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+            self.errorMessageLabel.text = "Searching for tags..."
+            self.errorMessageView.alpha = 1
+            self.errorMessageLabel.alpha = 1
+            self.errorMessageView.isHidden = false
+        })
+        
+        UIView.animate(withDuration: 0.8, delay:0.0, options:[.autoreverse, .repeat], animations: {
+            self.errorMessageLabel.alpha = 0
+        }, completion: nil)
         
         if let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
             print("NEXT PERIPHERAL NAME: \(peripheralName)")
@@ -293,6 +303,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
             self.errorMessageLabel.text = "Connection to sensor tag failed"
             self.errorMessageView.alpha = 1
+            self.errorMessageLabel.alpha = 1
             self.errorMessageView.isHidden = false
         })
     }
@@ -302,6 +313,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
             self.errorMessageLabel.text = "Disconnected from sensor tag"
             self.errorMessageView.alpha = 1
+            self.errorMessageLabel.alpha = 1
             self.errorMessageView.isHidden = false
         })
         if error != nil {
@@ -370,19 +382,10 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
                     let separateValues = lastString.components(separatedBy: ",")
                     if separateValues.count == 4 {
                         print("NUOVO PACCHETTO")
-                        if let x: CGFloat = CGFloat((separateValues[1] as NSString).doubleValue) {
-                            if let y: CGFloat = CGFloat((separateValues[2] as NSString).doubleValue) {
-                                if let heading: CGFloat = CGFloat((separateValues[3] as NSString).doubleValue) {
-                                    updateMap(x: x, y: y, heading: CGFloat(180)+heading+CGFloat(85)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord
-                                } else {
-                                    print("Packet error!")
-                                }
-                            } else {
-                                print("Packet error!")
-                            }
-                        } else {
-                            print("Packet error!")
-                        }
+                        let x: CGFloat = CGFloat((separateValues[1] as NSString).doubleValue)
+                        let y: CGFloat = CGFloat((separateValues[2] as NSString).doubleValue)
+                        let heading: CGFloat = CGFloat((separateValues[3] as NSString).doubleValue)
+                        updateMap(x: x, y: y, heading: CGFloat(180)+heading+CGFloat(85)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord
                     }
                     lastString = lastPacket.replacingOccurrences(of: "?", with: "")
                 } else if !lastPacket.contains("?") && !initialPacket {
