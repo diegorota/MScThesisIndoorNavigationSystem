@@ -269,6 +269,14 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             
             if peripheral.identifier.uuidString == identifier {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
+                
+                UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                    self.errorMessageLabel.text = "Sensor tag found. Connecting..."
+                    self.errorMessageView.alpha = 1
+                    self.errorMessageLabel.alpha = 1
+                    self.errorMessageView.isHidden = false
+                })
+                
                 // to save power, stop scanning for other devices
                 centralManager.stopScan()
                 
@@ -314,6 +322,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             self.errorMessageView.alpha = 1
             self.errorMessageLabel.alpha = 1
             self.errorMessageView.isHidden = false
+            self.centerButton.isHidden = true
         })
         if error != nil {
             print("****** DISCONNECTION DETAILS: \(error!.localizedDescription)")
