@@ -1456,37 +1456,71 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6QS-N2-U4X">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6QS-N2-U4X">
                                                 <rect key="frame" x="0.0" y="115" width="335" height="88"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="88" id="3pL-Ew-dzj"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FirstDishCell" id="Ii8-Fc-Dp9">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FirstDishCell" id="Ii8-Fc-Dp9" customClass="CafeteriaCell" customModule="Hospital" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="335" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ii8-Fc-Dp9" id="uNc-Re-qG6">
                                                             <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfb-qF-GKY">
+                                                                    <rect key="frame" x="16" y="8" width="271" height="27.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottomMargin" secondItem="jfb-qF-GKY" secondAttribute="bottom" id="3wA-94-t6b"/>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="jfb-qF-GKY" secondAttribute="trailing" constant="40" id="S69-aj-iMO"/>
+                                                                <constraint firstItem="jfb-qF-GKY" firstAttribute="top" secondItem="uNc-Re-qG6" secondAttribute="topMargin" id="dIF-Pg-hOJ"/>
+                                                                <constraint firstItem="jfb-qF-GKY" firstAttribute="leading" secondItem="uNc-Re-qG6" secondAttribute="leadingMargin" constant="8" id="ncA-pG-Xus"/>
+                                                            </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="titleLabel" destination="jfb-qF-GKY" id="quw-2N-PLe"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
-                                            <tableView clipsSubviews="YES" alpha="0.69999999999999996" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AGY-5A-ahF">
+                                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AGY-5A-ahF">
                                                 <rect key="frame" x="0.0" y="293" width="335" height="88"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="88" id="zOL-Ih-bJr"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SecondDishCell" id="Mzc-xy-fX6">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SecondDishCell" id="Mzc-xy-fX6" customClass="CafeteriaCell" customModule="Hospital" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="335" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mzc-xy-fX6" id="4rt-Z5-Vfu">
                                                             <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
                                                             <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsj-Vt-wcN">
+                                                                    <rect key="frame" x="16" y="8" width="271" height="27.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailingMargin" secondItem="zsj-Vt-wcN" secondAttribute="trailing" constant="40" id="9Re-1X-dDI"/>
+                                                                <constraint firstItem="zsj-Vt-wcN" firstAttribute="top" secondItem="4rt-Z5-Vfu" secondAttribute="topMargin" id="DeA-PG-vaW"/>
+                                                                <constraint firstAttribute="bottomMargin" secondItem="zsj-Vt-wcN" secondAttribute="bottom" id="J60-gp-u1g"/>
+                                                                <constraint firstItem="zsj-Vt-wcN" firstAttribute="leading" secondItem="4rt-Z5-Vfu" secondAttribute="leadingMargin" constant="8" id="Yl5-qu-q1X"/>
+                                                            </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="titleLabel" destination="zsj-Vt-wcN" id="eha-ih-h7O"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>

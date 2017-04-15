@@ -84,6 +84,47 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             cell.iconImage.image = UIImage(named: tiles[indexPath.item-1].logoTile)?.withRenderingMode(.alwaysTemplate)
             cell.iconImage.tintColor = Colors.darkColor
             cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                var description = ""
+                switch indexPath.item {
+                case 1:
+                    let menu = CafeteriaData.getData()
+                    if menu.newMenu! || (!menu.newMenu! && self.defaults.bool(forKey: UserDefaultsKeys.confirmationMenuBoolKey)){
+                        description = "You haven't choosen your menu."
+                    } else {
+                        description = "You have already choosen your menu."
+                    }
+                case 2:
+                    let examinations = MedicalExaminationSectionData.getData(refreshData: true)
+                    if examinations[0].items.count == 0 {
+                        description = "You have't examinations today."
+                    } else if examinations[0].items.count == 1 {
+                        description = "You have 1 examination today"
+                    } else {
+                        description = "You have \(examinations[0].items.count) examinations today."
+                    }
+                case 3:
+                    description = "Search the hospital places."
+                case 4:
+                    let prescription = PrescriptionSectionData.getData(refreshData: true)
+                    if prescription[0].items.count == 0 {
+                        description = "You have't prescriptions for today."
+                    } else {
+                        description = "See your prescriptions for today."
+                    }
+                case 5:
+                    description = "See where you are in the hospital."
+                case 6:
+                    description = "Read the last news of the hospital."
+                default:
+                    print("Error loading description tile")
+                }
+                DispatchQueue.main.async {
+                    cell.descriptionLabel.text = description
+                }
+            }
+            
             cell.layoutIfNeeded()
             return cell
         }

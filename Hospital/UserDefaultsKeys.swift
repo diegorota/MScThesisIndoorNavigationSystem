@@ -28,5 +28,6 @@ struct UserDefaultsKeys {
     static let lastYearKey = "lastyearkey"
     static let lastMonthKey = "lastmonthkey"
     static let lastDayKey = "lastdaykey"
+    static let lastDayNameKey = "lastdaynamekey"
     static let lastTypeKey = "lasttypekey"
 }

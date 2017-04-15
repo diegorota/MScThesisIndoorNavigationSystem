@@ -23,6 +23,8 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
     var waitingLabel: String?
     var ticketLabel: String?
     
+    var isToday = false
+    
     var locationManager: CLLocationManager!
     let beaconuuid = "8492E75F-4FD6-469D-B132-043FE94921D8"
     
@@ -83,6 +85,9 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
                 cell.textView.textColor = Colors.darkColor
                 
                 cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+                if !isToday {
+                    cell.textView.text = "The day of the visit you can check-in simply putting your smartphone near the totem."
+                }
 //                cell.layer.borderWidth = 0.5
 //                cell.layer.borderColor = Colors.darkColor.cgColor
                 return cell
@@ -252,7 +257,7 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
         if status == .authorizedWhenInUse {
             if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
                 if CLLocationManager.isRangingAvailable() {
-                    if !checkinDone {
+                    if !checkinDone && isToday {
                         startScanning()
                     }
                 }

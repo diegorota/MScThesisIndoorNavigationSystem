@@ -27,9 +27,8 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var scrollView: UIScrollView!
     
     var confirmationMenuBool = false
+    var menu: CafeteriaMenu!
     
-    var firstDishes = [String]()
-    var secondDishes = [String]()
     var firstChoosen = true
     var secondChoosen = true
     
@@ -38,12 +37,6 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var selectedFirstIndexPath: IndexPath? = IndexPath(row: 0, section: 0)
     var selectedSecondIndexPath: IndexPath? = IndexPath(row: 0, section: 0)
-    
-    var lastYear: Int?
-    var lastMonth: Int?
-    var lastDay: Int?
-    var lastType: String?
-    var newMenu = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,52 +69,34 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
         
         firstDishTableView.isScrollEnabled = false
         secondDishTableView.isScrollEnabled = false
+        
+        self.menu = CafeteriaData.getData()
+        self.dateLabel.text = "\(menu.lastDayName!) \(menu.lastDay!), \(menu.lastType!)"
+        if menu.newMenu == false {
+            selectedFirstIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedFirstDishIndexPathKey), section: 0)
+            selectedSecondIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedSecondDishIndexPathKey), section: 0)
+            firstChoosen = defaults.bool(forKey: UserDefaultsKeys.firstChoosenBoolKey)
+            secondChoosen = defaults.bool(forKey: UserDefaultsKeys.secondChoosenBoolKey)
+            confirmationMenuBool = defaults.bool(forKey: UserDefaultsKeys.confirmationMenuBoolKey)
+        } else {
+            selectedFirstIndexPath = IndexPath(row: 0, section: 0)
+            selectedSecondIndexPath = IndexPath(row: 0, section: 0)
+            firstChoosen = true
+            secondChoosen = true
+            confirmationMenuBool = false
+        }
+        firstDishSwitch.isOn = firstChoosen
+        secondDishSwitch.isOn = secondChoosen
+        firstDishTableView.isHidden = !firstChoosen
+        secondDishTableView.isHidden = !secondChoosen
+        confirmButton.isHidden = confirmationMenuBool
+        modifyButton.isHidden = true
+        if confirmationMenuBool {
+            hideView(duration: 0.5, confirmation: true)
+        } else {
+            showView(duration: 0.5, confirmation: true)
+        }
 
-    }
-    
-    // Funzione che carica il file JSON contenente le informazioni dei pasti
-    func loadDishes() {
-        
-        if let path = Bundle.main.path(forResource: "json/cafeteria-lunch", ofType: "json") {
-            if let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped) {
-                let json = JSON(data: data)
-                parse(json: json)
-            }
-        }
-    }
-    
-    func parse(json: JSON) {
-        let day = json["day"].intValue
-        let dayName = json["day_name"].stringValue
-        let type = json["type"].stringValue
-        
-        firstDishes = json["first_dish"].arrayObject as! [String]
-        secondDishes = json["second_dish"].arrayObject as! [String]
-        
-        dateLabel.text = "\(dayName) \(day), \(type)"
-        
-        if let lastYear = lastYear {
-            if let lastMonth = lastMonth {
-                if let lastDay = lastDay {
-                    if let lastType = lastType {
-                        if lastYear == json["year"].intValue && lastMonth == json["month"].intValue && lastDay == json["day"].intValue && lastType == json["type"].stringValue {
-                            newMenu = false
-                        } else {
-                            newMenu = true
-                        }
-                    }
-                }
-            }
-        }
-        self.lastYear = json["year"].intValue
-        self.lastMonth = json["month"].intValue
-        self.lastDay = json["day"].intValue
-        self.lastType = json["type"].stringValue
-        defaults.setValue(lastYear, forKey: UserDefaultsKeys.lastYearKey)
-        defaults.setValue(lastMonth, forKey: UserDefaultsKeys.lastMonthKey)
-        defaults.setValue(lastDay, forKey: UserDefaultsKeys.lastDayKey)
-        defaults.setValue(lastType, forKey: UserDefaultsKeys.lastTypeKey)
-        defaults.synchronize()
     }
     
     @IBAction func changeSwitch(_ sender: UISwitch) {
@@ -225,9 +200,9 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 0 {
-            return firstDishes.count
+            return menu.firstDishes!.count
         } else if tableView.tag == 1 {
-            return secondDishes.count
+            return menu.secondDishes!.count
         }
         
         return 0
@@ -235,27 +210,29 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = UITableViewCell()
+        var cell = CafeteriaCell()
         
         if tableView.tag == 0 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "FirstDishCell", for: indexPath)
-            cell.textLabel?.text = firstDishes[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "FirstDishCell", for: indexPath) as! CafeteriaCell
+            cell.titleLabel.text = menu.firstDishes![indexPath.row].capitalized
             if indexPath == selectedFirstIndexPath {
                 cell.accessoryType = UITableViewCellAccessoryType.checkmark
             } else {
                 cell.accessoryType = UITableViewCellAccessoryType.none
             }
         } else if tableView.tag == 1 {
-            cell = tableView.dequeueReusableCell(withIdentifier: "SecondDishCell", for: indexPath)
-            cell.textLabel?.text = secondDishes[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "SecondDishCell", for: indexPath) as! CafeteriaCell
+            cell.titleLabel.text = menu.secondDishes![indexPath.row].capitalized
             if indexPath == selectedSecondIndexPath {
                 cell.accessoryType = UITableViewCellAccessoryType.checkmark
             } else {
                 cell.accessoryType = UITableViewCellAccessoryType.none
             }
         }
-        cell.textLabel?.textColor = Colors.darkColor
+        cell.titleLabel.textColor = Colors.darkColor
+        cell.titleLabel.backgroundColor = UIColor.clear
         cell.tintColor = Colors.darkColor
+        cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.7).cgColor
         return cell
     }
     
@@ -303,41 +280,6 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.visibleViewController?.title = "Cafeteria"
-        if defaults.integer(forKey: UserDefaultsKeys.lastYearKey) != 0 {
-            self.lastYear = defaults.integer(forKey: UserDefaultsKeys.lastYearKey)
-        }
-        if defaults.integer(forKey: UserDefaultsKeys.lastMonthKey) != 0 {
-            self.lastMonth = defaults.integer(forKey: UserDefaultsKeys.lastMonthKey)
-        }
-        if defaults.integer(forKey: UserDefaultsKeys.lastDayKey) != 0 {
-            self.lastDay = defaults.integer(forKey: UserDefaultsKeys.lastDayKey)
-        }
-        lastType = defaults.string(forKey: UserDefaultsKeys.lastTypeKey)
-        loadDishes()
-        if newMenu == false {
-            selectedFirstIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedFirstDishIndexPathKey), section: 0)
-            selectedSecondIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedSecondDishIndexPathKey), section: 0)
-            firstChoosen = defaults.bool(forKey: UserDefaultsKeys.firstChoosenBoolKey)
-            secondChoosen = defaults.bool(forKey: UserDefaultsKeys.secondChoosenBoolKey)
-            confirmationMenuBool = defaults.bool(forKey: UserDefaultsKeys.confirmationMenuBoolKey)
-        } else {
-            selectedFirstIndexPath = IndexPath(row: 0, section: 0)
-            selectedSecondIndexPath = IndexPath(row: 0, section: 0)
-            firstChoosen = true
-            secondChoosen = true
-            confirmationMenuBool = false
-        }
-        firstDishSwitch.isOn = firstChoosen
-        secondDishSwitch.isOn = secondChoosen
-        firstDishTableView.isHidden = !firstChoosen
-        secondDishTableView.isHidden = !secondChoosen
-        confirmButton.isHidden = confirmationMenuBool
-        modifyButton.isHidden = true
-        if confirmationMenuBool {
-            hideView(duration: 0.5, confirmation: true)
-        } else {
-            showView(duration: 0.5, confirmation: true)
-        }
     }
     
 }

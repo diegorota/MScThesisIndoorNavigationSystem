@@ -207,6 +207,16 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             //print("*** RESUMING SCAN!")
             _ = Timer(timeInterval: timerScanInterval, target: self, selector: #selector(pauseScan), userInfo: nil, repeats: false)
             centralManager.scanForPeripherals(withServices: nil, options: nil)
+            self.errorMessageLabel.text = "Searching for tags..."
+            UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                self.errorMessageView.alpha = 1
+                self.errorMessageLabel.alpha = 1
+                self.errorMessageView.isHidden = false
+            })
+            
+            UIView.animate(withDuration: 0.8, delay:0.0, options:[.autoreverse, .repeat], animations: {
+                self.errorMessageLabel.alpha = 0
+            }, completion: nil)
         }
     }
     
@@ -228,7 +238,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             message = "The state of the BLE Manager is unknown."
         case .poweredOn:
             showMessage = false
-            message = "Bluetooth LE is turned on and ready for communication."
+            message = "Searching for tags..."
             
             print(message)
             keepScanning = true
@@ -245,23 +255,20 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
                 self.errorMessageLabel.alpha = 1
             })
         } else {
+            self.errorMessageLabel.text = message
             UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
-                self.errorMessageView.alpha = 0
-                self.errorMessageView.isHidden = true
+                self.errorMessageView.alpha = 1
+                self.errorMessageLabel.alpha = 1
+                self.errorMessageView.isHidden = false
             })
+            
+            UIView.animate(withDuration: 0.8, delay:0.0, options:[.autoreverse, .repeat], animations: {
+                self.errorMessageLabel.alpha = 0
+            }, completion: nil)
         }
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
-            self.errorMessageLabel.text = "Searching for tags..."
-            self.errorMessageView.alpha = 1
-            self.errorMessageView.isHidden = false
-        })
-        
-        UIView.animate(withDuration: 0.8, delay:0.0, options:[.autoreverse, .repeat], animations: {
-            self.errorMessageLabel.alpha = 0
-        }, completion: nil)
         
         if let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
             print("NEXT PERIPHERAL NAME: \(peripheralName)")
@@ -330,6 +337,16 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         arduinoPeripherals = nil
         centralManager.scanForPeripherals(withServices: nil, options: nil)
         initialPacket = true
+        self.errorMessageLabel.text = "Searching for tags..."
+        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+            self.errorMessageView.alpha = 1
+            self.errorMessageLabel.alpha = 1
+            self.errorMessageView.isHidden = false
+        })
+        
+        UIView.animate(withDuration: 0.8, delay:0.0, options:[.autoreverse, .repeat], animations: {
+            self.errorMessageLabel.alpha = 0
+        }, completion: nil)
         
     }
     

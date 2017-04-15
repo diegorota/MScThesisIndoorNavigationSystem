@@ -23,6 +23,7 @@
 		4852ABAF1E7E6F26005734A3 /* MedicalExaminationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852ABAE1E7E6F26005734A3 /* MedicalExaminationViewController.swift */; };
 		4852ABB11E7E7449005734A3 /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852ABB01E7E7449005734A3 /* TableViewSection.swift */; };
 		4852ABB31E7E7642005734A3 /* MedicalExaminationSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852ABB21E7E7642005734A3 /* MedicalExaminationSectionData.swift */; };
+		486B7BC21EA222F500208BBD /* CafeteriaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B7BC11EA222F500208BBD /* CafeteriaCell.swift */; };
 		486C6EF91E7C54580036B363 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */; };
 		486D55C51E94F08B00FD824C /* HomeInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D55C41E94F08B00FD824C /* HomeInfoCell.swift */; };
 		48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */; };
@@ -49,6 +50,8 @@
 		48F2A1381E7A92F7002A8DC0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */; };
 		48F2A13A1E7A9A31002A8DC0 /* json in Resources */ = {isa = PBXBuildFile; fileRef = 48F2A1391E7A9A31002A8DC0 /* json */; };
 		48F2A13C1E7A9C5B002A8DC0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */; };
+		48F949961EA207DE00C025EC /* CafeteriaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F949951EA207DE00C025EC /* CafeteriaData.swift */; };
+		48F949981EA20B0900C025EC /* CafeteriaMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F949971EA20B0900C025EC /* CafeteriaMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +71,7 @@
 		4852ABAE1E7E6F26005734A3 /* MedicalExaminationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationViewController.swift; sourceTree = "<group>"; };
 		4852ABB01E7E7449005734A3 /* TableViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		4852ABB21E7E7642005734A3 /* MedicalExaminationSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationSectionData.swift; sourceTree = "<group>"; };
+		486B7BC11EA222F500208BBD /* CafeteriaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaCell.swift; sourceTree = "<group>"; };
 		486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		486D55C41E94F08B00FD824C /* HomeInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInfoCell.swift; sourceTree = "<group>"; };
 		48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 		48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		48F2A1391E7A9A31002A8DC0 /* json */ = {isa = PBXFileReference; lastKnownFileType = folder; path = json; sourceTree = "<group>"; };
 		48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		48F949951EA207DE00C025EC /* CafeteriaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaData.swift; sourceTree = "<group>"; };
+		48F949971EA20B0900C025EC /* CafeteriaMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +137,7 @@
 				4805109C1E793D2B003B4014 /* AppDelegate.swift */,
 				4805109E1E793D2B003B4014 /* LoginViewController.swift */,
 				48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */,
-				48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */,
+				48F949941EA207C600C025EC /* Cafeteria */,
 				4828024F1E929CEC002C3665 /* Home */,
 				4828024B1E929C7B002C3665 /* Medical Examinations */,
 				4828024C1E929CAF002C3665 /* POI */,
@@ -215,6 +221,17 @@
 			name = Home;
 			sourceTree = "<group>";
 		};
+		48F949941EA207C600C025EC /* Cafeteria */ = {
+			isa = PBXGroup;
+			children = (
+				48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */,
+				486B7BC11EA222F500208BBD /* CafeteriaCell.swift */,
+				48F949951EA207DE00C025EC /* CafeteriaData.swift */,
+				48F949971EA20B0900C025EC /* CafeteriaMenu.swift */,
+			);
+			name = Cafeteria;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -292,7 +309,9 @@
 				48D371FD1E812726008E3A40 /* Information.swift in Sources */,
 				4805109F1E793D2B003B4014 /* LoginViewController.swift in Sources */,
 				48E536F91E82F98B00E03F77 /* TwoButtonsCell.swift in Sources */,
+				48F949961EA207DE00C025EC /* CafeteriaData.swift in Sources */,
 				4852ABB31E7E7642005734A3 /* MedicalExaminationSectionData.swift in Sources */,
+				48F949981EA20B0900C025EC /* CafeteriaMenu.swift in Sources */,
 				48CDE7161E7FD10A00092D93 /* PointOfInterestDetail.swift in Sources */,
 				480510B31E79DABB003B4014 /* HomeButton.swift in Sources */,
 				48C6EE6E1E84162B004F403B /* NewsCell.swift in Sources */,
@@ -303,6 +322,7 @@
 				48D371F91E8120F2008E3A40 /* MedicalExaminationCheckinOKCell.swift in Sources */,
 				48C6EE641E83E902004F403B /* PrescriptionSectionData.swift in Sources */,
 				4805109D1E793D2B003B4014 /* AppDelegate.swift in Sources */,
+				486B7BC21EA222F500208BBD /* CafeteriaCell.swift in Sources */,
 				48C6EE661E84139A004F403B /* NewsViewController.swift in Sources */,
 				480510AF1E7952EB003B4014 /* HomeViewController.swift in Sources */,
 				481FBBBB1E803FE100184EF7 /* ExaminationDetailViewController.swift in Sources */,

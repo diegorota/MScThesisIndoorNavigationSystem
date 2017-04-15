@@ -90,6 +90,10 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
             ed.bottomExaminationDetail.append(info4)
             ed.bottomExaminationDetail.append(info5!)
             
+            if indexPath.section == 0 {
+                ed.isToday = true
+            }
+            
             
             navigationController?.pushViewController(ed, animated: true)
         }
