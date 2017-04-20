@@ -47,6 +47,9 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     var lastPosition: CGPoint?
     var lastHeading: CGFloat?
     var firstPosition = true
+    
+    // Variabile filtro di Kalman
+    var kalmanFilter: KalmanFilter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,20 +74,20 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         mapScrollView.addGestureRecognizer(tap)
         
         // Chiamata asincrona per vedere spostamenti su mappa quando il bluetooth non è disponibile
-        var x = 0
-        var y = 0
-        var heading = 0
-        DispatchQueue.global(qos: .userInitiated).async {
-            for _ in 0...1000 {
-                sleep(1)
-                x = x+50
-                y = y+100
-                heading = heading-1
-                DispatchQueue.main.async {
-                    self.updateMap(x: CGFloat(x), y: CGFloat(y), heading: CGFloat(heading))
-                }
-            }
-        }
+//        var x = 0
+//        var y = 0
+//        var heading = 0
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            for _ in 0...1000 {
+//                sleep(1)
+//                x = x+50
+//                y = y+100
+//                heading = heading-1
+//                DispatchQueue.main.async {
+//                    self.updateMap(x: CGFloat(x), y: CGFloat(y), heading: CGFloat(heading))
+//                }
+//            }
+//        }
 
     }
     
@@ -100,11 +103,12 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             arrowView.transform = CGAffineTransform(rotationAngle: lastHeading!)
             firstPosition = false
         } else {
-            UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
-                //self.arrowView.transform = CGAffineTransform(translationX: self.lastPosition!.x, y: self.lastPosition!.y)
-                self.arrowView.transform = CGAffineTransform(rotationAngle: (self.lastHeading!*CGFloat.pi)/180)
-                self.arrowView.center = self.lastPosition!
-            })
+            self.arrowView.transform = CGAffineTransform(rotationAngle: (self.lastHeading!*CGFloat.pi)/180)
+            self.arrowView.center = self.lastPosition!
+//            UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+//                self.arrowView.transform = CGAffineTransform(rotationAngle: (self.lastHeading!*CGFloat.pi)/180)
+//                self.arrowView.center = self.lastPosition!
+//            })
         }
     }
     
@@ -284,6 +288,8 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
                     self.errorMessageView.isHidden = false
                 })
                 
+                sleep(2)
+                
                 // to save power, stop scanning for other devices
                 centralManager.stopScan()
                 
@@ -301,9 +307,18 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("**** SUCCESSFULLY CONNECTED TO SENSOR TAG!!!")
         UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
-            self.errorMessageView.alpha = 0
-            self.errorMessageView.isHidden = true
+            self.errorMessageLabel.text = "Connected."
+            self.errorMessageView.alpha = 1
+            self.errorMessageLabel.alpha = 1
+            self.errorMessageView.isHidden = false
         })
+        
+        sleep(2)
+        
+//        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+//            self.errorMessageView.alpha = 0
+//            self.errorMessageView.isHidden = true
+//        })
         
         // Now that we've successfully connected to the SensorTag, let's discover the services.
         // - NOTE:  we pass nil here to request ALL services be discovered.
@@ -320,6 +335,8 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             self.errorMessageLabel.alpha = 1
             self.errorMessageView.isHidden = false
         })
+        
+        sleep(2)
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -331,12 +348,17 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             self.errorMessageView.isHidden = false
             self.centerButton.isHidden = true
         })
+        
+        sleep(2)
+        
         if error != nil {
             print("****** DISCONNECTION DETAILS: \(error!.localizedDescription)")
         }
         arduinoPeripherals = nil
         centralManager.scanForPeripherals(withServices: nil, options: nil)
         initialPacket = true
+        kalmanFilter = nil
+        firstPosition = true
         self.errorMessageLabel.text = "Searching for tags..."
         UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
             self.errorMessageView.alpha = 1
@@ -347,6 +369,14 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         UIView.animate(withDuration: 0.8, delay:0.0, options:[.autoreverse, .repeat], animations: {
             self.errorMessageLabel.alpha = 0
         }, completion: nil)
+        
+        let subViews = self.imageView.subviews
+        for subview in subViews{
+            if (subview == arrowView) {
+                subview.removeFromSuperview()
+                return
+            }
+        }
         
     }
     
@@ -397,23 +427,64 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
                     print("ERROR ON UPDATING VALUE FOR CHARACTERISTIC: \(characteristic) - \(String(describing: error?.localizedDescription))")
                     return
                 }
+                
+                if initialPacket {
+                    sleep(2)
+                    UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                        self.errorMessageView.alpha = 0
+                        self.errorMessageView.isHidden = true
+                    })
+                }
+                
                 let array = [UInt8](dataBytes)
                 let lastPacket = String(bytes: array, encoding: String.Encoding.utf8)!
                 
-                if lastPacket.contains("?") && initialPacket {
-                    lastString = lastPacket.replacingOccurrences(of: "?", with: "")
+                if lastPacket.contains("R") && initialPacket {
+                    lastString = lastPacket.replacingOccurrences(of: "R", with: "")
                     initialPacket = false
-                } else if lastPacket.contains("?") && !initialPacket {
-                    let separateValues = lastString.components(separatedBy: ",")
-                    if separateValues.count == 4 {
+                } else if lastPacket.contains("R") && !initialPacket {
+                    var separateValues = lastString.components(separatedBy: ",")
+                    if separateValues.count == 6 {
+                        if kalmanFilter == nil {
+                            kalmanFilter = KalmanFilter()
+                        }
                         print("NUOVO PACCHETTO")
+                        for i in 0..<separateValues.count {
+                            separateValues[i] = separateValues[i].replacingOccurrences(of: "\0", with: "")
+                        }
                         let x: CGFloat = CGFloat((separateValues[1] as NSString).doubleValue)
                         let y: CGFloat = CGFloat((separateValues[2] as NSString).doubleValue)
-                        let heading: CGFloat = CGFloat((separateValues[3] as NSString).doubleValue)
-                        updateMap(x: x, y: y, heading: CGFloat(180)+heading+CGFloat(85)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord
+                        let accX: CGFloat = CGFloat((separateValues[3] as NSString).doubleValue)
+                        let accY: CGFloat = CGFloat((separateValues[4] as NSString).doubleValue)
+                        let heading: CGFloat = CGFloat((separateValues[5] as NSString).doubleValue)
+                        var position = kalmanFilter?.kalman_filter(coordX: Int(x), coordY: Int(y), accX: Float(accX)/100.00, accY: Float(accY)/100.00)
+                        
+                        if (position?.x)! < 0 {
+                            position?.x = 0
+                        } else if (position?.x)! > Int(realRoomWidth) {
+                            position?.x = Int(realRoomWidth)
+                        }
+                        if (position?.y)! < 0 {
+                            position?.y = 0
+                        } else if (position?.y)! > Int(realRoomHeight) {
+                            position?.y = Int(realRoomHeight)
+                        }
+                        
+                        updateMap(x: CGFloat(position!.x), y: CGFloat(position!.y), heading: CGFloat(180)+heading+CGFloat(85)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord. divido per 100 l'accelerazione per trasformare da mG a m/s^2
+                        //updateMap(x: x, y: y, heading: CGFloat(180)+heading+CGFloat(85))
+//                        str += "\(x),\(y),\((position?.x)!),\((position?.y)!)\n"
+//                        print(str)
+//                        
+//                        let destinationPath = NSTemporaryDirectory() + "dati.csv"
+//                        do {
+//                            try str.write(toFile: destinationPath, atomically: true, encoding: String.Encoding.utf8)
+//                        } catch {
+//                            print("Errore")
+//                        }
+                        
                     }
-                    lastString = lastPacket.replacingOccurrences(of: "?", with: "")
-                } else if !lastPacket.contains("?") && !initialPacket {
+                    lastString = lastPacket.replacingOccurrences(of: "R", with: "")
+                } else if !lastPacket.contains("R") && !initialPacket {
                     lastString.append(lastPacket.replacingOccurrences(of: "\n", with: ""))
                 }
             }

@@ -98,7 +98,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 case 2:
                     let examinations = MedicalExaminationSectionData.getData(refreshData: true)
                     if examinations[0].items.count == 0 {
-                        description = "You have't examinations today."
+                        description = "You haven't examinations today."
                     } else if examinations[0].items.count == 1 {
                         description = "You have 1 examination today"
                     } else {
@@ -109,7 +109,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 case 4:
                     let prescription = PrescriptionSectionData.getData(refreshData: true)
                     if prescription[0].items.count == 0 {
-                        description = "You have't prescriptions for today."
+                        description = "You haven't prescriptions for today."
                     } else {
                         description = "See your prescriptions for today."
                     }

@@ -89,6 +89,7 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
             ed.examinationDescriptionText = descriptionText
             ed.bottomExaminationDetail.append(info4)
             ed.bottomExaminationDetail.append(info5!)
+            ed.beaconuuid = (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).beacon_ID
             
             if indexPath.section == 0 {
                 ed.isToday = true

@@ -27,6 +27,7 @@
 		486C6EF91E7C54580036B363 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */; };
 		486D55C51E94F08B00FD824C /* HomeInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D55C41E94F08B00FD824C /* HomeInfoCell.swift */; };
 		48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */; };
+		48AF84B61EA785BA00B0A390 /* KalmanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AF84B51EA785BA00B0A390 /* KalmanFilter.swift */; };
 		48C6EE5E1E83D044004F403B /* PrescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C6EE5D1E83D044004F403B /* PrescriptionViewController.swift */; };
 		48C6EE621E83E5CA004F403B /* Prescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C6EE611E83E5CA004F403B /* Prescription.swift */; };
 		48C6EE641E83E902004F403B /* PrescriptionSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C6EE631E83E902004F403B /* PrescriptionSectionData.swift */; };
@@ -47,11 +48,13 @@
 		48E536F91E82F98B00E03F77 /* TwoButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536F81E82F98B00E03F77 /* TwoButtonsCell.swift */; };
 		48E536FB1E82F9EC00E03F77 /* DescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E536FA1E82F9EC00E03F77 /* DescriptionCell.swift */; };
 		48E7CCBF1E923B2C00103509 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E7CCBE1E923B2C00103509 /* Colors.swift */; };
+		48EF81EC1EA79BAC0072F025 /* KalmanPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EF81EB1EA79BAC0072F025 /* KalmanPosition.swift */; };
 		48F2A1381E7A92F7002A8DC0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */; };
 		48F2A13A1E7A9A31002A8DC0 /* json in Resources */ = {isa = PBXBuildFile; fileRef = 48F2A1391E7A9A31002A8DC0 /* json */; };
 		48F2A13C1E7A9C5B002A8DC0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */; };
 		48F949961EA207DE00C025EC /* CafeteriaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F949951EA207DE00C025EC /* CafeteriaData.swift */; };
 		48F949981EA20B0900C025EC /* CafeteriaMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F949971EA20B0900C025EC /* CafeteriaMenu.swift */; };
+		E82A5A088EC896085745A61B /* Pods_Hospital.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D263509C2CC95FCD8A0029 /* Pods_Hospital.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +78,7 @@
 		486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		486D55C41E94F08B00FD824C /* HomeInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInfoCell.swift; sourceTree = "<group>"; };
 		48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaViewController.swift; sourceTree = "<group>"; };
+		48AF84B51EA785BA00B0A390 /* KalmanFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KalmanFilter.swift; sourceTree = "<group>"; };
 		48C6EE5D1E83D044004F403B /* PrescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrescriptionViewController.swift; sourceTree = "<group>"; };
 		48C6EE611E83E5CA004F403B /* Prescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prescription.swift; sourceTree = "<group>"; };
 		48C6EE631E83E902004F403B /* PrescriptionSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrescriptionSectionData.swift; sourceTree = "<group>"; };
@@ -97,11 +101,15 @@
 		48E7CCBE1E923B2C00103509 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		48E7CCCA1E9244D200103509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		48E7CCCB1E9244D200103509 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		48EF81EB1EA79BAC0072F025 /* KalmanPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KalmanPosition.swift; sourceTree = "<group>"; };
 		48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		48F2A1391E7A9A31002A8DC0 /* json */ = {isa = PBXFileReference; lastKnownFileType = folder; path = json; sourceTree = "<group>"; };
 		48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		48F949951EA207DE00C025EC /* CafeteriaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaData.swift; sourceTree = "<group>"; };
 		48F949971EA20B0900C025EC /* CafeteriaMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaMenu.swift; sourceTree = "<group>"; };
+		600257575BBCADD49AAC2725 /* Pods-Hospital.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hospital.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hospital/Pods-Hospital.release.xcconfig"; sourceTree = "<group>"; };
+		92D263509C2CC95FCD8A0029 /* Pods_Hospital.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hospital.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C389ED54943170CB23144F8 /* Pods-Hospital.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hospital.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hospital/Pods-Hospital.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,17 +117,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E82A5A088EC896085745A61B /* Pods_Hospital.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21C20D12582E3D6B38DEC8D8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9C389ED54943170CB23144F8 /* Pods-Hospital.debug.xcconfig */,
+				600257575BBCADD49AAC2725 /* Pods-Hospital.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		480510901E793D2B003B4014 = {
 			isa = PBXGroup;
 			children = (
 				4805109B1E793D2B003B4014 /* Hospital */,
 				4805109A1E793D2B003B4014 /* Products */,
+				21C20D12582E3D6B38DEC8D8 /* Pods */,
+				6C5E3C955F1B90E614569173 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,6 +172,7 @@
 				48E7CCBE1E923B2C00103509 /* Colors.swift */,
 				486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */,
 				48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */,
+				48EF81EA1EA79B960072F025 /* Kalman */,
 				480510A01E793D2B003B4014 /* Main.storyboard */,
 				480510A31E793D2B003B4014 /* Assets.xcassets */,
 				480510A51E793D2B003B4014 /* LaunchScreen.storyboard */,
@@ -221,6 +242,15 @@
 			name = Home;
 			sourceTree = "<group>";
 		};
+		48EF81EA1EA79B960072F025 /* Kalman */ = {
+			isa = PBXGroup;
+			children = (
+				48AF84B51EA785BA00B0A390 /* KalmanFilter.swift */,
+				48EF81EB1EA79BAC0072F025 /* KalmanPosition.swift */,
+			);
+			name = Kalman;
+			sourceTree = "<group>";
+		};
 		48F949941EA207C600C025EC /* Cafeteria */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +262,14 @@
 			name = Cafeteria;
 			sourceTree = "<group>";
 		};
+		6C5E3C955F1B90E614569173 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				92D263509C2CC95FCD8A0029 /* Pods_Hospital.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -239,9 +277,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 480510AB1E793D2B003B4014 /* Build configuration list for PBXNativeTarget "Hospital" */;
 			buildPhases = (
+				8258A43A39BB886A09C6E124 /* [CP] Check Pods Manifest.lock */,
 				480510951E793D2B003B4014 /* Sources */,
 				480510961E793D2B003B4014 /* Frameworks */,
 				480510971E793D2B003B4014 /* Resources */,
+				9C9D560C8988F72F446FA5A9 /* [CP] Embed Pods Frameworks */,
+				2D692D2C0E9E757370D72B67 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -301,6 +342,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2D692D2C0E9E757370D72B67 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hospital/Pods-Hospital-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8258A43A39BB886A09C6E124 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9C9D560C8988F72F446FA5A9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hospital/Pods-Hospital-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		480510951E793D2B003B4014 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -339,7 +428,9 @@
 				48E536F51E82879600E03F77 /* POIDetailViewController.swift in Sources */,
 				48E536FB1E82F9EC00E03F77 /* DescriptionCell.swift in Sources */,
 				48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */,
+				48AF84B61EA785BA00B0A390 /* KalmanFilter.swift in Sources */,
 				48E536EF1E826CC600E03F77 /* POIViewController.swift in Sources */,
+				48EF81EC1EA79BAC0072F025 /* KalmanPosition.swift in Sources */,
 				480510B11E79B086003B4014 /* HomeButtonCell.swift in Sources */,
 				482802591E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift in Sources */,
 				48C6EE681E84154B004F403B /* MapViewController.swift in Sources */,
@@ -469,6 +560,7 @@
 		};
 		480510AC1E793D2B003B4014 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C389ED54943170CB23144F8 /* Pods-Hospital.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = EDG8TGNYUA;
@@ -482,6 +574,7 @@
 		};
 		480510AD1E793D2B003B4014 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 600257575BBCADD49AAC2725 /* Pods-Hospital.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = EDG8TGNYUA;

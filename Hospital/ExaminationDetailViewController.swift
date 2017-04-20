@@ -26,7 +26,7 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
     var isToday = false
     
     var locationManager: CLLocationManager!
-    let beaconuuid = "8492E75F-4FD6-469D-B132-043FE94921D8"
+    var beaconuuid: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,36 +60,26 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
                 cell.ticketImage.image = UIImage(named: "Settings")
                 cell.queueImage.image = UIImage(named: "Settings")
                 cell.waitingImage.image = UIImage(named: "Settings")
-                
                 cell.ticketLabel.text = ticketLabel!
                 cell.ticketLabel.textColor = Colors.darkColor
                 cell.queueLabel.text = queueLabel!
                 cell.queueLabel.textColor = Colors.darkColor
                 cell.waitingLabel.text = waitingLabel!
                 cell.waitingLabel.textColor = Colors.darkColor
-                
                 cell.queueLabel.adjustsFontSizeToFitWidth = true
                 cell.waitingLabel.adjustsFontSizeToFitWidth = true
                 cell.ticketLabel.adjustsFontSizeToFitWidth = true
-                
                 cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
-                
-//                cell.layer.borderWidth = 0.5
-//                cell.layer.borderColor = Colors.darkColor.cgColor
-                
                 return cell
             } else {
                 reusableIdentifier = "MedicalExaminationCheckinKOCell"
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! MedicalExaminationCheckinKOCell
                 cell.checkinImage.image = UIImage(named: "check")
                 cell.textView.textColor = Colors.darkColor
-                
                 cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
                 if !isToday {
                     cell.textView.text = "The day of the visit you can check-in simply putting your smartphone near the totem."
                 }
-//                cell.layer.borderWidth = 0.5
-//                cell.layer.borderColor = Colors.darkColor.cgColor
                 return cell
             }
         case 1:
@@ -98,11 +88,7 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
             cell.informationLabel.text = upperExaminationDetail[0].information
             cell.titleLabel.textColor = Colors.darkColor
             cell.informationLabel.textColor = Colors.darkColor
-            
             cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
-            
-//            cell.layer.borderWidth = 0.5
-//            cell.layer.borderColor = Colors.darkColor.cgColor
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
@@ -110,11 +96,7 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
             cell.informationLabel.text = upperExaminationDetail[1].information
             cell.titleLabel.textColor = Colors.darkColor
             cell.informationLabel.textColor = Colors.darkColor
-            
             cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
-            
-//            cell.layer.borderWidth = 0.5
-//            cell.layer.borderColor = Colors.darkColor.cgColor
             return cell
         case 3:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
@@ -122,52 +104,33 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
             cell.informationLabel.text = upperExaminationDetail[2].information
             cell.titleLabel.textColor = Colors.darkColor
             cell.informationLabel.textColor = Colors.darkColor
-            
             cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
-            
-//            cell.layer.borderWidth = 0.5
-//            cell.layer.borderColor = Colors.darkColor.cgColor
             return cell
         case 4:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationDescriptionCell", for: indexPath) as! MedicalExaminationDescriptionCell
-            cell.descriptionTextView.text = examinationDescriptionText
-            cell.descriptionTextView.textColor = Colors.darkColor
-            
-            cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
-            
-//            cell.layer.borderWidth = 0.5
-//            cell.layer.borderColor = Colors.darkColor.cgColor
-            return cell
-        case 5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
             cell.titleLabel.text = bottomExaminationDetail[0].title
             cell.informationLabel.text = bottomExaminationDetail[0].information
             cell.titleLabel.textColor = Colors.darkColor
             cell.informationLabel.textColor = Colors.darkColor
-            
             cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
-            
-//            cell.layer.borderWidth = 0.5
-//            cell.layer.borderColor = Colors.darkColor.cgColor
+            return cell
+        case 5:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationButtonCell", for: indexPath) as! MedicalExaminationButtonCell
+            cell.button.layer.backgroundColor = Colors.mediumColor.cgColor
             return cell
         case 6:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationDescriptionCell", for: indexPath) as! MedicalExaminationDescriptionCell
+            cell.descriptionTextView.text = examinationDescriptionText
+            cell.descriptionTextView.textColor = Colors.darkColor
+            cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
+            return cell
+        case 7:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationInformationCell", for: indexPath) as! MedicalExaminationInformationCell
             cell.titleLabel.text = bottomExaminationDetail[1].title
             cell.informationLabel.text = bottomExaminationDetail[1].information
             cell.titleLabel.textColor = Colors.darkColor
             cell.informationLabel.textColor = Colors.darkColor
-            
             cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
-            
-//            cell.layer.borderWidth = 0.5
-//            cell.layer.borderColor = Colors.darkColor.cgColor
-            return cell
-        case 7:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationButtonCell", for: indexPath) as! MedicalExaminationButtonCell
-            cell.button.layer.backgroundColor = Colors.mediumColor.cgColor
-            
-//            cell.layer.borderWidth = 0.5
-//            cell.layer.borderColor = Colors.darkColor.cgColor
             return cell
         default:
             let cell = UICollectionViewCell()
@@ -201,11 +164,14 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
         case 3:
             return CGSize(width: width, height: mediumHeight)
         case 4:
-            return CGSize(width: width, height: maxHeight)
+            return CGSize(width: width, height: mediumHeight)
         case 5:
             return CGSize(width: width, height: mediumHeight)
         case 6:
-            return CGSize(width: width, height: mediumHeight)
+            
+            let attributedString = NSAttributedString(string: examinationDescriptionText, attributes: [NSFontAttributeName : UIFont(name: "Helvetica", size: 16)!])
+            let boundingRect = attributedString.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+            return CGSize(width: boundingRect.width, height: boundingRect.height)
         case 7:
             return CGSize(width: width, height: littleHeight)
         default:

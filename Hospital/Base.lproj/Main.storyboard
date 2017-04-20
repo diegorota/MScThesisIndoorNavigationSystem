@@ -754,7 +754,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="144"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBg-jK-LIt">
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBg-jK-LIt">
                                                                 <rect key="frame" x="8" y="8" width="284" height="128"/>
                                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1147,7 +1147,7 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" image="thumbnail_image" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-fB-Y6d">
-                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="168.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
                                                             </imageView>
                                                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fgs-SK-oUQ">
                                                                 <rect key="frame" x="0.0" y="112.5" width="335" height="47"/>
@@ -1155,31 +1155,31 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="47"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 </view>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="47" id="eo9-LW-osb"/>
+                                                                </constraints>
                                                                 <blurEffect style="dark"/>
                                                             </visualEffectView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oax-SS-Ogq">
-                                                                <rect key="frame" x="0.0" y="112.5" width="335" height="47"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="oax-SS-Ogq" secondAttribute="height" multiplier="334:47" constant="1.0212765957446663" id="y5y-PL-QQ4"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <rect key="frame" x="8" y="112.5" width="319" height="47"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                                                             </label>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="Fgs-SK-oUQ" firstAttribute="height" secondItem="oax-SS-Ogq" secondAttribute="height" id="9Uo-UC-eY1"/>
-                                                            <constraint firstItem="Fgs-SK-oUQ" firstAttribute="centerX" secondItem="oax-SS-Ogq" secondAttribute="centerX" id="ChV-CE-Lba"/>
-                                                            <constraint firstAttribute="leadingMargin" secondItem="oax-SS-Ogq" secondAttribute="leading" constant="8" id="DpR-7m-5bb"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="Fgs-SK-oUQ" secondAttribute="trailing" constant="-8" id="8BX-A8-cUC"/>
                                                             <constraint firstItem="YW0-fB-Y6d" firstAttribute="leading" secondItem="99o-8C-0Gh" secondAttribute="leadingMargin" constant="-8" id="I3c-EC-Bju"/>
-                                                            <constraint firstItem="Fgs-SK-oUQ" firstAttribute="width" secondItem="oax-SS-Ogq" secondAttribute="width" id="IMX-Dg-D4s"/>
+                                                            <constraint firstItem="oax-SS-Ogq" firstAttribute="height" secondItem="Fgs-SK-oUQ" secondAttribute="height" id="Ifo-xp-ZUG"/>
+                                                            <constraint firstItem="oax-SS-Ogq" firstAttribute="trailing" secondItem="Fgs-SK-oUQ" secondAttribute="trailing" constant="-8" id="Jnm-yR-nUF"/>
                                                             <constraint firstItem="YW0-fB-Y6d" firstAttribute="top" secondItem="99o-8C-0Gh" secondAttribute="topMargin" constant="-8" id="NJe-Rl-mka"/>
-                                                            <constraint firstItem="oax-SS-Ogq" firstAttribute="top" secondItem="YW0-fB-Y6d" secondAttribute="bottom" constant="-55.5" id="TZi-Qw-gXe"/>
+                                                            <constraint firstItem="oax-SS-Ogq" firstAttribute="leading" secondItem="Fgs-SK-oUQ" secondAttribute="leading" constant="8" id="NcT-13-Vow"/>
                                                             <constraint firstAttribute="trailingMargin" secondItem="YW0-fB-Y6d" secondAttribute="trailing" constant="-8" id="YY6-0g-YX1"/>
-                                                            <constraint firstAttribute="trailingMargin" secondItem="oax-SS-Ogq" secondAttribute="trailing" constant="-8" id="fP0-qy-kBG"/>
-                                                            <constraint firstItem="Fgs-SK-oUQ" firstAttribute="centerY" secondItem="oax-SS-Ogq" secondAttribute="centerY" id="hEk-lc-9DG"/>
-                                                            <constraint firstAttribute="bottomMargin" secondItem="oax-SS-Ogq" secondAttribute="bottom" constant="-8" id="mGd-mg-Dp2"/>
+                                                            <constraint firstItem="oax-SS-Ogq" firstAttribute="centerY" secondItem="Fgs-SK-oUQ" secondAttribute="centerY" id="ZTP-Au-1hr"/>
+                                                            <constraint firstItem="Fgs-SK-oUQ" firstAttribute="leading" secondItem="99o-8C-0Gh" secondAttribute="leadingMargin" constant="-8" id="efm-Td-IUE"/>
+                                                            <constraint firstAttribute="bottomMargin" secondItem="Fgs-SK-oUQ" secondAttribute="bottom" constant="-8" id="g7S-an-Ppq"/>
+                                                            <constraint firstItem="oax-SS-Ogq" firstAttribute="centerX" secondItem="Fgs-SK-oUQ" secondAttribute="centerX" id="ikJ-Ei-ed6"/>
                                                         </constraints>
                                                     </tableViewCellContentView>
                                                     <connections>

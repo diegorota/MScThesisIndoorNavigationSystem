@@ -1,0 +1,668 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05881E93DA4E78FB224E1010D0DFE3A5 /* Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA8F16696F11F3533F89ECE19CA17DE /* Arithmetic.swift */; };
+		08165159F83037533E2FB36B46AD5C1A /* 2DTensorSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE4B2B8FB57B25AE6BDC6C73ABA9CFC /* 2DTensorSlice.swift */; };
+		0C1CE66BF2CEEC0830D97D6D2F5459A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16A0F483CA24D137B5DAD8790C1C51BF /* Foundation.framework */; };
+		0C547B2EE89784BE6B01FFC7B3C552AE /* ComplexArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9E0A19FC71769240775AF07A7E2C2B /* ComplexArray.swift */; };
+		15990F0DF465BD425C0D4ADCAEEA815E /* Real.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80F9A8A2C7082316433A3F2562FCF98 /* Real.swift */; };
+		1B638846B649AB3F888046FBD048D2B2 /* ComplexArraySlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E9C2A23791CBADDEEE16CB6F1EFE41 /* ComplexArraySlice.swift */; };
+		3604D08A8AD7863A33F100E91EC0C610 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9230EDCACC3E6F853128D339F388396 /* Value.swift */; };
+		368F69FAA55156E09BCADF07B75FFC53 /* Upsurge-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3473DC6D249DE5FEFC1BDC949F483938 /* Upsurge-dummy.m */; };
+		384D43CE40CED650E41A3EFA377E1AF4 /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78EA9C5BFCDFF95B66764AB111F53F /* FFT.swift */; };
+		3C75F56C95D1ACAF3559D37B50E099C1 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44232FB4A62756B9B126B397FA95BE4 /* Matrix.swift */; };
+		415B28940B89B03DBFD5E9EC1D0C8AC6 /* QuadraticType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1BC9E09210821462C330A16DF7EF6 /* QuadraticType.swift */; };
+		4335FF9A855BD2FC4D7AA7357B761C2F /* Pods-Hospital-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE886C61FCD07A7704F8F0DECE33D97F /* Pods-Hospital-dummy.m */; };
+		494967941C7C212CB13E7F36A73A0A98 /* TensorSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23D44C4E57760EEFF74E6ABF1BDF55B /* TensorSlice.swift */; };
+		4A63E59FB5E3CE27A3CEAE30732CBCFC /* Pods-Hospital-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E0B23C1F64C363B9C70FF121F919624E /* Pods-Hospital-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4CE25B23D58E062B80742AFB85FF891C /* Complex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59451870B014CB2A9A3B5F9255EDFF38 /* Complex.swift */; };
+		523BA231B821C59D757B6397D63C1467 /* Upsurge-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8750E44851C4D1A6BC2E30B48AD6FC6E /* Upsurge-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		610181B3C120023158A04E7A18D52FDB /* LinearOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC38111BEACF2458B90728382F6CCDB7 /* LinearOperators.swift */; };
+		67C6044BD1FCCE583CC9E1BA3D50BF0F /* Trigonometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256074F1D7363486EF2D20DAC2256B83 /* Trigonometric.swift */; };
+		6D1B7BF0E2F1FD698FA02977ED8908A9 /* PointerUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7178EC861B06F6F09AC6D0DDC7213373 /* PointerUtilities.swift */; };
+		6FFB3D3A97EE7FF6A576D8239D7FC431 /* ValueArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D442696868BBEC14FCF4C9FD291487 /* ValueArray.swift */; };
+		7C0F8DE20DD7B8506F6449D5E729EF5B /* ComplexArrayRealSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B2B14BD575F0F6F38D8C36EA98FA4E /* ComplexArrayRealSlice.swift */; };
+		7F6EA40921489C93027ADA0F365C8B94 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16A0F483CA24D137B5DAD8790C1C51BF /* Foundation.framework */; };
+		84084282DDE6C0A6D706CF6FE8B71A71 /* MatrixSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D516726BA1FFE993F07F61F93BC58923 /* MatrixSlice.swift */; };
+		888C61CD34A917FCBF1A74B55E9BF972 /* DSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3B22185C1CCB8DC579326E9943351A /* DSP.swift */; };
+		8A2A7C2DF903883B79B771D9176A0B48 /* ComplexArithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CED27A919F9AC910D6B995C9E6F9070 /* ComplexArithmetic.swift */; };
+		A2798E3BFE92A8FAB73AB68E630D56DB /* TensorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7904F2DB4B53FF459FC71D0D21F97833 /* TensorType.swift */; };
+		A6DBCABFD5ECBF64BDCF3AC07CF0DA50 /* Auxiliary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2636204128567386B0EBA4D276C130 /* Auxiliary.swift */; };
+		C088F2D3C59AF6ED0B26F632E6BD4185 /* LinearType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A63CA34232025BF3E3D510CFC3E8F8 /* LinearType.swift */; };
+		C31B1FCF6A9D337CCDD0BE396DD28F16 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4B89CEE67F7EA2A3C6A5E7A8735463 /* Interval.swift */; };
+		CE779CC5632068200DBC4C766DCCC264 /* Span.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A2E576BEB215E1FC5897AEF49E5A1D /* Span.swift */; };
+		D3A59471E36D24D4A0351393E09C5A0F /* Tensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFE15308C994EF103AA738772CA93FD /* Tensor.swift */; };
+		D7238F95837B13A7934C6D3AE7BD6296 /* MatrixArithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554D5C3980BAF5F3A7115BE9C67341FB /* MatrixArithmetic.swift */; };
+		DBEAD6281DA795AF135B014CABA2A1E0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9BEA3ADA9594BC194919329A004D9C /* Accelerate.framework */; };
+		DE56C241B631E9101C9C1EB1BCBD5B5F /* Hyperbolic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD7891426D5345FF2E76AB21B3BF81 /* Hyperbolic.swift */; };
+		EC0BD446E3851024D3383CEB8F337F18 /* ValueArraySlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C925E57DB149AC44E6847F92083DD3 /* ValueArraySlice.swift */; };
+		F64F3411816DF2F5B7126F5B91121777 /* Exponential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB8B7402366AF0B63E3608C9E5154A2 /* Exponential.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		32EBD770C25F62346D09898B7FDC35CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7171294FD7BD686712D265E4087174C;
+			remoteInfo = Upsurge;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		072A98027CF12EC155E5473B909A4EBF /* Pods-Hospital-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Hospital-frameworks.sh"; sourceTree = "<group>"; };
+		0921E5BD4F276AE7C1A068EA85DE4238 /* Pods-Hospital-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Hospital-resources.sh"; sourceTree = "<group>"; };
+		0A4B89CEE67F7EA2A3C6A5E7A8735463 /* Interval.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Interval.swift; path = Source/Types/Interval.swift; sourceTree = "<group>"; };
+		0AA1BC9E09210821462C330A16DF7EF6 /* QuadraticType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = QuadraticType.swift; path = Source/2D/QuadraticType.swift; sourceTree = "<group>"; };
+		11C1F1798639ECF04D0953066BFBD7F2 /* Pods-Hospital.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Hospital.release.xcconfig"; sourceTree = "<group>"; };
+		16A0F483CA24D137B5DAD8790C1C51BF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		1CED27A919F9AC910D6B995C9E6F9070 /* ComplexArithmetic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ComplexArithmetic.swift; path = Source/Complex/ComplexArithmetic.swift; sourceTree = "<group>"; };
+		256074F1D7363486EF2D20DAC2256B83 /* Trigonometric.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Trigonometric.swift; path = Source/Operations/Trigonometric.swift; sourceTree = "<group>"; };
+		2B9E0A19FC71769240775AF07A7E2C2B /* ComplexArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ComplexArray.swift; path = Source/Complex/ComplexArray.swift; sourceTree = "<group>"; };
+		2C1FF55EFFDA88D0137743932E16569F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3067474003E0DDF2666BC9B6071F5CF1 /* Pods-Hospital.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-Hospital.modulemap"; sourceTree = "<group>"; };
+		33B2B14BD575F0F6F38D8C36EA98FA4E /* ComplexArrayRealSlice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ComplexArrayRealSlice.swift; path = Source/Complex/ComplexArrayRealSlice.swift; sourceTree = "<group>"; };
+		3473DC6D249DE5FEFC1BDC949F483938 /* Upsurge-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Upsurge-dummy.m"; sourceTree = "<group>"; };
+		39A2E576BEB215E1FC5897AEF49E5A1D /* Span.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Span.swift; path = Source/ND/Span.swift; sourceTree = "<group>"; };
+		3A19CD19BD97FC4009390FCDBF665597 /* Upsurge.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Upsurge.modulemap; sourceTree = "<group>"; };
+		3A9BEA3ADA9594BC194919329A004D9C /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		3CFE15308C994EF103AA738772CA93FD /* Tensor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Tensor.swift; path = Source/ND/Tensor.swift; sourceTree = "<group>"; };
+		3D6BB2A80A76C1A879F6E4F6899AEE00 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		485505AAD7F7B78E7315FE73D746E181 /* Upsurge.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Upsurge.xcconfig; sourceTree = "<group>"; };
+		554D5C3980BAF5F3A7115BE9C67341FB /* MatrixArithmetic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MatrixArithmetic.swift; path = Source/2D/MatrixArithmetic.swift; sourceTree = "<group>"; };
+		59451870B014CB2A9A3B5F9255EDFF38 /* Complex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Complex.swift; path = Source/Complex/Complex.swift; sourceTree = "<group>"; };
+		5CAD7891426D5345FF2E76AB21B3BF81 /* Hyperbolic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Hyperbolic.swift; path = Source/Operations/Hyperbolic.swift; sourceTree = "<group>"; };
+		5DA327C8B8E26DEFEE48D16334D7A808 /* Pods-Hospital-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Hospital-acknowledgements.markdown"; sourceTree = "<group>"; };
+		63E9C2A23791CBADDEEE16CB6F1EFE41 /* ComplexArraySlice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ComplexArraySlice.swift; path = Source/Complex/ComplexArraySlice.swift; sourceTree = "<group>"; };
+		64D442696868BBEC14FCF4C9FD291487 /* ValueArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ValueArray.swift; path = Source/1D/ValueArray.swift; sourceTree = "<group>"; };
+		7178EC861B06F6F09AC6D0DDC7213373 /* PointerUtilities.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PointerUtilities.swift; path = Source/Operations/PointerUtilities.swift; sourceTree = "<group>"; };
+		75F1F6A8E3FCA05891421FD5C4DCB1EF /* Upsurge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Upsurge.framework; path = Upsurge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7904F2DB4B53FF459FC71D0D21F97833 /* TensorType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TensorType.swift; path = Source/ND/TensorType.swift; sourceTree = "<group>"; };
+		7E2636204128567386B0EBA4D276C130 /* Auxiliary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Auxiliary.swift; path = Source/Operations/Auxiliary.swift; sourceTree = "<group>"; };
+		8750E44851C4D1A6BC2E30B48AD6FC6E /* Upsurge-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Upsurge-umbrella.h"; sourceTree = "<group>"; };
+		8EB8B7402366AF0B63E3608C9E5154A2 /* Exponential.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Exponential.swift; path = Source/Operations/Exponential.swift; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9596518B0F8364179A81182608557E35 /* Upsurge-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Upsurge-prefix.pch"; sourceTree = "<group>"; };
+		9CFCE471D7066BC0756AA1B6DF3D66F8 /* Pods_Hospital.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Hospital.framework; path = "Pods-Hospital.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4A63CA34232025BF3E3D510CFC3E8F8 /* LinearType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LinearType.swift; path = Source/1D/LinearType.swift; sourceTree = "<group>"; };
+		B7C925E57DB149AC44E6847F92083DD3 /* ValueArraySlice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ValueArraySlice.swift; path = Source/1D/ValueArraySlice.swift; sourceTree = "<group>"; };
+		BCA8F16696F11F3533F89ECE19CA17DE /* Arithmetic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Arithmetic.swift; path = Source/Operations/Arithmetic.swift; sourceTree = "<group>"; };
+		BE886C61FCD07A7704F8F0DECE33D97F /* Pods-Hospital-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Hospital-dummy.m"; sourceTree = "<group>"; };
+		C3D0E64FA9786184AE392F3C3E43C959 /* Pods-Hospital-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Hospital-acknowledgements.plist"; sourceTree = "<group>"; };
+		CB3B22185C1CCB8DC579326E9943351A /* DSP.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DSP.swift; path = Source/DSP/DSP.swift; sourceTree = "<group>"; };
+		D23D44C4E57760EEFF74E6ABF1BDF55B /* TensorSlice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TensorSlice.swift; path = Source/ND/TensorSlice.swift; sourceTree = "<group>"; };
+		D44232FB4A62756B9B126B397FA95BE4 /* Matrix.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Matrix.swift; path = Source/2D/Matrix.swift; sourceTree = "<group>"; };
+		D516726BA1FFE993F07F61F93BC58923 /* MatrixSlice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MatrixSlice.swift; path = Source/2D/MatrixSlice.swift; sourceTree = "<group>"; };
+		DCE4B2B8FB57B25AE6BDC6C73ABA9CFC /* 2DTensorSlice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = 2DTensorSlice.swift; path = Source/2D/2DTensorSlice.swift; sourceTree = "<group>"; };
+		DE78EA9C5BFCDFF95B66764AB111F53F /* FFT.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FFT.swift; path = Source/DSP/FFT.swift; sourceTree = "<group>"; };
+		E0B23C1F64C363B9C70FF121F919624E /* Pods-Hospital-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Hospital-umbrella.h"; sourceTree = "<group>"; };
+		E80F9A8A2C7082316433A3F2562FCF98 /* Real.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Real.swift; path = Source/Types/Real.swift; sourceTree = "<group>"; };
+		EC38111BEACF2458B90728382F6CCDB7 /* LinearOperators.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LinearOperators.swift; path = Source/1D/LinearOperators.swift; sourceTree = "<group>"; };
+		EF8070C52AE5C77B92D1B29C1DCD53FE /* Pods-Hospital.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Hospital.debug.xcconfig"; sourceTree = "<group>"; };
+		F9230EDCACC3E6F853128D339F388396 /* Value.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Value.swift; path = Source/Types/Value.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5FF5B4358F463D902F04B7F7C256B3C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBEAD6281DA795AF135B014CABA2A1E0 /* Accelerate.framework in Frameworks */,
+				7F6EA40921489C93027ADA0F365C8B94 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72C1CA36C9B028E3C8C8F6A564F0E0CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C1CE66BF2CEEC0830D97D6D2F5459A8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		127C428C478807E1E44A10F87F5DDB0B /* Pods-Hospital */ = {
+			isa = PBXGroup;
+			children = (
+				3D6BB2A80A76C1A879F6E4F6899AEE00 /* Info.plist */,
+				3067474003E0DDF2666BC9B6071F5CF1 /* Pods-Hospital.modulemap */,
+				5DA327C8B8E26DEFEE48D16334D7A808 /* Pods-Hospital-acknowledgements.markdown */,
+				C3D0E64FA9786184AE392F3C3E43C959 /* Pods-Hospital-acknowledgements.plist */,
+				BE886C61FCD07A7704F8F0DECE33D97F /* Pods-Hospital-dummy.m */,
+				072A98027CF12EC155E5473B909A4EBF /* Pods-Hospital-frameworks.sh */,
+				0921E5BD4F276AE7C1A068EA85DE4238 /* Pods-Hospital-resources.sh */,
+				E0B23C1F64C363B9C70FF121F919624E /* Pods-Hospital-umbrella.h */,
+				EF8070C52AE5C77B92D1B29C1DCD53FE /* Pods-Hospital.debug.xcconfig */,
+				11C1F1798639ECF04D0953066BFBD7F2 /* Pods-Hospital.release.xcconfig */,
+			);
+			name = "Pods-Hospital";
+			path = "Target Support Files/Pods-Hospital";
+			sourceTree = "<group>";
+		};
+		23E81F99E99FA489A8C1F1D052D705E5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5E5BCE3293987B450EF8BD2C32864F22 /* Upsurge */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A0B2220F881A31216E4D001B31B31DA /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E5BCE3293987B450EF8BD2C32864F22 /* Upsurge */ = {
+			isa = PBXGroup;
+			children = (
+				DCE4B2B8FB57B25AE6BDC6C73ABA9CFC /* 2DTensorSlice.swift */,
+				BCA8F16696F11F3533F89ECE19CA17DE /* Arithmetic.swift */,
+				7E2636204128567386B0EBA4D276C130 /* Auxiliary.swift */,
+				59451870B014CB2A9A3B5F9255EDFF38 /* Complex.swift */,
+				1CED27A919F9AC910D6B995C9E6F9070 /* ComplexArithmetic.swift */,
+				2B9E0A19FC71769240775AF07A7E2C2B /* ComplexArray.swift */,
+				33B2B14BD575F0F6F38D8C36EA98FA4E /* ComplexArrayRealSlice.swift */,
+				63E9C2A23791CBADDEEE16CB6F1EFE41 /* ComplexArraySlice.swift */,
+				CB3B22185C1CCB8DC579326E9943351A /* DSP.swift */,
+				8EB8B7402366AF0B63E3608C9E5154A2 /* Exponential.swift */,
+				DE78EA9C5BFCDFF95B66764AB111F53F /* FFT.swift */,
+				5CAD7891426D5345FF2E76AB21B3BF81 /* Hyperbolic.swift */,
+				0A4B89CEE67F7EA2A3C6A5E7A8735463 /* Interval.swift */,
+				EC38111BEACF2458B90728382F6CCDB7 /* LinearOperators.swift */,
+				A4A63CA34232025BF3E3D510CFC3E8F8 /* LinearType.swift */,
+				D44232FB4A62756B9B126B397FA95BE4 /* Matrix.swift */,
+				554D5C3980BAF5F3A7115BE9C67341FB /* MatrixArithmetic.swift */,
+				D516726BA1FFE993F07F61F93BC58923 /* MatrixSlice.swift */,
+				7178EC861B06F6F09AC6D0DDC7213373 /* PointerUtilities.swift */,
+				0AA1BC9E09210821462C330A16DF7EF6 /* QuadraticType.swift */,
+				E80F9A8A2C7082316433A3F2562FCF98 /* Real.swift */,
+				39A2E576BEB215E1FC5897AEF49E5A1D /* Span.swift */,
+				3CFE15308C994EF103AA738772CA93FD /* Tensor.swift */,
+				D23D44C4E57760EEFF74E6ABF1BDF55B /* TensorSlice.swift */,
+				7904F2DB4B53FF459FC71D0D21F97833 /* TensorType.swift */,
+				256074F1D7363486EF2D20DAC2256B83 /* Trigonometric.swift */,
+				F9230EDCACC3E6F853128D339F388396 /* Value.swift */,
+				64D442696868BBEC14FCF4C9FD291487 /* ValueArray.swift */,
+				B7C925E57DB149AC44E6847F92083DD3 /* ValueArraySlice.swift */,
+				7335316AB79F60649AD470664B3344A8 /* Support Files */,
+			);
+			name = Upsurge;
+			path = Upsurge;
+			sourceTree = "<group>";
+		};
+		6D09EF3DBC06DD17C1BDB8CD930DEB6C /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				127C428C478807E1E44A10F87F5DDB0B /* Pods-Hospital */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		7335316AB79F60649AD470664B3344A8 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2C1FF55EFFDA88D0137743932E16569F /* Info.plist */,
+				3A19CD19BD97FC4009390FCDBF665597 /* Upsurge.modulemap */,
+				485505AAD7F7B78E7315FE73D746E181 /* Upsurge.xcconfig */,
+				3473DC6D249DE5FEFC1BDC949F483938 /* Upsurge-dummy.m */,
+				9596518B0F8364179A81182608557E35 /* Upsurge-prefix.pch */,
+				8750E44851C4D1A6BC2E30B48AD6FC6E /* Upsurge-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Upsurge";
+			sourceTree = "<group>";
+		};
+		7A0B2220F881A31216E4D001B31B31DA /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3A9BEA3ADA9594BC194919329A004D9C /* Accelerate.framework */,
+				16A0F483CA24D137B5DAD8790C1C51BF /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
+				23E81F99E99FA489A8C1F1D052D705E5 /* Pods */,
+				CC8B64D22A513E2B123F8833F662339A /* Products */,
+				6D09EF3DBC06DD17C1BDB8CD930DEB6C /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		CC8B64D22A513E2B123F8833F662339A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9CFCE471D7066BC0756AA1B6DF3D66F8 /* Pods_Hospital.framework */,
+				75F1F6A8E3FCA05891421FD5C4DCB1EF /* Upsurge.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		89E2A7CF3D42367DDC7FC1998727B444 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				523BA231B821C59D757B6397D63C1467 /* Upsurge-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E532E372612CBA947B65BAB6FEC37895 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A63E59FB5E3CE27A3CEAE30732CBCFC /* Pods-Hospital-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		E7171294FD7BD686712D265E4087174C /* Upsurge */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CAB28EB61BC9101AEEB976641D09EF4 /* Build configuration list for PBXNativeTarget "Upsurge" */;
+			buildPhases = (
+				4D098D72A385A92288F389A1CC00BF83 /* Sources */,
+				5FF5B4358F463D902F04B7F7C256B3C2 /* Frameworks */,
+				89E2A7CF3D42367DDC7FC1998727B444 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Upsurge;
+			productName = Upsurge;
+			productReference = 75F1F6A8E3FCA05891421FD5C4DCB1EF /* Upsurge.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		EEB5F7D137A4C8D805882A7E62D828AC /* Pods-Hospital */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 36CDEDB8B1EBDD81D434B60BE0B9431E /* Build configuration list for PBXNativeTarget "Pods-Hospital" */;
+			buildPhases = (
+				301A48776E71C51AD79D7A2E7801D3D7 /* Sources */,
+				72C1CA36C9B028E3C8C8F6A564F0E0CD /* Frameworks */,
+				E532E372612CBA947B65BAB6FEC37895 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2A91C16A03060B9ABFF167898257F944 /* PBXTargetDependency */,
+			);
+			name = "Pods-Hospital";
+			productName = "Pods-Hospital";
+			productReference = 9CFCE471D7066BC0756AA1B6DF3D66F8 /* Pods_Hospital.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = CC8B64D22A513E2B123F8833F662339A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EEB5F7D137A4C8D805882A7E62D828AC /* Pods-Hospital */,
+				E7171294FD7BD686712D265E4087174C /* Upsurge */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		301A48776E71C51AD79D7A2E7801D3D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4335FF9A855BD2FC4D7AA7357B761C2F /* Pods-Hospital-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D098D72A385A92288F389A1CC00BF83 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08165159F83037533E2FB36B46AD5C1A /* 2DTensorSlice.swift in Sources */,
+				05881E93DA4E78FB224E1010D0DFE3A5 /* Arithmetic.swift in Sources */,
+				A6DBCABFD5ECBF64BDCF3AC07CF0DA50 /* Auxiliary.swift in Sources */,
+				4CE25B23D58E062B80742AFB85FF891C /* Complex.swift in Sources */,
+				8A2A7C2DF903883B79B771D9176A0B48 /* ComplexArithmetic.swift in Sources */,
+				0C547B2EE89784BE6B01FFC7B3C552AE /* ComplexArray.swift in Sources */,
+				7C0F8DE20DD7B8506F6449D5E729EF5B /* ComplexArrayRealSlice.swift in Sources */,
+				1B638846B649AB3F888046FBD048D2B2 /* ComplexArraySlice.swift in Sources */,
+				888C61CD34A917FCBF1A74B55E9BF972 /* DSP.swift in Sources */,
+				F64F3411816DF2F5B7126F5B91121777 /* Exponential.swift in Sources */,
+				384D43CE40CED650E41A3EFA377E1AF4 /* FFT.swift in Sources */,
+				DE56C241B631E9101C9C1EB1BCBD5B5F /* Hyperbolic.swift in Sources */,
+				C31B1FCF6A9D337CCDD0BE396DD28F16 /* Interval.swift in Sources */,
+				610181B3C120023158A04E7A18D52FDB /* LinearOperators.swift in Sources */,
+				C088F2D3C59AF6ED0B26F632E6BD4185 /* LinearType.swift in Sources */,
+				3C75F56C95D1ACAF3559D37B50E099C1 /* Matrix.swift in Sources */,
+				D7238F95837B13A7934C6D3AE7BD6296 /* MatrixArithmetic.swift in Sources */,
+				84084282DDE6C0A6D706CF6FE8B71A71 /* MatrixSlice.swift in Sources */,
+				6D1B7BF0E2F1FD698FA02977ED8908A9 /* PointerUtilities.swift in Sources */,
+				415B28940B89B03DBFD5E9EC1D0C8AC6 /* QuadraticType.swift in Sources */,
+				15990F0DF465BD425C0D4ADCAEEA815E /* Real.swift in Sources */,
+				CE779CC5632068200DBC4C766DCCC264 /* Span.swift in Sources */,
+				D3A59471E36D24D4A0351393E09C5A0F /* Tensor.swift in Sources */,
+				494967941C7C212CB13E7F36A73A0A98 /* TensorSlice.swift in Sources */,
+				A2798E3BFE92A8FAB73AB68E630D56DB /* TensorType.swift in Sources */,
+				67C6044BD1FCCE583CC9E1BA3D50BF0F /* Trigonometric.swift in Sources */,
+				368F69FAA55156E09BCADF07B75FFC53 /* Upsurge-dummy.m in Sources */,
+				3604D08A8AD7863A33F100E91EC0C610 /* Value.swift in Sources */,
+				6FFB3D3A97EE7FF6A576D8239D7FC431 /* ValueArray.swift in Sources */,
+				EC0BD446E3851024D3383CEB8F337F18 /* ValueArraySlice.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2A91C16A03060B9ABFF167898257F944 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Upsurge;
+			target = E7171294FD7BD686712D265E4087174C /* Upsurge */;
+			targetProxy = 32EBD770C25F62346D09898B7FDC35CD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		31C6069EB53D2EDB3ED868242160D997 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11C1F1798639ECF04D0953066BFBD7F2 /* Pods-Hospital.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Hospital/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Hospital/Pods-Hospital.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Hospital;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4370B93FFEB41DA3262F3303A711D7EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 485505AAD7F7B78E7315FE73D746E181 /* Upsurge.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Upsurge/Upsurge-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Upsurge/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Upsurge/Upsurge.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = Upsurge;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		643C76AA582046977B7877822ED7A258 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		6A4D5FAB538F9E615BC33D6EFB7651F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 485505AAD7F7B78E7315FE73D746E181 /* Upsurge.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Upsurge/Upsurge-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Upsurge/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Upsurge/Upsurge.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Upsurge;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8D280B14759BFF178B3E4D39E7955E01 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF8070C52AE5C77B92D1B29C1DCD53FE /* Pods-Hospital.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-Hospital/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Hospital/Pods-Hospital.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_Hospital;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C03B8870130C98D1B02B59D003687524 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				643C76AA582046977B7877822ED7A258 /* Debug */,
+				C03B8870130C98D1B02B59D003687524 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		36CDEDB8B1EBDD81D434B60BE0B9431E /* Build configuration list for PBXNativeTarget "Pods-Hospital" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D280B14759BFF178B3E4D39E7955E01 /* Debug */,
+				31C6069EB53D2EDB3ED868242160D997 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7CAB28EB61BC9101AEEB976641D09EF4 /* Build configuration list for PBXNativeTarget "Upsurge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4370B93FFEB41DA3262F3303A711D7EC /* Debug */,
+				6A4D5FAB538F9E615BC33D6EFB7651F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
