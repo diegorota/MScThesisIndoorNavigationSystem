@@ -13,6 +13,8 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let defaults = UserDefaults.standard
+    
     var upperExaminationDetail = [Information]()
     var bottomExaminationDetail = [Information]()
     var examinationDescriptionText = String()
@@ -192,6 +194,7 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.visibleViewController?.title = "Details"
+        checkinDone = defaults.bool(forKey: UserDefaultsKeys.checkinDoneKey)
     }
     
     // Funzione che ridimensiona le celle quando si ruota lo schermo
@@ -243,29 +246,37 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
         locationManager.startMonitoring(for: beaconRegion)
         locationManager.startRangingBeacons(in: beaconRegion)
     }
+    func stopScanning() {
+        let uuid = UUID(uuidString: beaconuuid)!
+        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "MyBeacon")
+        
+        locationManager.stopMonitoring(for: beaconRegion)
+        locationManager.stopRangingBeacons(in: beaconRegion)
+    }
     
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         if beacons.count > 0 {
             for beacon in beacons {
                 if beacon.proximityUUID.uuidString == beaconuuid && beacon.proximity == CLProximity.immediate {
+                    stopScanning()
                     let ac = UIAlertController(title: "Checkin", message: "Would you like to check-in?", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Ckeck-in", style: .default, handler: reloadCheckin))
-                    ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                    ac.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: restartScaninng))
                     present(ac, animated: true)
                 }
             }
         }
     }
     
+    func restartScaninng(_ sender: UIAlertAction) {
+        startScanning()
+    }
+    
     func reloadCheckin(_ sender: UIAlertAction) {
+        stopScanning()
         checkinDone = true
+        defaults.setValue(checkinDone, forKey: UserDefaultsKeys.checkinDoneKey)
         collectionView.reloadData()
-        
-        let uuid = UUID(uuidString: beaconuuid)!
-        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, identifier: "MyBeacon")
-        
-        locationManager.stopMonitoring(for: beaconRegion)
-        locationManager.stopRangingBeacons(in: beaconRegion)
     }
     
 }

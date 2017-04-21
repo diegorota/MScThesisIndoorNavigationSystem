@@ -30,4 +30,7 @@ struct UserDefaultsKeys {
     static let lastDayKey = "lastdaykey"
     static let lastDayNameKey = "lastdaynamekey"
     static let lastTypeKey = "lasttypekey"
+    
+    // Examination view data
+    static let checkinDoneKey = "checkindonekey"
 }

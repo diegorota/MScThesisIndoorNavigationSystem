@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let appDomain = Bundle.main.bundleIdentifier!
             UserDefaults.standard.removePersistentDomain(forName: appDomain)
         }
+        defaults.set(false, forKey: UserDefaultsKeys.checkinDoneKey)
     }
 
 }
