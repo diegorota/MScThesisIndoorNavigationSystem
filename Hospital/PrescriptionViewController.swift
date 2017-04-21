@@ -25,6 +25,7 @@ class PrescriptionViewController: UIViewController, UITableViewDelegate, UITable
         refreshControl.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
         tableView.addSubview(refreshControl)
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+        tableView.sectionHeaderHeight = 50
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,10 +54,11 @@ class PrescriptionViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont.init(name: "Regular", size: 24)
-        header.textLabel?.textColor = UIColor.white
-        header.backgroundView?.backgroundColor = Colors.mediumColor
+        header.textLabel?.font = UIFont.systemFont(ofSize: 28)
+        header.textLabel?.textColor = Colors.darkColor
+        header.backgroundView?.backgroundColor = UIColor.clear
     }
     
     override func viewWillAppear(_ animated: Bool) {

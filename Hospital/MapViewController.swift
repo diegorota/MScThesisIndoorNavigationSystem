@@ -57,6 +57,8 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         self.mapScrollView.delegate = self
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         
+        self.centerButton.setImage(UIImage(named: "center")?.withRenderingMode(.alwaysTemplate), for: UIControlState.normal)
+        self.centerButton.tintColor = Colors.darkColor
         self.centerButton.isHidden = true
         self.errorMessageView.isHidden = true
         self.errorMessageView.alpha = 0
@@ -171,6 +173,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.visibleViewController?.title = "Map"
+        UIApplication.shared.isIdleTimerDisabled = true
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -184,6 +187,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.disconnect()
+        UIApplication.shared.isIdleTimerDisabled = false
     }
     
     //Inizio funzioni gestione connessione bluetooth

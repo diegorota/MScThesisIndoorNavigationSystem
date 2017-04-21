@@ -71,7 +71,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
         secondDishTableView.isScrollEnabled = false
         
         self.menu = CafeteriaData.getData()
-        self.dateLabel.text = "\(menu.lastDayName!.uppercased()) \(menu.lastDay!), \(menu.lastType!.uppercased())"
+        self.dateLabel.text = "\(menu.lastDayName!.capitalized) \(menu.lastDay!), \(menu.lastType!.capitalized)"
         if menu.newMenu == false {
             selectedFirstIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedFirstDishIndexPathKey), section: 0)
             selectedSecondIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedSecondDishIndexPathKey), section: 0)
@@ -141,7 +141,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
             self.dateLabel.alpha = 0
             self.confirmButton.alpha = 0
             
-            self.confirmationView.alpha = 1
+            self.confirmationView.alpha = 0.7
             self.modifyButton.alpha = 1
         }){[unowned self] (finished: Bool) in
             self.firstDishLabel.isHidden = true
@@ -164,16 +164,16 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func showView(duration: Double, confirmation: Bool) {
         UIView.animate(withDuration: duration, delay: 0, options: [], animations: { [unowned self] in
-            self.firstDishLabel.alpha = 1
+            self.firstDishLabel.alpha = 0.7
             self.firstDishSwitch.alpha = 1
             self.firstDishTableView.alpha = 1
             
-            self.secondDishLabel.alpha = 1
+            self.secondDishLabel.alpha = 0.7
             self.secondDishSwitch.alpha = 1
             self.secondDishTableView.alpha = 1
             
-            self.informationLabel.alpha = 1
-            self.dateLabel.alpha = 1
+            self.informationLabel.alpha = 0.7
+            self.dateLabel.alpha = 0.7
             self.confirmButton.alpha = 1
             
             self.confirmationView.alpha = 0

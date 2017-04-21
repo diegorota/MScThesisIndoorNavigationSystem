@@ -144,11 +144,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if indexPath.item == 0 {
             return
         }
-        UIView.animate(withDuration: 0.25, delay: 0, options: [], animations: {
+        UIView.animate(withDuration: 0.15, delay: 0, options: [], animations: {
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }) { [unowned self] (finished: Bool) in
-            if self.tiles[indexPath.row-1].titleTile.lowercased() != "notizie" {
+            if indexPath.item != self.tiles.count {
                 if let newView = self.storyboard?.instantiateViewController(withIdentifier: "TabBar") as? UITabBarController {
                     newView.selectedIndex = indexPath.row-1
                     self.navigationController?.pushViewController(newView, animated: true)

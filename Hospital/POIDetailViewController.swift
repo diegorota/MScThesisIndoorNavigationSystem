@@ -107,7 +107,9 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "InformationCell", for: indexPath) as! InformationCell
             cell.titleLabel.text = informationList[indexPath.row-1].title
+            cell.titleLabel.textColor = Colors.darkColor
             cell.informationLabel.text = informationList[indexPath.row-1].information
+            cell.informationLabel.textColor = Colors.darkColor
             cell.backgroundColor = UIColor(white: 1, alpha: 0.7)
             cell.bounds.size.width = self.view.bounds.size.width-40
             if indexPath.row == 5 {
@@ -118,6 +120,8 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         } else if indexPath.row == (informationList.count+1) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DescriptionCell", for: indexPath) as! DescriptionCell
             cell.descriptionText.text = placeDescription
+            cell.descriptionText.textColor = Colors.darkColor
+            cell.descriptionLabel.textColor = Colors.darkColor
             cell.backgroundColor = UIColor(white: 1, alpha: 0.7)
             cell.bounds.size.width = self.view.bounds.size.width-40
             return cell
@@ -136,7 +140,7 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 68
+            return 50
         } else if (indexPath.row > 0) && (indexPath.row < (informationList.count+1)) {
             return 44
         } else {

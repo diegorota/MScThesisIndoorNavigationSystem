@@ -25,6 +25,7 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
         refreshControl.addTarget(self, action: #selector(refreshData(sender:)), for: .valueChanged)
         medicalExaminationTableView.addSubview(refreshControl)
         medicalExaminationTableView.tableFooterView = UIView(frame: CGRect.zero)
+        medicalExaminationTableView.sectionHeaderHeight = 50
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,10 +57,11 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont.init(name: "Regular", size: 24)
-        header.textLabel?.textColor = UIColor.white
-        header.backgroundView?.backgroundColor = Colors.mediumColor
+        header.textLabel?.font = UIFont.systemFont(ofSize: 28)
+        header.textLabel?.textColor = Colors.darkColor
+        header.backgroundView?.backgroundColor = UIColor.clear
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

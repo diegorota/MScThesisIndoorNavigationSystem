@@ -35,7 +35,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         name.text = defaults.string(forKey: UserDefaultsKeys.nameKey)!
         surname.text = defaults.string(forKey: UserDefaultsKeys.surnameKey)!
         fiscalCode.text = defaults.string(forKey: UserDefaultsKeys.fiscalCodeKey)!
-        image.image = UIImage(named: "User_logo")
+        image.image = UIImage(named: "User_logo")?.withRenderingMode(.alwaysTemplate)
+        image.tintColor = Colors.darkColor
         
         settingsTableView.tableFooterView = UIView(frame: CGRect.zero)
         

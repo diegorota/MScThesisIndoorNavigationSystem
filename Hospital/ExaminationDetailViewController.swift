@@ -57,9 +57,12 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
                     self.loadCheckinDetails()
                 }
                 cell.checkinImage.image = UIImage(named: "check")
-                cell.ticketImage.image = UIImage(named: "Settings")
-                cell.queueImage.image = UIImage(named: "Settings")
-                cell.waitingImage.image = UIImage(named: "Settings")
+                cell.ticketImage.image = UIImage(named: "ticket")?.withRenderingMode(.alwaysTemplate)
+                cell.ticketImage.tintColor = Colors.darkColor
+                cell.queueImage.image = UIImage(named: "queue")?.withRenderingMode(.alwaysTemplate)
+                cell.queueImage.tintColor = Colors.darkColor
+                cell.waitingImage.image = UIImage(named: "waiting")?.withRenderingMode(.alwaysTemplate)
+                cell.waitingImage.tintColor = Colors.darkColor
                 cell.ticketLabel.text = ticketLabel!
                 cell.ticketLabel.textColor = Colors.darkColor
                 cell.queueLabel.text = queueLabel!
@@ -117,6 +120,8 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
         case 5:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationButtonCell", for: indexPath) as! MedicalExaminationButtonCell
             cell.button.layer.backgroundColor = Colors.mediumColor.cgColor
+            cell.button.setImage(UIImage(named: "pin")?.withRenderingMode(.alwaysTemplate), for: UIControlState.normal)
+            cell.button.tintColor = UIColor.white
             return cell
         case 6:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MedicalExaminationDescriptionCell", for: indexPath) as! MedicalExaminationDescriptionCell

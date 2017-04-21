@@ -232,10 +232,11 @@
                                 <rect key="frame" x="47" y="72" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="69s-J5-gIB"/>
+                                    <constraint firstAttribute="height" constant="100" id="eV1-As-J69"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Surname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMM-kO-22h">
-                                <rect key="frame" x="162" y="112" width="197" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Surname" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vMM-kO-22h">
+                                <rect key="frame" x="162" y="112.5" width="197" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="rb0-n9-4B4"/>
                                 </constraints>
@@ -243,17 +244,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b53-Ie-GXT">
-                                <rect key="frame" x="162" y="83" width="197" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="3aN-a2-1DK"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b53-Ie-GXT">
+                                <rect key="frame" x="162" y="83" width="197" height="23.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fiscal Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUn-bD-Yvd">
-                                <rect key="frame" x="162" y="141" width="197" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fiscal Code" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUn-bD-Yvd">
+                                <rect key="frame" x="162" y="140.5" width="197" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -276,13 +275,13 @@
                             <constraint firstItem="smV-Y2-Cv5" firstAttribute="leading" secondItem="v1F-S6-i5b" secondAttribute="leading" constant="20" id="QUF-Fp-jTY"/>
                             <constraint firstItem="vMM-kO-22h" firstAttribute="leading" secondItem="eUn-bD-Yvd" secondAttribute="leading" id="SdE-Wl-9XM"/>
                             <constraint firstItem="vMM-kO-22h" firstAttribute="trailing" secondItem="eUn-bD-Yvd" secondAttribute="trailing" id="Tna-Os-ygd"/>
-                            <constraint firstItem="vMM-kO-22h" firstAttribute="top" secondItem="b53-Ie-GXT" secondAttribute="bottom" constant="8" symbolic="YES" id="WQT-am-Dlc"/>
+                            <constraint firstItem="vMM-kO-22h" firstAttribute="top" secondItem="b53-Ie-GXT" secondAttribute="bottom" constant="6" id="WQT-am-Dlc"/>
                             <constraint firstAttribute="trailing" secondItem="bB5-5v-CPL" secondAttribute="trailing" id="WUY-kJ-sf8"/>
                             <constraint firstItem="b53-Ie-GXT" firstAttribute="leading" secondItem="vMM-kO-22h" secondAttribute="leading" id="erV-Ej-0cd"/>
                             <constraint firstItem="smV-Y2-Cv5" firstAttribute="top" relation="lessThanOrEqual" secondItem="eUn-bD-Yvd" secondAttribute="bottom" constant="42" id="hZl-Uw-a4C"/>
                             <constraint firstItem="Ewy-JC-OXO" firstAttribute="top" secondItem="an8-vZ-8gg" secondAttribute="bottom" constant="52" id="lRf-62-gDT"/>
-                            <constraint firstItem="Ewy-JC-OXO" firstAttribute="centerY" secondItem="vMM-kO-22h" secondAttribute="centerY" id="leT-Qo-1Sl"/>
-                            <constraint firstItem="eUn-bD-Yvd" firstAttribute="top" secondItem="vMM-kO-22h" secondAttribute="bottom" constant="8" symbolic="YES" id="m37-eA-tdE"/>
+                            <constraint firstItem="Ewy-JC-OXO" firstAttribute="centerY" secondItem="vMM-kO-22h" secondAttribute="centerY" constant="-1" id="leT-Qo-1Sl"/>
+                            <constraint firstItem="eUn-bD-Yvd" firstAttribute="top" secondItem="vMM-kO-22h" secondAttribute="bottom" constant="7" id="m37-eA-tdE"/>
                             <constraint firstItem="2Dl-8x-9op" firstAttribute="width" secondItem="bB5-5v-CPL" secondAttribute="width" id="n5m-4b-3ee"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WzK-aO-gyc" secondAttribute="trailing" constant="20" id="nih-hn-vlc"/>
                             <constraint firstItem="2Dl-8x-9op" firstAttribute="centerY" secondItem="bB5-5v-CPL" secondAttribute="centerY" id="q9T-ao-08T"/>
@@ -745,9 +744,7 @@
                                                         <constraint firstAttribute="trailingMargin" secondItem="4WD-7T-mY2" secondAttribute="trailing" id="SHY-KP-oAP"/>
                                                         <constraint firstItem="uiu-5D-TIS" firstAttribute="top" secondItem="O4D-dJ-aN9" secondAttribute="topMargin" constant="4" id="gak-Bt-Y3Z"/>
                                                         <constraint firstItem="uiu-5D-TIS" firstAttribute="width" secondItem="4WD-7T-mY2" secondAttribute="width" id="jp4-a1-tYZ"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="uiu-5D-TIS" secondAttribute="bottom" constant="3" id="krD-Dn-ehQ"/>
                                                         <constraint firstItem="uiu-5D-TIS" firstAttribute="height" secondItem="4WD-7T-mY2" secondAttribute="height" id="nQ9-WU-cbD"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="4WD-7T-mY2" secondAttribute="bottom" constant="3" id="vuq-Sv-0Km"/>
                                                     </constraints>
                                                     <size key="customSize" width="300" height="44"/>
                                                     <connections>
@@ -789,10 +786,10 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uE-9o-ZWB">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uE-9o-ZWB">
                                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                                                                 <color key="backgroundColor" red="0.84174233679999999" green="0.34967362880000002" blue="0.286275059" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                <state key="normal" title="Navigate to the building">
+                                                                <state key="normal" title="Bring me to the building">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </state>
                                                             </button>
@@ -1727,16 +1724,16 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cafeteria" width="22" height="22"/>
+        <image name="cafeteria" width="25" height="25"/>
         <image name="center" width="50" height="50"/>
         <image name="city" width="375" height="200"/>
-        <image name="examinations" width="22" height="22"/>
+        <image name="examinations" width="25" height="25"/>
         <image name="login_image" width="375" height="667"/>
-        <image name="map" width="22" height="22"/>
-        <image name="navigate" width="40" height="40"/>
-        <image name="phone" width="40" height="40"/>
+        <image name="map" width="25" height="25"/>
+        <image name="navigate" width="30" height="30"/>
+        <image name="phone" width="30" height="30"/>
         <image name="pill" width="22" height="22"/>
-        <image name="pin" width="22" height="22"/>
+        <image name="pin" width="25" height="25"/>
         <image name="thumbnail_image" width="100" height="100"/>
         <image name="touch_id" width="60" height="60"/>
         <image name="ufficio_resize" width="375" height="416"/>
