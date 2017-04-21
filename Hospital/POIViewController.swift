@@ -87,6 +87,13 @@ class POIViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         resetSearchBar()
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = UIFont.init(name: "Regular", size: 24)
+        header.textLabel?.textColor = UIColor.white
+        header.backgroundView?.backgroundColor = Colors.mediumColor
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if (searchBar.text?.isEmpty)! {
             isSearching = false

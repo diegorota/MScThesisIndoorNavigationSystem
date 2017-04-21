@@ -37,6 +37,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         fiscalCode.text = defaults.string(forKey: UserDefaultsKeys.fiscalCodeKey)!
         image.image = UIImage(named: "User_logo")
         
+        settingsTableView.tableFooterView = UIView(frame: CGRect.zero)
+        
     }
 
     override func didReceiveMemoryWarning() {

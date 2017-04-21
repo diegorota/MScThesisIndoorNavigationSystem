@@ -110,6 +110,9 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.informationLabel.text = informationList[indexPath.row-1].information
             cell.backgroundColor = UIColor(white: 1, alpha: 0.7)
             cell.bounds.size.width = self.view.bounds.size.width-40
+            if indexPath.row == 5 {
+                cell.isUserInteractionEnabled = true
+            }
             return cell
             
         } else if indexPath.row == (informationList.count+1) {
@@ -121,6 +124,13 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
 
         } else {
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 5 {
+            callNumber(phoneNumber: phoneNumber!)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     

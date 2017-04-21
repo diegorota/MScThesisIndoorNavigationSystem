@@ -52,12 +52,11 @@ class PrescriptionViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-        header.textLabel?.textColor = Colors.darkColor
-        header.backgroundView?.backgroundColor = UIColor.white
+        header.textLabel?.font = UIFont.init(name: "Regular", size: 24)
+        header.textLabel?.textColor = UIColor.white
+        header.backgroundView?.backgroundColor = Colors.mediumColor
     }
     
     override func viewWillAppear(_ animated: Bool) {

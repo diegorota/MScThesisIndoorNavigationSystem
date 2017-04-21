@@ -71,7 +71,7 @@ class CafeteriaViewController: UIViewController, UITableViewDelegate, UITableVie
         secondDishTableView.isScrollEnabled = false
         
         self.menu = CafeteriaData.getData()
-        self.dateLabel.text = "\(menu.lastDayName!) \(menu.lastDay!), \(menu.lastType!)"
+        self.dateLabel.text = "\(menu.lastDayName!.uppercased()) \(menu.lastDay!), \(menu.lastType!.uppercased())"
         if menu.newMenu == false {
             selectedFirstIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedFirstDishIndexPathKey), section: 0)
             selectedSecondIndexPath = IndexPath(row: defaults.integer(forKey: UserDefaultsKeys.selectedSecondDishIndexPathKey), section: 0)
