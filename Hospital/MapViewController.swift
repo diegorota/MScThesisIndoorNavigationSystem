@@ -29,6 +29,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     let RBL_SERVICE_UUID = "713D0000-503E-4C75-BA94-3148F18D941E"
     let RBL_CHAR_TX_UUID = "713D0002-503E-4C75-BA94-3148F18D941E"
     let RBL_CHAR_RX_UUID = "713D0003-503E-4C75-BA94-3148F18D941E"
+    var tagName = ""
     
     var lastString = ""
     var initialPacket = true
@@ -103,12 +104,10 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             arrowView.transform = CGAffineTransform(rotationAngle: lastHeading!)
             firstPosition = false
         } else {
-            self.arrowView.transform = CGAffineTransform(rotationAngle: (self.lastHeading!*CGFloat.pi)/180)
-            self.arrowView.center = self.lastPosition!
-//            UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-//                self.arrowView.transform = CGAffineTransform(rotationAngle: (self.lastHeading!*CGFloat.pi)/180)
-//                self.arrowView.center = self.lastPosition!
-//            })
+            UIView.animate(withDuration: 0.05, delay: 0, options: [], animations: {
+                self.arrowView.transform = CGAffineTransform(rotationAngle: (self.lastHeading!*CGFloat.pi)/180)
+                self.arrowView.center = self.lastPosition!
+            })
         }
     }
     
@@ -281,14 +280,14 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             if peripheral.identifier.uuidString == identifier {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
                 
+                tagName = (advertisementData[CBAdvertisementDataLocalNameKey] as? String)!
+                
                 UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
                     self.errorMessageLabel.text = "Sensor tag found. Connecting..."
                     self.errorMessageView.alpha = 1
                     self.errorMessageLabel.alpha = 1
                     self.errorMessageView.isHidden = false
                 })
-                
-                sleep(2)
                 
                 // to save power, stop scanning for other devices
                 centralManager.stopScan()
@@ -307,13 +306,11 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("**** SUCCESSFULLY CONNECTED TO SENSOR TAG!!!")
         UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
-            self.errorMessageLabel.text = "Connected."
+            self.errorMessageLabel.text = "Connected to \(self.tagName)"
             self.errorMessageView.alpha = 1
             self.errorMessageLabel.alpha = 1
             self.errorMessageView.isHidden = false
         })
-        
-        sleep(2)
         
 //        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
 //            self.errorMessageView.alpha = 0
@@ -335,8 +332,6 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             self.errorMessageLabel.alpha = 1
             self.errorMessageView.isHidden = false
         })
-        
-        sleep(2)
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -348,8 +343,6 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             self.errorMessageView.isHidden = false
             self.centerButton.isHidden = true
         })
-        
-        sleep(2)
         
         if error != nil {
             print("****** DISCONNECTION DETAILS: \(error!.localizedDescription)")
@@ -426,14 +419,6 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
                 if error != nil {
                     print("ERROR ON UPDATING VALUE FOR CHARACTERISTIC: \(characteristic) - \(String(describing: error?.localizedDescription))")
                     return
-                }
-                
-                if initialPacket {
-                    sleep(2)
-                    UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
-                        self.errorMessageView.alpha = 0
-                        self.errorMessageView.isHidden = true
-                    })
                 }
                 
                 let array = [UInt8](dataBytes)

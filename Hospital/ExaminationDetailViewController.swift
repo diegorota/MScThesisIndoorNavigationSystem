@@ -74,7 +74,7 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
             } else {
                 reusableIdentifier = "MedicalExaminationCheckinKOCell"
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! MedicalExaminationCheckinKOCell
-                cell.checkinImage.image = UIImage(named: "check")
+                cell.checkinImage.image = UIImage(named: "totem")
                 cell.textView.textColor = Colors.darkColor
                 cell.layer.backgroundColor = UIColor(white: 1, alpha: 0.70).cgColor
                 if !isToday {

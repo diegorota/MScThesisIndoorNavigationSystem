@@ -15,6 +15,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var collectionView: UICollectionView!
     
     var tiles = [HomeButton]()
+    var hourTimer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Settings"), style: .plain, target: self, action: #selector(openSettings))
         loadTiles()
+        
+        if hourTimer == nil {
+            hourTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateHour), userInfo: nil, repeats: true)
+        }
 
+    }
+    
+    func updateHour() {
+        let cell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! HomeInfoCell
+        cell.hourLabel.text = composeHour()
     }
     
     func composeDate() -> String {
@@ -250,6 +260,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if hourTimer != nil {
+            hourTimer?.invalidate()
+            hourTimer = nil
+        }
+        
     }
     
 }
