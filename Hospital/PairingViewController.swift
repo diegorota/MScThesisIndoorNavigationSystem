@@ -35,7 +35,24 @@ class PairingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bluetoothDevices.count
+        var numOfSections: Int = 0
+        if bluetoothDevices.count > 0
+        {
+            tableView.separatorStyle = .singleLine
+            numOfSections            = bluetoothDevices.count
+            tableView.backgroundView = nil
+        }
+        else
+        {
+            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            noDataLabel.text          = "Searching for devices..."
+            noDataLabel.textColor     = UIColor.white
+            noDataLabel.textAlignment = .center
+            noDataLabel.font = UIFont.systemFont(ofSize: 28)
+            tableView.backgroundView  = noDataLabel
+            tableView.separatorStyle  = .none
+        }
+        return numOfSections
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
