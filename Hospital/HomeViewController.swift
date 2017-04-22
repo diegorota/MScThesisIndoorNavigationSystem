@@ -31,7 +31,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func updateHour() {
         let cell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! HomeInfoCell
         cell.hourLabel.text = composeHour()
-        print(composeHour())
     }
     
     func composeDate() -> String {

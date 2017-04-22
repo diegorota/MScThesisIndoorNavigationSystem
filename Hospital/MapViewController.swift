@@ -284,7 +284,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             if peripheral.identifier.uuidString == identifier {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
                 
-                tagName = (advertisementData[CBAdvertisementDataLocalNameKey] as? String)!
+                tagName = peripheralName
                 
                 UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
                     self.errorMessageLabel.text = "Sensor tag found. Connecting..."

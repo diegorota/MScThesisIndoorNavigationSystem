@@ -301,6 +301,88 @@
             </objects>
             <point key="canvasLocation" x="2812" y="-658.02098950524737"/>
         </scene>
+        <!--Pairing View Controller-->
+        <scene sceneID="tMB-eP-YHb">
+            <objects>
+                <viewController storyboardIdentifier="Pairing" id="gvO-ZU-Lmn" customClass="PairingViewController" customModule="Hospital" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bkc-Hm-kWj"/>
+                        <viewControllerLayoutGuide type="bottom" id="2dp-m0-EvZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7lQ-5V-Y8R">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_image" translatesAutoresizingMaskIntoConstraints="NO" id="8SQ-1g-jRW">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OEu-mv-OaW">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="jOI-id-Gpv">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <tableView clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rja-Ii-PM1">
+                                            <rect key="frame" x="20" y="20" width="335" height="607"/>
+                                            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <prototypes>
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BluetoothCell" textLabel="i9T-6B-76I" detailTextLabel="G89-l4-iTm" style="IBUITableViewCellStyleSubtitle" id="Nv9-5X-DgT">
+                                                    <rect key="frame" x="0.0" y="28" width="335" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nv9-5X-DgT" id="X7a-Ow-DAz">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i9T-6B-76I">
+                                                                <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G89-l4-iTm">
+                                                                <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </tableViewCellContentView>
+                                                </tableViewCell>
+                                            </prototypes>
+                                        </tableView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Rja-Ii-PM1" firstAttribute="top" secondItem="jOI-id-Gpv" secondAttribute="top" constant="20" id="A00-UF-7e9"/>
+                                        <constraint firstAttribute="trailing" secondItem="Rja-Ii-PM1" secondAttribute="trailing" constant="20" id="Mha-vz-tVM"/>
+                                        <constraint firstAttribute="bottom" secondItem="Rja-Ii-PM1" secondAttribute="bottom" constant="20" id="Qhy-D6-rUa"/>
+                                        <constraint firstItem="Rja-Ii-PM1" firstAttribute="leading" secondItem="jOI-id-Gpv" secondAttribute="leading" constant="20" id="Sn3-dA-Pka"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8SQ-1g-jRW" firstAttribute="centerX" secondItem="OEu-mv-OaW" secondAttribute="centerX" id="1Rs-Wy-5zt"/>
+                            <constraint firstItem="OEu-mv-OaW" firstAttribute="top" secondItem="bkc-Hm-kWj" secondAttribute="bottom" id="4IW-Fw-c7O"/>
+                            <constraint firstAttribute="trailing" secondItem="OEu-mv-OaW" secondAttribute="trailing" id="HdN-D3-nvE"/>
+                            <constraint firstItem="8SQ-1g-jRW" firstAttribute="width" secondItem="OEu-mv-OaW" secondAttribute="width" id="Sa7-bl-o4G"/>
+                            <constraint firstItem="OEu-mv-OaW" firstAttribute="leading" secondItem="7lQ-5V-Y8R" secondAttribute="leading" id="VgQ-cU-zvH"/>
+                            <constraint firstItem="2dp-m0-EvZ" firstAttribute="top" secondItem="OEu-mv-OaW" secondAttribute="bottom" id="cEa-p7-iJg"/>
+                            <constraint firstItem="8SQ-1g-jRW" firstAttribute="height" secondItem="OEu-mv-OaW" secondAttribute="height" id="huK-92-lAZ"/>
+                            <constraint firstItem="8SQ-1g-jRW" firstAttribute="centerY" secondItem="OEu-mv-OaW" secondAttribute="centerY" id="w4N-tl-hX1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pairingTableView" destination="Rja-Ii-PM1" id="k0n-nu-ZRg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oSS-fW-fhV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3812" y="-658.02098950524737"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="i6Z-NG-p1P">
             <objects>

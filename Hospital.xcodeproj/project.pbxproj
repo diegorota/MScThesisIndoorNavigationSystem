@@ -20,6 +20,8 @@
 		482802571E92C36C002C3665 /* MedicalExaminationInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482802561E92C36C002C3665 /* MedicalExaminationInformationCell.swift */; };
 		482802591E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482802581E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift */; };
 		4828025B1E92C44D002C3665 /* MedicalExaminationButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4828025A1E92C44D002C3665 /* MedicalExaminationButtonCell.swift */; };
+		482D1FE21EAB39A2005E158E /* PairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D1FE11EAB39A2005E158E /* PairingViewController.swift */; };
+		482D1FE51EAB3E37005E158E /* BluetoothDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D1FE41EAB3E37005E158E /* BluetoothDevice.swift */; };
 		4852ABAF1E7E6F26005734A3 /* MedicalExaminationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852ABAE1E7E6F26005734A3 /* MedicalExaminationViewController.swift */; };
 		4852ABB11E7E7449005734A3 /* TableViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852ABB01E7E7449005734A3 /* TableViewSection.swift */; };
 		4852ABB31E7E7642005734A3 /* MedicalExaminationSectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4852ABB21E7E7642005734A3 /* MedicalExaminationSectionData.swift */; };
@@ -71,6 +73,8 @@
 		482802561E92C36C002C3665 /* MedicalExaminationInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationInformationCell.swift; sourceTree = "<group>"; };
 		482802581E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationDescriptionCell.swift; sourceTree = "<group>"; };
 		4828025A1E92C44D002C3665 /* MedicalExaminationButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationButtonCell.swift; sourceTree = "<group>"; };
+		482D1FE11EAB39A2005E158E /* PairingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairingViewController.swift; sourceTree = "<group>"; };
+		482D1FE41EAB3E37005E158E /* BluetoothDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothDevice.swift; sourceTree = "<group>"; };
 		4852ABAE1E7E6F26005734A3 /* MedicalExaminationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationViewController.swift; sourceTree = "<group>"; };
 		4852ABB01E7E7449005734A3 /* TableViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSection.swift; sourceTree = "<group>"; };
 		4852ABB21E7E7642005734A3 /* MedicalExaminationSectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicalExaminationSectionData.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				4805109C1E793D2B003B4014 /* AppDelegate.swift */,
 				4805109E1E793D2B003B4014 /* LoginViewController.swift */,
 				48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */,
+				482D1FE31EAB3E1B005E158E /* Pairing */,
 				48F949941EA207C600C025EC /* Cafeteria */,
 				4828024F1E929CEC002C3665 /* Home */,
 				4828024B1E929C7B002C3665 /* Medical Examinations */,
@@ -240,6 +245,15 @@
 				486D55C41E94F08B00FD824C /* HomeInfoCell.swift */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		482D1FE31EAB3E1B005E158E /* Pairing */ = {
+			isa = PBXGroup;
+			children = (
+				482D1FE11EAB39A2005E158E /* PairingViewController.swift */,
+				482D1FE41EAB3E37005E158E /* BluetoothDevice.swift */,
+			);
+			name = Pairing;
 			sourceTree = "<group>";
 		};
 		48EF81EA1EA79B960072F025 /* Kalman */ = {
@@ -410,6 +424,7 @@
 				486D55C51E94F08B00FD824C /* HomeInfoCell.swift in Sources */,
 				48D371F91E8120F2008E3A40 /* MedicalExaminationCheckinOKCell.swift in Sources */,
 				48C6EE641E83E902004F403B /* PrescriptionSectionData.swift in Sources */,
+				482D1FE21EAB39A2005E158E /* PairingViewController.swift in Sources */,
 				4805109D1E793D2B003B4014 /* AppDelegate.swift in Sources */,
 				486B7BC21EA222F500208BBD /* CafeteriaCell.swift in Sources */,
 				48C6EE661E84139A004F403B /* NewsViewController.swift in Sources */,
@@ -430,6 +445,7 @@
 				48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */,
 				48AF84B61EA785BA00B0A390 /* KalmanFilter.swift in Sources */,
 				48E536EF1E826CC600E03F77 /* POIViewController.swift in Sources */,
+				482D1FE51EAB3E37005E158E /* BluetoothDevice.swift in Sources */,
 				48EF81EC1EA79BAC0072F025 /* KalmanPosition.swift in Sources */,
 				480510B11E79B086003B4014 /* HomeButtonCell.swift in Sources */,
 				482802591E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift in Sources */,

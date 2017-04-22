@@ -57,7 +57,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if indexPath.row == 0 {
             cell.textLabel?.text = "Logout"
         } else if indexPath.row == 1 {
-            cell.textLabel?.text = "Support"
+            cell.textLabel?.text = "Bluetooth pairing"
         }
         cell.textLabel?.textColor = Colors.darkColor
         return cell
@@ -70,19 +70,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 UserDefaults.standard.removePersistentDomain(forName: appDomain)
                 present(login,animated: true)
             }
+        } else if indexPath.row == 1 {
+            if let pairing = storyboard?.instantiateViewController(withIdentifier: "Pairing") {
+                self.navigationController?.pushViewController(pairing, animated: true)
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
