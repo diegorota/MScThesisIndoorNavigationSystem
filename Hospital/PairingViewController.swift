@@ -67,6 +67,21 @@ class PairingViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedDevice = bluetoothDevices[indexPath.row].uuid
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let ac = UIAlertController(title: "Done!", message: "You have selected the devices. Now you can open the map.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Go Back", style: .default, handler: goBack))
+        ac.addAction(UIAlertAction(title: "Go Home", style: .default, handler: goHome))
+        present(ac, animated: true)
+    }
+    
+    func goBack(_ sender: UIAlertAction) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func goHome(_ sender: UIAlertAction) {
+        if let newView = self.storyboard?.instantiateViewController(withIdentifier: "HomeNavigation") as? UINavigationController {
+            present(newView, animated: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,7 +106,7 @@ class PairingViewController: UIViewController, UITableViewDelegate, UITableViewD
     // Inizio funzioni gestione Bluetooth
     func pauseScan() {
         // Scanning uses up battery on phone, so pause the scan process for the designated interval.
-        print("*** PAUSING SCAN...")
+        //print("*** PAUSING SCAN...")
         _ = Timer.scheduledTimer(timeInterval: timerPauseInterval, target: self, selector: #selector(resumeScan), userInfo: nil, repeats: false)
         centralManager.stopScan()
     }
@@ -99,7 +114,7 @@ class PairingViewController: UIViewController, UITableViewDelegate, UITableViewD
     func resumeScan() {
         if keepScanning {
             // Start scanning again...
-            print("*** RESUMING SCAN!")
+            //print("*** RESUMING SCAN!")
             _ = Timer.scheduledTimer(timeInterval: timerScanInterval, target: self, selector: #selector(pauseScan), userInfo: nil, repeats: false)
             centralManager.scanForPeripherals(withServices: nil, options: nil)
         }
