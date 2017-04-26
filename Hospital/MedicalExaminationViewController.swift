@@ -47,7 +47,10 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MedicalExaminationCell", for: indexPath)
         cell.textLabel?.text = (medicalExaminationSection[indexPath.section].items[indexPath.row] as? ExaminationDetail)?.name
-        cell.detailTextLabel?.text = "Hour: \((medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).hour)"
+        
+        var date = (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).date.components(separatedBy: "-")
+        
+        cell.detailTextLabel?.text = "\(date[2])-\(date[1])-\(date[0]) at \((medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).hour)"
         cell.textLabel?.textColor = Colors.darkColor
         cell.textLabel?.backgroundColor = UIColor.clear
         cell.detailTextLabel?.backgroundColor = UIColor.clear

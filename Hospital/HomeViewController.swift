@@ -21,7 +21,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        title = "Hospital"
+        title = "Medical Center"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Settings"), style: .plain, target: self, action: #selector(openSettings))
         loadTiles()
@@ -71,7 +71,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeInfoCell", for: indexPath) as! HomeInfoCell
-            cell.helloLabel.text = "Hello, \(defaults.string(forKey: UserDefaultsKeys.nameKey)!)"
+            cell.helloLabel.text = "Hi, \(defaults.string(forKey: UserDefaultsKeys.nameKey)!)"
             cell.dateLabel.text = composeDate()
             cell.hourLabel.text = composeHour()
             cell.helloLabel.textColor = Colors.darkColor
@@ -94,41 +94,66 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
             DispatchQueue.global(qos: .userInitiated).async {
                 var description = ""
+                var color = Colors.darkColor
+                var seeBadge = false
+                var badgeText = ""
                 switch indexPath.item {
                 case 1:
                     let menu = CafeteriaData.getData()
-                    if menu.newMenu! || (!menu.newMenu! && self.defaults.bool(forKey: UserDefaultsKeys.confirmationMenuBoolKey)){
-                        description = "You haven't choosen your menu."
+                    if menu.newMenu! || (!menu.newMenu! && !self.defaults.bool(forKey: UserDefaultsKeys.confirmationMenuBoolKey)){
+                        description = "You haven't choosen your menu"
+                        color = Colors.green
+                        badgeText = "!"
+                        seeBadge = true
+                        
                     } else {
-                        description = "You have already choosen your menu."
+                        description = "You have already choosen your menu"
                     }
                 case 2:
                     let examinations = MedicalExaminationSectionData.getData(refreshData: true)
                     if examinations[0].items.count == 0 {
-                        description = "You haven't examinations today."
+                        description = "You haven't examinations today"
                     } else if examinations[0].items.count == 1 {
                         description = "You have 1 examination today"
+                        badgeText = "1"
+                        seeBadge = true
+                        color = Colors.green
                     } else {
-                        description = "You have \(examinations[0].items.count) examinations today."
+                        description = "You have \(examinations[0].items.count) examinations today"
+                        badgeText = "\(examinations[0].items.count)"
+                        seeBadge = true
+                        color = Colors.green
                     }
                 case 3:
                     description = "Search the hospital places."
                 case 4:
                     let prescription = PrescriptionSectionData.getData(refreshData: true)
                     if prescription[0].items.count == 0 {
-                        description = "You haven't prescriptions for today."
+                        description = "You haven't prescriptions for today"
                     } else {
-                        description = "See your prescriptions for today."
+                        description = "See your prescriptions for today"
+                        badgeText = "\(prescription[0].items.count)"
+                        seeBadge = true
+                        color = Colors.green
                     }
                 case 5:
-                    description = "See where you are in the hospital."
+                    description = "See where you are in the hospital"
                 case 6:
-                    description = "Read the last news of the hospital."
+                    description = "Read the last news of the hospital"
                 default:
                     print("Error loading description tile")
                 }
                 DispatchQueue.main.async {
                     cell.descriptionLabel.text = description
+                    cell.descriptionLabel.textColor = color
+                    
+                    if seeBadge {
+                        cell.badge.image = UIImage(named: "badge")?.withRenderingMode(.alwaysTemplate)
+                        cell.badge.tintColor = Colors.green
+                        cell.badgeNumber.text = badgeText
+                    }
+                    cell.badgeNumber.isHidden = !seeBadge
+                    cell.badge.isHidden = !seeBadge
                 }
             }
             
@@ -257,6 +282,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        collectionView.reloadData()
         if hourTimer == nil {
             hourTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateHour), userInfo: nil, repeats: true)
         }

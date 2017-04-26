@@ -47,7 +47,10 @@ class PrescriptionViewController: UIViewController, UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PrescriptionCell", for: indexPath)
         cell.textLabel?.text = (prescriptionSection[indexPath.section].items[indexPath.row] as? Prescription)?.name
-        cell.detailTextLabel?.text = "Hour: \((prescriptionSection[indexPath.section].items[indexPath.row] as! Prescription).hour)"
+        
+        var date = (prescriptionSection[indexPath.section].items[indexPath.row] as! Prescription).date.components(separatedBy: "-")
+        
+        cell.detailTextLabel?.text = "\(date[2])-\(date[1])-\(date[0]) at \((prescriptionSection[indexPath.section].items[indexPath.row] as! Prescription).hour)"
         cell.detailTextLabel?.textColor = Colors.darkColor
         cell.textLabel?.textColor = Colors.darkColor
         return cell

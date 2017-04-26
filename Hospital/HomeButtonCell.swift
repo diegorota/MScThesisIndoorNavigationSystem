@@ -13,5 +13,7 @@ class HomeButtonCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var badge: UIImageView!
+    @IBOutlet weak var badgeNumber: UILabel!
     
 }
