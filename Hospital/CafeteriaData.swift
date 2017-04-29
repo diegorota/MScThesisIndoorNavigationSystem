@@ -55,9 +55,17 @@ class CafeteriaData {
                         } else {
                             menu.newMenu = true
                         }
+                    } else {
+                        menu.newMenu = true
                     }
+                } else {
+                    menu.newMenu = true
                 }
+            } else {
+                menu.newMenu = true
             }
+        } else {
+            menu.newMenu = true
         }
         menu.lastYear = json["year"].intValue
         menu.lastMonth = json["month"].intValue

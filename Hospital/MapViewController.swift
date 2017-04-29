@@ -11,6 +11,8 @@ import CoreBluetooth
 
 class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate {
     
+    let defaults = UserDefaults.standard
+    
     @IBOutlet weak var mapScrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var centerButton: UIButton!
@@ -25,7 +27,8 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     var arduinoPeripherals:CBPeripheral?
     var arduinoCharacteristic:CBCharacteristic?
     
-    let identifier = "3CF2AC85-97E2-4346-8A4B-DE1398DB9B37"
+    //let identifier = "3CF2AC85-97E2-4346-8A4B-DE1398DB9B37"
+    var identifier: String!
     let RBL_SERVICE_UUID = "713D0000-503E-4C75-BA94-3148F18D941E"
     let RBL_CHAR_TX_UUID = "713D0002-503E-4C75-BA94-3148F18D941E"
     let RBL_CHAR_RX_UUID = "713D0003-503E-4C75-BA94-3148F18D941E"
@@ -174,6 +177,19 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         super.viewWillAppear(animated)
         navigationController?.visibleViewController?.title = "Map"
         UIApplication.shared.isIdleTimerDisabled = true
+        identifier = defaults.string(forKey: UserDefaultsKeys.uuidDeviceKey)
+        print("HELLO")
+        
+        if identifier == "" {
+            let ac = UIAlertController(title: "Error", message: "There aren't bluetooth devices paired. Select PAIR to do the pairing.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "PAIR", style: .default, handler: { (UIAlertAction) in
+                if let pairing = self.storyboard?.instantiateViewController(withIdentifier: "Pairing") {
+                    self.navigationController?.pushViewController(pairing, animated: true)
+                }
+            }))
+            present(ac, animated: true)
+        }
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -281,7 +297,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
             print("NEXT PERIPHERAL NAME: \(peripheralName)")
             print("NEXT PERIPHERAL UUID: \(peripheral.identifier.uuidString)")
             
-            if peripheral.identifier.uuidString == identifier {
+            if peripheral.identifier.uuidString == identifier! {
                 print("SENSOR TAG FOUND! ADDING NOW!!!")
                 
                 tagName = peripheralName

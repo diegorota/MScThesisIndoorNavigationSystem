@@ -35,14 +35,14 @@
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="hhm-Ny-zbJ">
                                             <rect key="frame" x="-0.5" y="-0.5" width="375" height="667"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medical Center" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46W-IU-n44">
-                                                    <rect key="frame" x="0.0" y="70" width="375" height="72"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="60"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medical Center" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46W-IU-n44">
+                                                    <rect key="frame" x="8" y="230" width="359" height="60"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="50"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXv-4W-Amc" userLabel="ContentView">
-                                                    <rect key="frame" x="0.0" y="162" width="375" height="224"/>
+                                                    <rect key="frame" x="0.0" y="300" width="375" height="224"/>
                                                     <subviews>
                                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Patient code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bhr-rM-J9K">
                                                             <rect key="frame" x="8" y="8" width="359" height="40"/>
@@ -124,23 +124,31 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Designed and developed by Montalto Simone and Rota Diego - Politecnico di Milano, 2017" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20v-ry-BZv">
-                                                    <rect key="frame" x="20" y="430" width="335" height="15"/>
+                                                    <rect key="frame" x="20" y="568" width="335" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="08w-a3-igx">
+                                                    <rect key="frame" x="107" y="70" width="160" height="160"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="160" id="Y4j-rL-RYW"/>
+                                                        <constraint firstAttribute="width" constant="160" id="ozC-DP-sz5"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="46W-IU-n44" firstAttribute="leading" secondItem="hhm-Ny-zbJ" secondAttribute="leading" id="1I6-jU-Q8X"/>
-                                                <constraint firstItem="46W-IU-n44" firstAttribute="top" secondItem="hhm-Ny-zbJ" secondAttribute="top" constant="70" id="3rs-7c-jNL"/>
+                                                <constraint firstItem="46W-IU-n44" firstAttribute="leading" secondItem="hhm-Ny-zbJ" secondAttribute="leading" constant="8" id="1I6-jU-Q8X"/>
+                                                <constraint firstItem="08w-a3-igx" firstAttribute="top" secondItem="hhm-Ny-zbJ" secondAttribute="top" constant="70" id="7nZ-vS-JzG"/>
+                                                <constraint firstItem="46W-IU-n44" firstAttribute="top" secondItem="08w-a3-igx" secondAttribute="bottom" id="Bqz-nT-OYa"/>
                                                 <constraint firstItem="SXv-4W-Amc" firstAttribute="width" secondItem="hhm-Ny-zbJ" secondAttribute="width" id="KwD-1f-be0"/>
-                                                <constraint firstAttribute="trailing" secondItem="46W-IU-n44" secondAttribute="trailing" id="R8S-su-1iu"/>
+                                                <constraint firstAttribute="trailing" secondItem="46W-IU-n44" secondAttribute="trailing" constant="8" id="R8S-su-1iu"/>
                                                 <constraint firstItem="SXv-4W-Amc" firstAttribute="leading" secondItem="hhm-Ny-zbJ" secondAttribute="leading" id="YdF-hK-Jda"/>
-                                                <constraint firstItem="SXv-4W-Amc" firstAttribute="top" secondItem="46W-IU-n44" secondAttribute="bottom" constant="20" id="cc9-Q3-Pbr"/>
+                                                <constraint firstItem="SXv-4W-Amc" firstAttribute="top" secondItem="46W-IU-n44" secondAttribute="bottom" constant="10" id="cc9-Q3-Pbr"/>
                                                 <constraint firstItem="20v-ry-BZv" firstAttribute="leading" secondItem="hhm-Ny-zbJ" secondAttribute="leading" constant="20" id="edP-WK-MSV"/>
-                                                <constraint firstItem="46W-IU-n44" firstAttribute="width" secondItem="hhm-Ny-zbJ" secondAttribute="width" id="iGg-fU-cJ9"/>
                                                 <constraint firstAttribute="bottom" secondItem="20v-ry-BZv" secondAttribute="bottom" constant="261" id="ilT-ng-shY"/>
                                                 <constraint firstItem="20v-ry-BZv" firstAttribute="top" secondItem="SXv-4W-Amc" secondAttribute="bottom" constant="44" id="okI-z7-AQr"/>
+                                                <constraint firstItem="08w-a3-igx" firstAttribute="centerX" secondItem="hhm-Ny-zbJ" secondAttribute="centerX" id="seu-Fd-3Ne"/>
                                                 <constraint firstAttribute="trailing" secondItem="20v-ry-BZv" secondAttribute="trailing" constant="20" id="wNL-aJ-f3p"/>
                                                 <constraint firstAttribute="trailing" secondItem="SXv-4W-Amc" secondAttribute="trailing" id="xGv-Bm-2Jl"/>
                                             </constraints>
@@ -170,6 +178,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="yMV-wy-aBJ"/>
                     <connections>
+                        <outlet property="imageLogo" destination="08w-a3-igx" id="dSb-Nm-Q3M"/>
+                        <outlet property="medicalCenter" destination="46W-IU-n44" id="MNP-IT-gxY"/>
                         <outlet property="password" destination="vv4-f4-VAu" id="a2g-fL-dZm"/>
                         <outlet property="patientCode" destination="Bhr-rM-J9K" id="7Ft-Fl-Irc"/>
                         <outlet property="rememberMeLabel" destination="Znp-xW-twp" id="prc-He-IVE"/>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
@@ -25,7 +26,73 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Settings"), style: .plain, target: self, action: #selector(openSettings))
         loadTiles()
-
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge], completionHandler: { (granted,error) in
+                self.defaults.set(granted, forKey: UserDefaultsKeys.localnotificationsEnabledKey)
+        })
+        
+        // Creazione notifiche per Medical Examination e Prescriptions
+        DispatchQueue.global(qos: .userInitiated).async {
+            
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            
+            let examinations = MedicalExaminationSectionData.getData(refreshData: false)
+            let prescriprions = PrescriptionSectionData.getData(refreshData: false)
+            
+            for i in 0...1 {
+                for examination in examinations[i].items as! [ExaminationDetail] {
+                    
+                    let time = examination.hour.components(separatedBy: ":")
+                    let date = examination.date.components(separatedBy: "-")
+                    
+                    if let year: Int = Int(date[0]) {
+                        if let month: Int = Int(date[1]) {
+                            if let day: Int = Int(date[2]) {
+                                if let hour: Int = Int(time[0]) {
+                                    if let minutes: Int = Int(time[1]) {
+                                        let content = UNMutableNotificationContent()
+                                        content.title = "You have a new Medical Examination"
+                                        content.body = "\(examination.name) Medical Examination will start at \(hour):\(time[1])."
+                                        content.categoryIdentifier = "message"
+                                        
+                                        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(year: year, month: month, day: day, hour: hour-1, minute: minutes), repeats: false)
+                                        let request = UNNotificationRequest(identifier: "\(examination.date)-\(examination.hour)-\(examination.name)", content: content, trigger: trigger)
+                                        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                for prescription in prescriprions[i].items as! [Prescription] {
+                    
+                    let time = prescription.hour.components(separatedBy: ":")
+                    let date = prescription.date.components(separatedBy: "-")
+                    
+                    if let year: Int = Int(date[0]) {
+                        if let month: Int = Int(date[1]) {
+                            if let day: Int = Int(date[2]) {
+                                if let hour: Int = Int(time[0]) {
+                                    if let minutes: Int = Int(time[1]) {
+                                        let content = UNMutableNotificationContent()
+                                        content.title = "You have a new Prescription"
+                                        content.body = "You have to take \(prescription.name) at \(hour):\(time[1])."
+                                        content.categoryIdentifier = "message"
+                                        
+                                        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(year: year, month: month, day: day, hour: hour, minute: minutes), repeats: false)
+                                        let request = UNNotificationRequest(identifier: "\(prescription.date)-\(prescription.hour)-\(prescription.name)", content: content, trigger: trigger)
+                                        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
     }
     
     func updateHour() {

@@ -11,6 +11,8 @@ import CoreBluetooth
 
 class PairingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CBCentralManagerDelegate, CBPeripheralDelegate {
     
+    let defaults = UserDefaults.standard
+    
     @IBOutlet weak var pairingTableView: UITableView!
     var bluetoothDevices = [BluetoothDevice]()
     var selectedDevice: String?
@@ -66,10 +68,10 @@ class PairingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedDevice = bluetoothDevices[indexPath.row].uuid
+        defaults.set(selectedDevice!, forKey: UserDefaultsKeys.uuidDeviceKey)
         tableView.deselectRow(at: indexPath, animated: true)
         
         let ac = UIAlertController(title: "Done!", message: "You have selected the devices. Now you can open the map.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Go Back", style: .default, handler: goBack))
         ac.addAction(UIAlertAction(title: "Go Home", style: .default, handler: goHome))
         present(ac, animated: true)
     }

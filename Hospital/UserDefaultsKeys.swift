@@ -33,4 +33,10 @@ struct UserDefaultsKeys {
     
     // Examination view data
     static let checkinDoneKey = "checkindonekey"
+    
+    // Bluetooth Device UUID
+    static let uuidDeviceKey = "uuiddevicekey"
+    
+    // Local notifications
+    static let localnotificationsEnabledKey = "localnotificationsenabledkey"
 }

@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = initialviewController
         self.window?.makeKeyAndVisible()
         
+        defaults.set("", forKey: UserDefaultsKeys.uuidDeviceKey)
+        
         // Configura colore della navigation bar
         UINavigationBar.appearance().barTintColor = Colors.mediumColor
         UINavigationBar.appearance().tintColor = UIColor.white
@@ -67,6 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.removePersistentDomain(forName: appDomain)
         }
         defaults.set(false, forKey: UserDefaultsKeys.checkinDoneKey)
+        defaults.set("", forKey: UserDefaultsKeys.uuidDeviceKey)
     }
 
 }

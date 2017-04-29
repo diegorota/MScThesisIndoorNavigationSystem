@@ -19,6 +19,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var rememberMeSwitch: UISwitch!
     @IBOutlet weak var signinButton: UIButton!
     @IBOutlet weak var touchIDButton: UIButton!
+    @IBOutlet weak var imageLogo: UIImageView!
+    @IBOutlet weak var medicalCenter: UILabel!
     
     var rememberMe = false
     var touchIDEnabled = false
@@ -26,6 +28,12 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Login"
+        
+        imageLogo.image = UIImage(named: "logo_image")?.withRenderingMode(.alwaysTemplate)
+        imageLogo.tintColor = Colors.darkColor
+        
+        medicalCenter.textColor = Colors.darkColor
+        
         touchIDEnabled = defaults.bool(forKey: UserDefaultsKeys.touchIDKey)
         rememberMe = rememberMeSwitch.isOn
         touchIDButton.isEnabled = touchIDEnabled
