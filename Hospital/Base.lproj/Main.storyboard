@@ -1126,9 +1126,28 @@
             <point key="canvasLocation" x="4928.8000000000002" y="622.93853073463276"/>
         </scene>
         <!--Map-->
+        <scene sceneID="Mm1-1V-6km">
+            <objects>
+                <viewController id="3zh-My-9hR" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vmB-Dg-Xj0"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ujc-1X-Y9Q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vZc-q6-Yl3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="GN4-vk-J7j"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rEt-ph-UT4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4126" y="1380"/>
+        </scene>
+        <!--Map-->
         <scene sceneID="Zjx-vz-PTh">
             <objects>
-                <viewController id="4UF-LD-Tpb" customClass="MapViewController" customModule="Hospital" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OfficeMap" id="4UF-LD-Tpb" customClass="MapViewController" customModule="Hospital" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NgU-3D-bJH"/>
                         <viewControllerLayoutGuide type="bottom" id="6Wo-o4-iUi"/>
@@ -1230,7 +1249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ke-Tb-PLc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4928.8000000000002" y="1378.56071964018"/>
+            <point key="canvasLocation" x="2810" y="-1430"/>
         </scene>
         <!--News View Controller-->
         <scene sceneID="RNy-kg-bsp">
@@ -1792,7 +1811,7 @@
                         <segue destination="3xR-TB-rM9" kind="relationship" relationship="viewControllers" id="3jR-U5-2LV"/>
                         <segue destination="flB-4v-8BU" kind="relationship" relationship="viewControllers" id="BWD-H1-qsk"/>
                         <segue destination="wjK-oJ-aOl" kind="relationship" relationship="viewControllers" id="O7l-e3-JbB"/>
-                        <segue destination="4UF-LD-Tpb" kind="relationship" relationship="viewControllers" id="PtI-fv-SqO"/>
+                        <segue destination="3zh-My-9hR" kind="relationship" relationship="viewControllers" id="iAz-OX-XDw"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Goy-KA-XXs" userLabel="First Responder" sceneMemberID="firstResponder"/>

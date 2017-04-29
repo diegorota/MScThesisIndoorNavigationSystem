@@ -48,7 +48,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -58,6 +58,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             cell.textLabel?.text = "Logout"
         } else if indexPath.row == 1 {
             cell.textLabel?.text = "Bluetooth pairing"
+        } else if indexPath.row == 2 {
+            cell.textLabel?.text = "Office Map"
         }
         cell.textLabel?.textColor = Colors.darkColor
         return cell
@@ -73,6 +75,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         } else if indexPath.row == 1 {
             if let pairing = storyboard?.instantiateViewController(withIdentifier: "Pairing") {
                 self.navigationController?.pushViewController(pairing, animated: true)
+            }
+        } else if indexPath.row == 2 {
+            if let map = storyboard?.instantiateViewController(withIdentifier: "OfficeMap") {
+                self.navigationController?.pushViewController(map, animated: true)
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)

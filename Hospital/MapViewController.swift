@@ -181,10 +181,15 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
         print("HELLO")
         
         if identifier == "" {
-            let ac = UIAlertController(title: "Error", message: "There aren't bluetooth devices paired. Select PAIR to do the pairing.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "PAIR", style: .default, handler: { (UIAlertAction) in
+            let ac = UIAlertController(title: "Error", message: "There aren't bluetooth devices paired. Select 'Pair' to do the pairing.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Pair", style: .default, handler: { (UIAlertAction) in
                 if let pairing = self.storyboard?.instantiateViewController(withIdentifier: "Pairing") {
                     self.navigationController?.pushViewController(pairing, animated: true)
+                }
+            }))
+            ac.addAction(UIAlertAction(title: "Go Home", style: .default, handler: { (UIAlertAction) in
+                if let newView = self.storyboard?.instantiateViewController(withIdentifier: "HomeNavigation") as? UINavigationController {
+                    self.present(newView, animated: true)
                 }
             }))
             present(ac, animated: true)
