@@ -175,7 +175,6 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
         case 5:
             return CGSize(width: width, height: mediumHeight)
         case 6:
-            
             let attributedString = NSAttributedString(string: examinationDescriptionText, attributes: [NSFontAttributeName : UIFont(name: "Helvetica", size: 16)!])
             let boundingRect = attributedString.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
             return CGSize(width: boundingRect.width, height: boundingRect.height)
@@ -204,6 +203,12 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
     
     
     @IBAction func navigate(_ sender: Any) {
+        if let map = storyboard?.instantiateViewController(withIdentifier: "MedicalCenterMap") as? MedicalCenterMapViewController {
+            if let coordinates = POICoordinates {
+                map.POIPosition = coordinates
+                self.navigationController?.pushViewController(map, animated: true)
+            }
+        }
     }
     
     // Funzione che scarica il file JSON dal server

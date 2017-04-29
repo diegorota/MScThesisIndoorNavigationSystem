@@ -905,6 +905,9 @@
                                                                 <state key="normal" title="Bring me to the building">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="navigate:" destination="bVT-X4-dLI" eventType="touchUpInside" id="rsD-Ou-wlb"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </view>
@@ -1128,7 +1131,7 @@
         <!--Map-->
         <scene sceneID="Mm1-1V-6km">
             <objects>
-                <viewController id="3zh-My-9hR" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MedicalCenterMap" id="3zh-My-9hR" customClass="MedicalCenterMapViewController" customModule="Hospital" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vmB-Dg-Xj0"/>
                         <viewControllerLayoutGuide type="bottom" id="Ujc-1X-Y9Q"/>
@@ -1136,18 +1139,67 @@
                     <view key="view" contentMode="scaleToFill" id="vZc-q6-Yl3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_image" translatesAutoresizingMaskIntoConstraints="NO" id="Ucu-yZ-Iu2">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p0H-Uj-cch">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="wOo-fa-SUM">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="598"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBO-tZ-fuh">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="medical_center_map" translatesAutoresizingMaskIntoConstraints="NO" id="MJU-Jf-uec">
+                                        <rect key="frame" x="0.0" y="20" width="375" height="259"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="375" id="7RD-kC-e06"/>
+                                            <constraint firstAttribute="height" constant="259" id="ZqA-42-thx"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="MJU-Jf-uec" firstAttribute="top" secondItem="FBO-tZ-fuh" secondAttribute="top" constant="20" id="AfS-Bq-q0w"/>
+                                    <constraint firstAttribute="bottom" secondItem="MJU-Jf-uec" secondAttribute="bottom" constant="40" id="Oo9-ho-6Io"/>
+                                    <constraint firstItem="MJU-Jf-uec" firstAttribute="leading" secondItem="FBO-tZ-fuh" secondAttribute="leading" id="USH-1n-Jvk"/>
+                                    <constraint firstAttribute="trailing" secondItem="MJU-Jf-uec" secondAttribute="trailing" id="Uex-aW-wH7"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ujc-1X-Y9Q" firstAttribute="top" secondItem="Ucu-yZ-Iu2" secondAttribute="bottom" id="ABx-ql-qJw"/>
+                            <constraint firstItem="p0H-Uj-cch" firstAttribute="height" secondItem="Ucu-yZ-Iu2" secondAttribute="height" id="EqJ-x0-utR"/>
+                            <constraint firstItem="FBO-tZ-fuh" firstAttribute="width" secondItem="p0H-Uj-cch" secondAttribute="width" id="Hdr-CZ-le2"/>
+                            <constraint firstItem="Ucu-yZ-Iu2" firstAttribute="leading" secondItem="vZc-q6-Yl3" secondAttribute="leading" id="Hx6-m4-x0G"/>
+                            <constraint firstItem="FBO-tZ-fuh" firstAttribute="centerX" secondItem="p0H-Uj-cch" secondAttribute="centerX" id="KRQ-3x-etj"/>
+                            <constraint firstItem="p0H-Uj-cch" firstAttribute="width" secondItem="Ucu-yZ-Iu2" secondAttribute="width" id="Nuo-l4-ad3"/>
+                            <constraint firstAttribute="trailing" secondItem="Ucu-yZ-Iu2" secondAttribute="trailing" id="Vdb-Aa-wbX"/>
+                            <constraint firstItem="FBO-tZ-fuh" firstAttribute="height" secondItem="p0H-Uj-cch" secondAttribute="height" id="aMN-YI-81z"/>
+                            <constraint firstItem="p0H-Uj-cch" firstAttribute="centerX" secondItem="Ucu-yZ-Iu2" secondAttribute="centerX" id="h6U-t1-NDu"/>
+                            <constraint firstItem="FBO-tZ-fuh" firstAttribute="centerY" secondItem="p0H-Uj-cch" secondAttribute="centerY" id="jKk-eH-cXT"/>
+                            <constraint firstItem="Ucu-yZ-Iu2" firstAttribute="top" secondItem="vmB-Dg-Xj0" secondAttribute="bottom" id="lLA-X6-Dbn"/>
+                            <constraint firstItem="p0H-Uj-cch" firstAttribute="centerY" secondItem="Ucu-yZ-Iu2" secondAttribute="centerY" id="q7m-St-qxb"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="map" id="GN4-vk-J7j"/>
+                    <connections>
+                        <outlet property="imageView" destination="MJU-Jf-uec" id="xGC-sZ-pCL"/>
+                        <outlet property="mapScrollView" destination="FBO-tZ-fuh" id="QDV-Ic-NO5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rEt-ph-UT4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4126" y="1380"/>
+            <point key="canvasLocation" x="4928.8000000000002" y="1472.1139430284859"/>
         </scene>
         <!--Map-->
         <scene sceneID="Zjx-vz-PTh">
             <objects>
-                <viewController storyboardIdentifier="OfficeMap" id="4UF-LD-Tpb" customClass="MapViewController" customModule="Hospital" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OfficeMap" id="4UF-LD-Tpb" customClass="OfficeMapViewController" customModule="Hospital" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NgU-3D-bJH"/>
                         <viewControllerLayoutGuide type="bottom" id="6Wo-o4-iUi"/>
@@ -1157,18 +1209,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_image" translatesAutoresizingMaskIntoConstraints="NO" id="bdC-jm-e4h">
-                                <rect key="frame" x="-0.5" y="20" width="375" height="598"/>
+                                <rect key="frame" x="-0.5" y="20" width="375" height="647"/>
                             </imageView>
                             <visualEffectView opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfx-ba-mj0">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Sie-Sl-oac">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="598"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYX-NE-BuE">
-                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ufficio_resize" translatesAutoresizingMaskIntoConstraints="NO" id="UIp-Jb-9Rg">
                                         <rect key="frame" x="0.0" y="43" width="375" height="417"/>
@@ -1187,7 +1239,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5WK-UO-EFM">
-                                <rect key="frame" x="309" y="548" width="50" height="50"/>
+                                <rect key="frame" x="309" y="597" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="CJA-43-hle"/>
                                     <constraint firstAttribute="width" constant="50" id="t7S-Rb-mGZ"/>
@@ -1385,7 +1437,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="250"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="city" translatesAutoresizingMaskIntoConstraints="NO" id="Pfe-y5-rBb">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pfe-y5-rBb">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="250"/>
                                                     </imageView>
                                                 </subviews>
@@ -1497,8 +1549,8 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bai-Ft-2o2">
-                                                                <rect key="frame" x="8" y="38" width="319" height="127"/>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bai-Ft-2o2">
+                                                                <rect key="frame" x="8" y="30" width="319" height="137.5"/>
                                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1506,10 +1558,10 @@
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="trailingMargin" secondItem="sZn-cb-wiu" secondAttribute="trailing" id="833-PN-YTY"/>
-                                                            <constraint firstItem="Bai-Ft-2o2" firstAttribute="top" secondItem="sZn-cb-wiu" secondAttribute="bottom" constant="8" id="85f-hy-Tza"/>
                                                             <constraint firstAttribute="leadingMargin" secondItem="sZn-cb-wiu" secondAttribute="leading" id="EmH-HS-7m8"/>
+                                                            <constraint firstItem="Bai-Ft-2o2" firstAttribute="top" secondItem="Xr0-I3-peE" secondAttribute="top" constant="30" id="Gms-Tg-poY"/>
                                                             <constraint firstAttribute="leadingMargin" secondItem="Bai-Ft-2o2" secondAttribute="leading" id="MeB-Ol-DA6"/>
-                                                            <constraint firstAttribute="bottomMargin" secondItem="Bai-Ft-2o2" secondAttribute="bottom" constant="2" id="Yvy-TV-5Ay"/>
+                                                            <constraint firstAttribute="bottomMargin" secondItem="Bai-Ft-2o2" secondAttribute="bottom" id="Yvy-TV-5Ay"/>
                                                             <constraint firstAttribute="topMargin" secondItem="sZn-cb-wiu" secondAttribute="top" id="rYf-uH-yX0"/>
                                                             <constraint firstAttribute="trailingMargin" secondItem="Bai-Ft-2o2" secondAttribute="trailing" id="wyp-Zt-7Rm"/>
                                                         </constraints>
@@ -1545,6 +1597,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="headerImage" destination="Pfe-y5-rBb" id="PHb-Ai-bbj"/>
                         <outlet property="tableView" destination="4fK-od-zgC" id="AqD-9h-ms8"/>
                     </connections>
                 </viewController>
@@ -1858,10 +1911,10 @@
     <resources>
         <image name="cafeteria" width="25" height="25"/>
         <image name="center" width="50" height="50"/>
-        <image name="city" width="375" height="200"/>
         <image name="examinations" width="25" height="25"/>
         <image name="login_image" width="375" height="667"/>
         <image name="map" width="25" height="25"/>
+        <image name="medical_center_map" width="833" height="574"/>
         <image name="navigate" width="30" height="30"/>
         <image name="phone" width="30" height="30"/>
         <image name="pill" width="22" height="22"/>

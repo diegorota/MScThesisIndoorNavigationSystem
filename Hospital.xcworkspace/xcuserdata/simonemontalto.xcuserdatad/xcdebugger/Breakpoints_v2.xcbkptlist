@@ -179,5 +179,83 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Hospital/OfficeMapViewController.swift"
+            timestampString = "515149844.584231"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "OfficeMapViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hospital.OfficeMapViewController.tagName.getter : Swift.String"
+                  moduleName = "Hospital"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/simonemontalto/Dropbox/Cartelle%20condivise/Tesi/MOBILE%20APP/Hospital/Hospital/OfficeMapViewController.swift"
+                  timestampString = "515149848.272068"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "53">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hospital.OfficeMapViewController.tagName.setter : Swift.String"
+                  moduleName = "Hospital"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/simonemontalto/Dropbox/Cartelle%20condivise/Tesi/MOBILE%20APP/Hospital/Hospital/OfficeMapViewController.swift"
+                  timestampString = "515149848.274836"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "95">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hospital.OfficeMapViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; Hospital.OfficeMapViewController"
+                  moduleName = "Hospital"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/simonemontalto/Dropbox/Cartelle%20condivise/Tesi/MOBILE%20APP/Hospital/Hospital/OfficeMapViewController.swift"
+                  timestampString = "515149848.276251"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "859">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Hospital.OfficeMapViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Hospital.OfficeMapViewController&gt;"
+                  moduleName = "Hospital"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/simonemontalto/Dropbox/Cartelle%20condivise/Tesi/MOBILE%20APP/Hospital/Hospital/OfficeMapViewController.swift"
+                  timestampString = "515149848.279817"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "769">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

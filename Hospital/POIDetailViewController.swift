@@ -16,6 +16,7 @@ struct StretchyHeader {
 class POIDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var headerImage: UIImageView!
     var headerView: UIView!
     
     var newHeaderLayer: CAShapeLayer!
@@ -24,6 +25,7 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     var placeCoordinates: CGPoint?
     var placeDescription: String?
     var phoneNumber: String?
+    var POI_id: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +72,7 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         
         headerView.frame = getHeaderFrame
+        headerImage.image = UIImage(named: POI_id!)
         let cutDirection = UIBezierPath()
         cutDirection.move(to: CGPoint(x: 0, y: 0))
         cutDirection.addLine(to: CGPoint(x: getHeaderFrame.width, y: 0))
@@ -144,7 +147,7 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         } else if (indexPath.row > 0) && (indexPath.row < (informationList.count+1)) {
             return 44
         } else {
-            return 132
+            return 150
         }
     }
     
@@ -171,7 +174,10 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         case 0:
             callNumber(phoneNumber: phoneNumber!)
         case 1:
-            print("naviga")
+            if let map = storyboard?.instantiateViewController(withIdentifier: "MedicalCenterMap") as? MedicalCenterMapViewController {
+                map.POIPosition = placeCoordinates
+                self.navigationController?.pushViewController(map, animated: true)
+            }
         default:
             print("errore")
         }

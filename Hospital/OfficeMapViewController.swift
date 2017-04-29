@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate {
+class OfficeMapViewController: UIViewController, UIScrollViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     let defaults = UserDefaults.standard
     
@@ -175,10 +175,9 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.visibleViewController?.title = "Map"
+        navigationController?.visibleViewController?.title = "Office Map"
         UIApplication.shared.isIdleTimerDisabled = true
         identifier = defaults.string(forKey: UserDefaultsKeys.uuidDeviceKey)
-        print("HELLO")
         
         if identifier == "" {
             let ac = UIAlertController(title: "Error", message: "There aren't bluetooth devices paired. Select 'Pair' to do the pairing.", preferredStyle: .alert)
@@ -198,7 +197,7 @@ class MapViewController: UIViewController, UIScrollViewDelegate, CBCentralManage
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if navigationController?.visibleViewController?.title == "Map" {
+        if navigationController?.visibleViewController?.title == "Office Map" {
             super.viewWillTransition(to: size, with: coordinator)
             self.mapScrollView.zoomScale = CGFloat(1)
             setMapZoom(size: size)

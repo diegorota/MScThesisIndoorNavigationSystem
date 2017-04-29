@@ -81,6 +81,7 @@ class POIViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             poiView.placeCoordinates = list[indexPath.row].coordinates
             poiView.placeDescription = list[indexPath.row].POIDescription
             poiView.phoneNumber = list[indexPath.row].phoneNumber
+            poiView.POI_id = list[indexPath.row].ID
             navigationController?.pushViewController(poiView, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)

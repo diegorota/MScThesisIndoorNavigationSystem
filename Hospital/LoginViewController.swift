@@ -9,7 +9,7 @@
 import UIKit
 import LocalAuthentication
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let defaults = UserDefaults.standard
 
@@ -28,6 +28,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Login"
+        
+        patientCode.delegate = self
+        password.delegate = self
         
         imageLogo.image = UIImage(named: "logo_image")?.withRenderingMode(.alwaysTemplate)
         imageLogo.tintColor = Colors.darkColor
@@ -145,6 +148,11 @@ class LoginViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         patientCode.underlined()
         password.underlined()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     

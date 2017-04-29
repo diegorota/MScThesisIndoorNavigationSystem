@@ -1,1 +1,1 @@
-{"checkin_response":true,"name":"Simone", "surname":"Candle", "fiscal_code": "AAABBB91C01A222Z", "hospitalized":false, "examination_name":"fisioterapia","queue":3, "waiting_time":40, "ticket":10}
+{"checkin_response":true,"name":"Simone", "surname":"Candle", "fiscal_code": "AAABBB91C01A222Z", "hospitalized":false, "examination_name":"cardiology","queue":3, "waiting_time":40, "ticket":10}
