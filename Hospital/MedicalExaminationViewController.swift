@@ -78,7 +78,7 @@ class MedicalExaminationViewController: UIViewController, UITableViewDelegate, U
             var info5: Information?
             for poi in POIData.getData() {
                 if poi.ID == (medicalExaminationSection[indexPath.section].items[indexPath.row] as! ExaminationDetail).POI_ID {
-                    info5 = Information(title: "Building:", information: poi.name)
+                    info5 = Information(title: "Building:", information: poi.building)
                     ed.POICoordinates = poi.coordinates
                 }
             }

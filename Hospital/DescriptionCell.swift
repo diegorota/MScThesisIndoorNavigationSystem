@@ -11,6 +11,6 @@ import UIKit
 class DescriptionCell: UITableViewCell {
 
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var descriptionText: UITextView!
+    @IBOutlet weak var descriptionText: UILabel!
 
 }

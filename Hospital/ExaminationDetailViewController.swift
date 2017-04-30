@@ -17,7 +17,7 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
     
     var upperExaminationDetail = [Information]()
     var bottomExaminationDetail = [Information]()
-    var examinationDescriptionText = String()
+    var examinationDescriptionText: String!
     var checkinDone = false
     var POICoordinates: CGPoint? = nil
     
@@ -175,9 +175,9 @@ class ExaminationDetailViewController: UIViewController, UICollectionViewDelegat
         case 5:
             return CGSize(width: width, height: mediumHeight)
         case 6:
-            let attributedString = NSAttributedString(string: examinationDescriptionText, attributes: [NSFontAttributeName : UIFont(name: "Helvetica", size: 16)!])
-            let boundingRect = attributedString.boundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
-            return CGSize(width: boundingRect.width, height: boundingRect.height)
+            let attributedString = NSAttributedString(string: examinationDescriptionText, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 16)])
+            let boundingRect = attributedString.boundingRect(with: CGSize(width: width-16, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+            return CGSize(width: width, height: boundingRect.height+16)
         case 7:
             return CGSize(width: width, height: littleHeight)
         default:

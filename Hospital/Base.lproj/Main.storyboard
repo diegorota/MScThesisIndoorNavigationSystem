@@ -872,24 +872,24 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="144"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBg-jK-LIt">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9q-ff-zcw">
                                                                 <rect key="frame" x="8" y="8" width="284" height="128"/>
-                                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                            </textView>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                     </view>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="mBg-jK-LIt" secondAttribute="trailing" constant="8" id="dUr-W5-Kp0"/>
-                                                        <constraint firstItem="mBg-jK-LIt" firstAttribute="leading" secondItem="oeP-4o-6uN" secondAttribute="leading" constant="8" id="gMp-3O-F35"/>
-                                                        <constraint firstItem="mBg-jK-LIt" firstAttribute="top" secondItem="oeP-4o-6uN" secondAttribute="top" constant="8" id="mbY-Tf-bXk"/>
-                                                        <constraint firstAttribute="bottom" secondItem="mBg-jK-LIt" secondAttribute="bottom" constant="8" id="svh-Q5-EmB"/>
+                                                        <constraint firstItem="A9q-ff-zcw" firstAttribute="top" secondItem="oeP-4o-6uN" secondAttribute="top" constant="8" id="2lQ-9w-1RU"/>
+                                                        <constraint firstAttribute="bottom" secondItem="A9q-ff-zcw" secondAttribute="bottom" constant="8" id="4of-ds-Eob"/>
+                                                        <constraint firstItem="A9q-ff-zcw" firstAttribute="leading" secondItem="oeP-4o-6uN" secondAttribute="leading" constant="8" id="dzL-ha-CxM"/>
+                                                        <constraint firstAttribute="trailing" secondItem="A9q-ff-zcw" secondAttribute="trailing" constant="8" id="vrO-25-UqP"/>
                                                     </constraints>
                                                     <size key="customSize" width="300" height="144"/>
                                                     <connections>
-                                                        <outlet property="descriptionTextView" destination="mBg-jK-LIt" id="ZVz-3h-Bg7"/>
+                                                        <outlet property="descriptionTextView" destination="A9q-ff-zcw" id="OT7-BM-aRQ"/>
                                                     </connections>
                                                 </collectionViewCell>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MedicalExaminationButtonCell" id="M3r-qc-A4R" customClass="MedicalExaminationButtonCell" customModule="Hospital" customModuleProvider="target">
@@ -1431,7 +1431,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4fK-od-zgC">
-                                            <rect key="frame" x="20" y="0.0" width="335" height="647"/>
+                                            <rect key="frame" x="20" y="0.0" width="335" height="627"/>
                                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <view key="tableHeaderView" contentMode="scaleToFill" id="67P-4R-cb5">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="250"/>
@@ -1544,31 +1544,34 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZn-cb-wiu">
-                                                                <rect key="frame" x="8" y="8" width="319" height="22"/>
+                                                                <rect key="frame" x="16" y="16" width="319" height="22"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="22" id="Vd1-bj-VLi"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bai-Ft-2o2">
-                                                                <rect key="frame" x="8" y="30" width="319" height="137.5"/>
-                                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                            </textView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sb2-VY-9SD">
+                                                                <rect key="frame" x="16" y="46" width="303" height="113.5"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="trailingMargin" secondItem="sZn-cb-wiu" secondAttribute="trailing" id="833-PN-YTY"/>
-                                                            <constraint firstAttribute="leadingMargin" secondItem="sZn-cb-wiu" secondAttribute="leading" id="EmH-HS-7m8"/>
-                                                            <constraint firstItem="Bai-Ft-2o2" firstAttribute="top" secondItem="Xr0-I3-peE" secondAttribute="top" constant="30" id="Gms-Tg-poY"/>
-                                                            <constraint firstAttribute="leadingMargin" secondItem="Bai-Ft-2o2" secondAttribute="leading" id="MeB-Ol-DA6"/>
-                                                            <constraint firstAttribute="bottomMargin" secondItem="Bai-Ft-2o2" secondAttribute="bottom" id="Yvy-TV-5Ay"/>
-                                                            <constraint firstAttribute="topMargin" secondItem="sZn-cb-wiu" secondAttribute="top" id="rYf-uH-yX0"/>
-                                                            <constraint firstAttribute="trailingMargin" secondItem="Bai-Ft-2o2" secondAttribute="trailing" id="wyp-Zt-7Rm"/>
+                                                            <constraint firstItem="sZn-cb-wiu" firstAttribute="top" secondItem="Xr0-I3-peE" secondAttribute="topMargin" constant="8" id="5sQ-iz-HSX"/>
+                                                            <constraint firstItem="Sb2-VY-9SD" firstAttribute="top" secondItem="sZn-cb-wiu" secondAttribute="bottom" constant="8" id="IdG-SP-dDO"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="sZn-cb-wiu" secondAttribute="trailing" constant="-8" id="KBD-NL-VKa"/>
+                                                            <constraint firstAttribute="trailingMargin" secondItem="Sb2-VY-9SD" secondAttribute="trailing" constant="8" id="RrF-yq-D4t"/>
+                                                            <constraint firstAttribute="bottomMargin" secondItem="Sb2-VY-9SD" secondAttribute="bottom" constant="8" id="aCK-6u-xS0"/>
+                                                            <constraint firstItem="Sb2-VY-9SD" firstAttribute="leading" secondItem="Xr0-I3-peE" secondAttribute="leadingMargin" constant="8" id="caZ-be-2bL"/>
+                                                            <constraint firstAttribute="leadingMargin" secondItem="sZn-cb-wiu" secondAttribute="leading" constant="-8" id="lCB-sS-IF0"/>
                                                         </constraints>
                                                     </tableViewCellContentView>
                                                     <connections>
                                                         <outlet property="descriptionLabel" destination="sZn-cb-wiu" id="DrV-4H-zX0"/>
-                                                        <outlet property="descriptionText" destination="Bai-Ft-2o2" id="wyY-fd-Os3"/>
+                                                        <outlet property="descriptionText" destination="Sb2-VY-9SD" id="d7J-6C-dv7"/>
                                                     </connections>
                                                 </tableViewCell>
                                             </prototypes>
@@ -1578,7 +1581,7 @@
                                         <constraint firstItem="4fK-od-zgC" firstAttribute="leading" secondItem="1xC-8l-7MD" secondAttribute="leading" constant="20" id="0DG-Jy-QcK"/>
                                         <constraint firstItem="4fK-od-zgC" firstAttribute="top" secondItem="1xC-8l-7MD" secondAttribute="top" id="Tnj-Aw-Fmg"/>
                                         <constraint firstAttribute="trailing" secondItem="4fK-od-zgC" secondAttribute="trailing" constant="20" id="kUL-w0-YvT"/>
-                                        <constraint firstAttribute="bottom" secondItem="4fK-od-zgC" secondAttribute="bottom" id="ntE-FH-AAJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="4fK-od-zgC" secondAttribute="bottom" constant="20" id="ntE-FH-AAJ"/>
                                     </constraints>
                                 </view>
                                 <blurEffect style="light"/>

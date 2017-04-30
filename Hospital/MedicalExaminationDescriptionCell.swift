@@ -10,6 +10,6 @@ import UIKit
 
 class MedicalExaminationDescriptionCell: UICollectionViewCell {
     
-    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var descriptionTextView: UILabel!
     
 }

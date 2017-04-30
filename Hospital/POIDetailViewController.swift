@@ -42,6 +42,7 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         setNewView(width: size.width)
+        tableView.reloadData()
     }
     
     func updateView() {
@@ -147,7 +148,10 @@ class POIDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         } else if (indexPath.row > 0) && (indexPath.row < (informationList.count+1)) {
             return 44
         } else {
-            return 150
+            
+            let attributedString = NSAttributedString(string: placeDescription!, attributes: [NSFontAttributeName : UIFont.systemFont(ofSize: 16)])
+            let boundingRect = attributedString.boundingRect(with: CGSize(width: view.bounds.size.width-40-16, height: CGFloat.greatestFiniteMagnitude), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil)
+            return boundingRect.height+22+60
         }
     }
     
