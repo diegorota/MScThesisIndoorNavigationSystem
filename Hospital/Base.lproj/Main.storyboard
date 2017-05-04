@@ -123,7 +123,7 @@
                                                         <constraint firstItem="pc0-Sa-au7" firstAttribute="centerY" secondItem="kik-Dq-R6f" secondAttribute="centerY" id="sDU-ag-f2V"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Designed and developed by Montalto Simone and Rota Diego - Politecnico di Milano, 2017" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20v-ry-BZv">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Designed and developed\n by Montalto Simone and Rota Diego - Politecnico di Milano, 2017" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20v-ry-BZv">
                                                     <rect key="frame" x="20" y="568" width="335" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

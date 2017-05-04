@@ -168,7 +168,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 case 1:
                     let menu = CafeteriaData.getData()
                     if menu.newMenu! || (!menu.newMenu! && !self.defaults.bool(forKey: UserDefaultsKeys.confirmationMenuBoolKey)){
-                        description = "You haven't choosen your menu"
+                        description = "You haven't chosen your menu"
                         color = Colors.green
                         badgeText = "!"
                         seeBadge = true
