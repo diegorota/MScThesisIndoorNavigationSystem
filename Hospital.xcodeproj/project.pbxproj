@@ -57,6 +57,11 @@
 		48F2A13C1E7A9C5B002A8DC0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */; };
 		48F949961EA207DE00C025EC /* CafeteriaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F949951EA207DE00C025EC /* CafeteriaData.swift */; };
 		48F949981EA20B0900C025EC /* CafeteriaMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F949971EA20B0900C025EC /* CafeteriaMenu.swift */; };
+		48FE2AF81EC33CBB0000B184 /* DepartmentMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FE2AF71EC33CBB0000B184 /* DepartmentMapViewController.swift */; };
+		48FE2AFB1EC346E40000B184 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FE2AFA1EC346E40000B184 /* Vertex.swift */; };
+		48FE2AFD1EC347450000B184 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FE2AFC1EC347450000B184 /* Edge.swift */; };
+		48FE2AFF1EC347B10000B184 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FE2AFE1EC347B10000B184 /* Graph.swift */; };
+		48FE2B011EC35C140000B184 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FE2B001EC35C140000B184 /* Direction.swift */; };
 		E82A5A088EC896085745A61B /* Pods_Hospital.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D263509C2CC95FCD8A0029 /* Pods_Hospital.framework */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +118,11 @@
 		48F2A13B1E7A9C5B002A8DC0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		48F949951EA207DE00C025EC /* CafeteriaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaData.swift; sourceTree = "<group>"; };
 		48F949971EA20B0900C025EC /* CafeteriaMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaMenu.swift; sourceTree = "<group>"; };
+		48FE2AF71EC33CBB0000B184 /* DepartmentMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartmentMapViewController.swift; sourceTree = "<group>"; };
+		48FE2AFA1EC346E40000B184 /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		48FE2AFC1EC347450000B184 /* Edge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		48FE2AFE1EC347B10000B184 /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		48FE2B001EC35C140000B184 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		600257575BBCADD49AAC2725 /* Pods-Hospital.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hospital.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hospital/Pods-Hospital.release.xcconfig"; sourceTree = "<group>"; };
 		92D263509C2CC95FCD8A0029 /* Pods_Hospital.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hospital.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C389ED54943170CB23144F8 /* Pods-Hospital.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hospital.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hospital/Pods-Hospital.debug.xcconfig"; sourceTree = "<group>"; };
@@ -164,6 +174,7 @@
 				4805109E1E793D2B003B4014 /* LoginViewController.swift */,
 				48F2A1371E7A92F7002A8DC0 /* SettingsViewController.swift */,
 				48C6EE671E84154B004F403B /* OfficeMapViewController.swift */,
+				48FE2AF91EC342010000B184 /* Navigator */,
 				482D1FE31EAB3E1B005E158E /* Pairing */,
 				48F949941EA207C600C025EC /* Cafeteria */,
 				4828024F1E929CEC002C3665 /* Home */,
@@ -277,6 +288,18 @@
 				48F949971EA20B0900C025EC /* CafeteriaMenu.swift */,
 			);
 			name = Cafeteria;
+			sourceTree = "<group>";
+		};
+		48FE2AF91EC342010000B184 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				48FE2AF71EC33CBB0000B184 /* DepartmentMapViewController.swift */,
+				48FE2AFA1EC346E40000B184 /* Vertex.swift */,
+				48FE2AFC1EC347450000B184 /* Edge.swift */,
+				48FE2AFE1EC347B10000B184 /* Graph.swift */,
+				48FE2B001EC35C140000B184 /* Direction.swift */,
+			);
+			name = Navigator;
 			sourceTree = "<group>";
 		};
 		6C5E3C955F1B90E614569173 /* Frameworks */ = {
@@ -412,10 +435,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48FE2AF81EC33CBB0000B184 /* DepartmentMapViewController.swift in Sources */,
 				48D371FD1E812726008E3A40 /* Information.swift in Sources */,
 				4805109F1E793D2B003B4014 /* LoginViewController.swift in Sources */,
 				48E536F91E82F98B00E03F77 /* TwoButtonsCell.swift in Sources */,
 				48F949961EA207DE00C025EC /* CafeteriaData.swift in Sources */,
+				48FE2AFB1EC346E40000B184 /* Vertex.swift in Sources */,
 				4852ABB31E7E7642005734A3 /* MedicalExaminationSectionData.swift in Sources */,
 				48F949981EA20B0900C025EC /* CafeteriaMenu.swift in Sources */,
 				48CDE7161E7FD10A00092D93 /* PointOfInterestDetail.swift in Sources */,
@@ -444,16 +469,19 @@
 				48E536F11E826D6F00E03F77 /* POIData.swift in Sources */,
 				48F2A13C1E7A9C5B002A8DC0 /* SwiftyJSON.swift in Sources */,
 				48CDE7141E7FCE8E00092D93 /* ExaminationDetail.swift in Sources */,
+				48FE2AFF1EC347B10000B184 /* Graph.swift in Sources */,
 				48E536F51E82879600E03F77 /* POIDetailViewController.swift in Sources */,
 				48E536FB1E82F9EC00E03F77 /* DescriptionCell.swift in Sources */,
 				48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */,
 				48AF84B61EA785BA00B0A390 /* KalmanFilter.swift in Sources */,
 				48E536EF1E826CC600E03F77 /* POIViewController.swift in Sources */,
 				482D1FE51EAB3E37005E158E /* BluetoothDevice.swift in Sources */,
+				48FE2B011EC35C140000B184 /* Direction.swift in Sources */,
 				48EF81EC1EA79BAC0072F025 /* KalmanPosition.swift in Sources */,
 				480510B11E79B086003B4014 /* HomeButtonCell.swift in Sources */,
 				482802591E92C3F9002C3665 /* MedicalExaminationDescriptionCell.swift in Sources */,
 				48C6EE681E84154B004F403B /* OfficeMapViewController.swift in Sources */,
+				48FE2AFD1EC347450000B184 /* Edge.swift in Sources */,
 				48C6EE5E1E83D044004F403B /* PrescriptionViewController.swift in Sources */,
 				48E7CCBF1E923B2C00103509 /* Colors.swift in Sources */,
 				482802551E92C24F002C3665 /* MedicalExaminationCheckinKOCell.swift in Sources */,
