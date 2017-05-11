@@ -56,7 +56,9 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     var kalmanFilter: KalmanFilter?
     
     // Variabile grafo
-    var graph: Graph!
+    var allGraph: Graph!
+    var bestGraph: Graph?
+    var maximumDistance: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,28 +84,49 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         tap.numberOfTapsRequired = 2
         mapScrollView.addGestureRecognizer(tap)
         
-        graph = initializeGraph()
-        imageView.image = drawLines(size: imageView.image!.size, image: imageView.image!)
+        maximumDistance = 1000*(imageView.image?.size.width)!/realRoomWidth
+        print("maximum distance: \(maximumDistance)")
         
-        // Chiamata asincrona per vedere spostamenti su mappa quando il bluetooth non è disponibile
-        //        var x = 0
-        //        var y = 0
-        //        var heading = 0
-        //        DispatchQueue.global(qos: .userInitiated).async {
-        //            for _ in 0...1000 {
-        //                sleep(1)
-        //                x = x+50
-        //                y = y+100
-        //                heading = heading-1
-        //                DispatchQueue.main.async {
-        //                    self.updateMap(x: CGFloat(x), y: CGFloat(y), heading: CGFloat(heading))
-        //                }
-        //            }
-        //        }
+        self.allGraph = self.initializeGraph()
+        self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
+        
+        bestGraph = allGraph.processDijkstra(source: allGraph.canvas[0], destination: allGraph.canvas[4], vertices: allGraph.canvas)
+        if let bestGraph = bestGraph {
+            self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: bestGraph, color: UIColor.green)
+        }
+        
+        let kalmanPosition = CGPoint(x: 6000, y: 6500)
+        let kalmanPositionPixel = normalizePosition(meterX: kalmanPosition.x, meterY: kalmanPosition.y)
+        updateMap(x: kalmanPosition.x, y: kalmanPosition.y, heading: 90)
+        var lessDistance: CGFloat? = nil
+        var nearestVertex: Vertex? = nil
+        
+        for v in (bestGraph?.canvas)! {
+            let distance = CGPointDistance(from: kalmanPositionPixel, to: v.position)
+            print(distance)
+            if lessDistance == nil {
+                if distance < maximumDistance {
+                    lessDistance = distance
+                    nearestVertex = v
+                }
+            } else {
+                if distance < lessDistance! && distance < maximumDistance {
+                    lessDistance = distance
+                    nearestVertex = v
+                }
+            }
+        }
+        
+        if let nearestVertex = nearestVertex {
+            print("il nodo più vicino è \(nearestVertex.key!). Indicazione: \(nearestVertex.neighbors[0].direction)")
+        } else {
+            print("sei lontano dal percorso ottimale. Ricalcolo percorso.")
+        }
+        
         
     }
     
-    func drawLines(size: CGSize, image: UIImage) -> UIImage? {
+    func drawLines(size: CGSize, image: UIImage, graph: Graph, color: UIColor) -> UIImage? {
         
         UIGraphicsBeginImageContext(size)
         image.draw(at: CGPoint.zero)
@@ -112,7 +135,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             for edge in vertex.neighbors {
                 if let context = UIGraphicsGetCurrentContext() {
                     context.setLineWidth(5.0)
-                    context.setStrokeColor(UIColor.blue.cgColor)
+                    context.setStrokeColor(color.cgColor)
                     context.move(to: vertex.position)
                     context.addLine(to: edge.neighbor.position)
                     context.closePath()
@@ -127,18 +150,19 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     }
     
     func initializeGraph() -> Graph {
-        var graph = Graph()
+        let graph = Graph()
         
-        var g1 = graph.addVertex(key: "Baresi", position: CGPoint(x: 123, y: 352))
-        var g2 = graph.addVertex(key: "Lab 1", position: CGPoint(x: 123, y: 336))
-        var g3 = graph.addVertex(key: "Svincolo Sam", position: CGPoint(x: 131, y: 134))
-        var g4 = graph.addVertex(key: "Svincolo Pradella", position: CGPoint(x: 247, y: 137))
-        var g5 = graph.addVertex(key: "Lab 2", position: CGPoint(x: 247, y: 222))
-        var g6 = graph.addVertex(key: "Svincolo bagno ragazze", position: CGPoint(x: 246, y: 406))
-        var g7 = graph.addVertex(key: "Svincolo Ardagna", position: CGPoint(x: 130, y: 422))
-        var g8 = graph.addVertex(key: "Tesisti", position: CGPoint(x: 186, y: 286))
+        let g1 = graph.addVertex(key: "Baresi", position: CGPoint(x: 123, y: 352))
+        let g2 = graph.addVertex(key: "Lab 1", position: CGPoint(x: 123, y: 336))
+        let g3 = graph.addVertex(key: "Svincolo Sam", position: CGPoint(x: 131, y: 134))
+        let g4 = graph.addVertex(key: "Svincolo Pradella", position: CGPoint(x: 247, y: 137))
+        let g5 = graph.addVertex(key: "Lab 2", position: CGPoint(x: 247, y: 222))
+        let g6 = graph.addVertex(key: "Svincolo bagno ragazze", position: CGPoint(x: 246, y: 406))
+        let g7 = graph.addVertex(key: "Svincolo Ardagna", position: CGPoint(x: 130, y: 422))
+        let g8 = graph.addVertex(key: "Tesisti", position: CGPoint(x: 186, y: 286))
         
         graph.addEdge(source: g1, neighbor: g2, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: g2, neighbor: g1, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g2, neighbor: g3, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g3, neighbor: g4, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g4, neighbor: g5, weight: 1, direction: Direction.straight.rawValue)
@@ -149,6 +173,14 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         graph.addEdge(source: g8, neighbor: g5, weight: 1, direction: Direction.straight.rawValue)
         
         return graph
+    }
+    
+    func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
+        return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y);
+    }
+    
+    func CGPointDistance(from: CGPoint, to: CGPoint) -> CGFloat {
+        return sqrt(CGPointDistanceSquared(from: from, to: to));
     }
     
     func updateMap(x: CGFloat, y: CGFloat, heading: CGFloat) {

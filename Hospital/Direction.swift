@@ -8,9 +8,9 @@
 
 import Foundation
 
-enum Direction: Int {
-    case right = 0
-    case left = 1
-    case straight = 2
+enum Direction: String {
+    case right = "right"
+    case left = "left"
+    case straight = "straight"
     
 }

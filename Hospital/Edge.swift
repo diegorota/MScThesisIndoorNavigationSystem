@@ -12,12 +12,12 @@ class Edge {
     
     var neighbor: Vertex
     var weight: Int
-    var direction: Int
+    var direction: String
     
     init() {
         weight = 0
         self.neighbor = Vertex()
-        self.direction = Int()
+        self.direction = String()
     }
     
 }
