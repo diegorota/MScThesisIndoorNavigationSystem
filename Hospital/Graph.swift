@@ -113,11 +113,16 @@ class Graph {
         if finalPaths.count == 0 {
             return nil
         } else {
+            bestPath = Path()
             for p in finalPaths {
                 let path = p as Path
-                if (path.total < bestPath.total) && (path.destination.key == destination.key){
+                if (bestPath.total == nil) && (path.destination.key == destination.key) || (bestPath.total != nil) && (path.total < bestPath.total) && (path.destination.key == destination.key){
                     bestPath = path
+                    print("ATTENZIONE: \(bestPath.destination.key!)")
                 }
+            }
+            if bestPath.total == nil {
+                return nil
             }
             printSeperator(content: "BESTPATH AFTER")
             printPath(path: bestPath, source: source)

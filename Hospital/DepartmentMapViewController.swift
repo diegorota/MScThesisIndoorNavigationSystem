@@ -346,7 +346,14 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     
     @IBAction func startNavigation(_ sender: UIButton) {
         self.imageView.image = originalImage
+        
         self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
+        if let a = startingVertex {
+            print(a.key!)
+        }
+        if let b = destinationVertex {
+            print(b.key!)
+        }
         searchBestPath(startingPoint: startingVertex!, destinationPoint: destinationVertex!, graph: allGraph)
     }
     
