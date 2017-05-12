@@ -29,6 +29,8 @@
 		486B7BC21EA222F500208BBD /* CafeteriaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B7BC11EA222F500208BBD /* CafeteriaCell.swift */; };
 		486C6EF91E7C54580036B363 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */; };
 		486D55C51E94F08B00FD824C /* HomeInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D55C41E94F08B00FD824C /* HomeInfoCell.swift */; };
+		486F81881EC604BA0076E4B1 /* SelectPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F81871EC604BA0076E4B1 /* SelectPlaceViewController.swift */; };
+		486F818E1EC616CC0076E4B1 /* SelectDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F818D1EC616CC0076E4B1 /* SelectDestinationView.swift */; };
 		48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */; };
 		48AD540F1EC44CC200E16F29 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AD540E1EC44CC200E16F29 /* Path.swift */; };
 		48AF84B61EA785BA00B0A390 /* KalmanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AF84B51EA785BA00B0A390 /* KalmanFilter.swift */; };
@@ -89,6 +91,8 @@
 		486B7BC11EA222F500208BBD /* CafeteriaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaCell.swift; sourceTree = "<group>"; };
 		486C6EF81E7C54580036B363 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		486D55C41E94F08B00FD824C /* HomeInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeInfoCell.swift; sourceTree = "<group>"; };
+		486F81871EC604BA0076E4B1 /* SelectPlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPlaceViewController.swift; sourceTree = "<group>"; };
+		486F818D1EC616CC0076E4B1 /* SelectDestinationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDestinationView.swift; sourceTree = "<group>"; };
 		48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaViewController.swift; sourceTree = "<group>"; };
 		48AD540E1EC44CC200E16F29 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		48AF84B51EA785BA00B0A390 /* KalmanFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KalmanFilter.swift; sourceTree = "<group>"; };
@@ -296,11 +300,13 @@
 			isa = PBXGroup;
 			children = (
 				48FE2AF71EC33CBB0000B184 /* DepartmentMapViewController.swift */,
+				486F81871EC604BA0076E4B1 /* SelectPlaceViewController.swift */,
 				48AD540E1EC44CC200E16F29 /* Path.swift */,
 				48FE2AFA1EC346E40000B184 /* Vertex.swift */,
 				48FE2AFC1EC347450000B184 /* Edge.swift */,
 				48FE2AFE1EC347B10000B184 /* Graph.swift */,
 				48FE2B001EC35C140000B184 /* Direction.swift */,
+				486F818D1EC616CC0076E4B1 /* SelectDestinationView.swift */,
 			);
 			name = Navigator;
 			sourceTree = "<group>";
@@ -445,6 +451,7 @@
 				48F949961EA207DE00C025EC /* CafeteriaData.swift in Sources */,
 				48FE2AFB1EC346E40000B184 /* Vertex.swift in Sources */,
 				4852ABB31E7E7642005734A3 /* MedicalExaminationSectionData.swift in Sources */,
+				486F818E1EC616CC0076E4B1 /* SelectDestinationView.swift in Sources */,
 				48F949981EA20B0900C025EC /* CafeteriaMenu.swift in Sources */,
 				48CDE7161E7FD10A00092D93 /* PointOfInterestDetail.swift in Sources */,
 				480510B31E79DABB003B4014 /* HomeButton.swift in Sources */,
@@ -475,6 +482,7 @@
 				48CDE7141E7FCE8E00092D93 /* ExaminationDetail.swift in Sources */,
 				48FE2AFF1EC347B10000B184 /* Graph.swift in Sources */,
 				48E536F51E82879600E03F77 /* POIDetailViewController.swift in Sources */,
+				486F81881EC604BA0076E4B1 /* SelectPlaceViewController.swift in Sources */,
 				48E536FB1E82F9EC00E03F77 /* DescriptionCell.swift in Sources */,
 				48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */,
 				48AF84B61EA785BA00B0A390 /* KalmanFilter.swift in Sources */,

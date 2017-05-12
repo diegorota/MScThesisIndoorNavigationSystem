@@ -88,6 +88,7 @@ class Graph {
                 newPath.destination = e.neighbor
                 newPath.previous = bestPath
                 newPath.total = bestPath.total + e.weight
+                
                 //add the new path to the frontier
                 var insert = true
                 for v in vertexAlreadySeen {
@@ -96,6 +97,7 @@ class Graph {
                     }
                 }
                 if insert {
+                    vertexAlreadySeen.append(newPath.destination)
                     frontier.append(newPath)
                 }
             }

@@ -9,15 +9,15 @@
 import UIKit
 import CoreBluetooth
 
-class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate {
+class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate, SelectPlaceViewControllerDelegate {
     
     let defaults = UserDefaults.standard
     
     @IBOutlet weak var mapScrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var centerButton: UIButton!
     @IBOutlet weak var errorMessageView: UIView!
     @IBOutlet weak var errorMessageLabel: UILabel!
+    @IBOutlet weak var selectDestinationView: SelectDestinationView!
     
     // View della freccia
     var arrowView: UIView!
@@ -59,15 +59,15 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     var allGraph: Graph!
     var bestGraph: Graph?
     var maximumDistance: CGFloat!
+    var startingVertex: Vertex?
+    var destinationVertex: Vertex?
+    var originalImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapScrollView.delegate = self
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         
-        self.centerButton.setImage(UIImage(named: "center")?.withRenderingMode(.alwaysTemplate), for: UIControlState.normal)
-        self.centerButton.tintColor = Colors.darkColor
-        self.centerButton.isHidden = true
         self.errorMessageView.isHidden = true
         self.errorMessageView.alpha = 0
         self.errorMessageView.backgroundColor = Colors.mediumColor
@@ -84,44 +84,46 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         tap.numberOfTapsRequired = 2
         mapScrollView.addGestureRecognizer(tap)
         
+        // Setto view navigation
+        selectDestinationView.backgroundColor = Colors.mediumColor
+        selectDestinationView.startingButton.tintColor = Colors.darkColor
+        selectDestinationView.destinationButton.tintColor = Colors.darkColor
+        selectDestinationView.navigateButton.isEnabled = false
+        
         maximumDistance = 1000*(imageView.image?.size.width)!/realRoomWidth
         print("maximum distance: \(maximumDistance)")
         
         self.allGraph = self.initializeGraph()
+        originalImage = self.imageView.image!
         self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
         
-        bestGraph = allGraph.processDijkstra(source: allGraph.canvas[0], destination: allGraph.canvas[4], vertices: allGraph.canvas)
-        if let bestGraph = bestGraph {
-            self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: bestGraph, color: UIColor.green)
-        }
+        // let kalmanPosition = CGPoint(x: 6000, y: 6500)
+        // let kalmanPositionPixel = normalizePosition(meterX: kalmanPosition.x, meterY: kalmanPosition.y)
+        // updateMap(x: kalmanPosition.x, y: kalmanPosition.y, heading: 90)
+        // var lessDistance: CGFloat? = nil
+        // var nearestVertex: Vertex? = nil
         
-        let kalmanPosition = CGPoint(x: 6000, y: 6500)
-        let kalmanPositionPixel = normalizePosition(meterX: kalmanPosition.x, meterY: kalmanPosition.y)
-        updateMap(x: kalmanPosition.x, y: kalmanPosition.y, heading: 90)
-        var lessDistance: CGFloat? = nil
-        var nearestVertex: Vertex? = nil
-        
-        for v in (bestGraph?.canvas)! {
-            let distance = CGPointDistance(from: kalmanPositionPixel, to: v.position)
-            print(distance)
-            if lessDistance == nil {
-                if distance < maximumDistance {
-                    lessDistance = distance
-                    nearestVertex = v
-                }
-            } else {
-                if distance < lessDistance! && distance < maximumDistance {
-                    lessDistance = distance
-                    nearestVertex = v
-                }
-            }
-        }
-        
-        if let nearestVertex = nearestVertex {
-            print("il nodo più vicino è \(nearestVertex.key!). Indicazione: \(nearestVertex.neighbors[0].direction)")
-        } else {
-            print("sei lontano dal percorso ottimale. Ricalcolo percorso.")
-        }
+//        for v in (bestGraph?.canvas)! {
+//            let distance = CGPointDistance(from: kalmanPositionPixel, to: v.position)
+//            print(distance)
+//            if lessDistance == nil {
+//                if distance < maximumDistance {
+//                    lessDistance = distance
+//                    nearestVertex = v
+//                }
+//            } else {
+//                if distance < lessDistance! && distance < maximumDistance {
+//                    lessDistance = distance
+//                    nearestVertex = v
+//                }
+//            }
+//        }
+//        
+//        if let nearestVertex = nearestVertex {
+//            print("il nodo più vicino è \(nearestVertex.key!). Indicazione: \(nearestVertex.neighbors[0].direction)")
+//        } else {
+//            print("sei lontano dal percorso ottimale. Ricalcolo percorso.")
+//        }
         
         
     }
@@ -149,6 +151,13 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         return resultImage
     }
     
+    func searchBestPath(startingPoint: Vertex, destinationPoint: Vertex, graph: Graph) {
+        bestGraph = allGraph.processDijkstra(source: startingPoint, destination: destinationPoint, vertices: graph.canvas)
+        if let bestGraph = bestGraph {
+            self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: bestGraph, color: UIColor.green)
+        }
+    }
+    
     func initializeGraph() -> Graph {
         let graph = Graph()
         
@@ -164,13 +173,21 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         graph.addEdge(source: g1, neighbor: g2, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g2, neighbor: g1, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g2, neighbor: g3, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: g3, neighbor: g2, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g3, neighbor: g4, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: g4, neighbor: g3, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g4, neighbor: g5, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: g5, neighbor: g4, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g5, neighbor: g6, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: g6, neighbor: g5, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g6, neighbor: g7, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: g7, neighbor: g6, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g7, neighbor: g1, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: g1, neighbor: g7, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g2, neighbor: g8, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: g8, neighbor: g2, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: g8, neighbor: g5, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: g5, neighbor: g8, weight: 1, direction: Direction.straight.rawValue)
         
         return graph
     }
@@ -183,13 +200,40 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         return sqrt(CGPointDistanceSquared(from: from, to: to));
     }
     
+    func placeViewControllerDidSelect(value: Vertex?, kindOfButton: Int) {
+        if kindOfButton == 0 {
+            startingVertex = value
+            if let value = value {
+                selectDestinationView.startingButton.setTitle(value.key, for: .normal)
+            } else  {
+                selectDestinationView.startingButton.setTitle("Starting Point", for: .normal)
+            }
+        } else if kindOfButton == 1 {
+            destinationVertex = value
+            if let value = value {
+                selectDestinationView.destinationButton.setTitle(value.key, for: .normal)
+            } else {
+                selectDestinationView.destinationButton.setTitle("Destination Point", for: .normal)
+            }
+        }
+        
+        if let _ = startingVertex {
+            if let _ = destinationVertex {
+                selectDestinationView.navigateButton.isEnabled = true
+            } else {
+                selectDestinationView.navigateButton.isEnabled = false
+            }
+        } else {
+            selectDestinationView.navigateButton.isEnabled = false
+        }
+    }
+    
     func updateMap(x: CGFloat, y: CGFloat, heading: CGFloat) {
         lastPosition = normalizePosition(meterX: x, meterY: y)
         
         lastHeading = heading
         
         if firstPosition {
-            self.centerButton.isHidden = false
             addArrowToMap()
             arrowView.center = lastPosition!
             arrowView.transform = CGAffineTransform(rotationAngle: lastHeading!)
@@ -247,13 +291,6 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         self.mapScrollView.zoomScale = CGFloat(minZoom)
     }
     
-    // Funzione che centra la mappa nel punto in cui si trova l'utente.
-    @IBAction func centerView(_ sender: UIButton) {
-        UIView.animate(withDuration: 2, delay: 0, options: [], animations: {
-            self.mapScrollView.zoom(to: CGRect(origin: CGPoint(x:(self.lastPosition?.x)!-100,y:(self.lastPosition?.y)!-100), size: CGSize(width: 200, height: 200)), animated: true)
-        })
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -261,7 +298,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.visibleViewController?.title = "Office Map"
+        navigationController?.visibleViewController?.title = "Department Map"
         UIApplication.shared.isIdleTimerDisabled = true
         identifier = defaults.string(forKey: UserDefaultsKeys.uuidDeviceKey)
         
@@ -283,7 +320,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if navigationController?.visibleViewController?.title == "Office Map" {
+        if navigationController?.visibleViewController?.title == "Department Map" {
             super.viewWillTransition(to: size, with: coordinator)
             self.mapScrollView.zoomScale = CGFloat(1)
             setMapZoom(size: size)
@@ -296,7 +333,24 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
-    //Inizio funzioni gestione connessione bluetooth
+    @IBAction func openDestinationSelection(_ sender: UIButton) {
+        if let selectPlace = storyboard?.instantiateViewController(withIdentifier: "SelectPlace") {
+            if let selectPlace = selectPlace as? SelectPlaceViewController {
+                selectPlace.canvas = allGraph.canvas
+                selectPlace.kindOfButton = sender.tag
+                selectPlace.delegate = self
+                self.navigationController?.pushViewController(selectPlace, animated: true)
+            }
+        }
+    }
+    
+    @IBAction func startNavigation(_ sender: UIButton) {
+        self.imageView.image = originalImage
+        self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
+        searchBestPath(startingPoint: startingVertex!, destinationPoint: destinationVertex!, graph: allGraph)
+    }
+    
+    //************************ Inizio funzioni gestione connessione bluetooth ************************ //
     func disconnect() {
         if let arduinoPeripherals = self.arduinoPeripherals {
             if let arduinoCharacteristic = self.arduinoCharacteristic {
@@ -441,7 +495,6 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             self.errorMessageView.alpha = 1
             self.errorMessageLabel.alpha = 1
             self.errorMessageView.isHidden = false
-            self.centerButton.isHidden = true
         })
         
         if error != nil {
