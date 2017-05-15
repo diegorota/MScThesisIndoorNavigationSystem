@@ -90,7 +90,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         selectDestinationView.destinationButton.tintColor = Colors.darkColor
         selectDestinationView.navigateButton.isEnabled = false
         
-        maximumDistance = 1000*(imageView.image?.size.width)!/realRoomWidth
+        maximumDistance = 2000*(imageView.image?.size.width)!/realRoomWidth
         print("maximum distance: \(maximumDistance)")
         
         self.allGraph = self.initializeGraph()
@@ -128,6 +128,41 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         
     }
     
+    func navigation(position: CGPoint, graph: Graph) {
+        
+        var lessDistance: CGFloat? = nil
+        var nearestVertex: Vertex? = nil
+        
+        for v in (bestGraph?.canvas)! {
+            let distance = CGPointDistance(from: position, to: v.position)
+            print(distance)
+            if lessDistance == nil {
+                if distance < maximumDistance {
+                    lessDistance = distance
+                    nearestVertex = v
+                }
+            } else {
+                if distance < lessDistance! && distance < maximumDistance {
+                    lessDistance = distance
+                    nearestVertex = v
+                }
+            }
+        }
+        
+        if let nearestVertex = nearestVertex {
+            if nearestVertex.neighbors.count != 0 {
+                print("il nodo più vicino è \(nearestVertex.key!). Indicazione: \(nearestVertex.neighbors[0].direction)")
+                errorMessageLabel.text = "il nodo più vicino è \(nearestVertex.key!). Indicazione: \(nearestVertex.neighbors[0].direction)"
+            } else {
+                print("Sei arrivato! Nodo: \(nearestVertex.key!).")
+                errorMessageLabel.text = "Sei arrivato! Nodo: \(nearestVertex.key!)."
+            }
+        } else {
+            print("sei lontano dal percorso ottimale. Ricalcolo percorso.")
+            errorMessageLabel.text = "sei lontano dal percorso ottimale. Ricalcolo percorso."
+        }
+    }
+    
     func drawLines(size: CGSize, image: UIImage, graph: Graph, color: UIColor) -> UIImage? {
         
         UIGraphicsBeginImageContext(size)
@@ -161,33 +196,268 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     func initializeGraph() -> Graph {
         let graph = Graph()
         
-        let g1 = graph.addVertex(key: "Baresi", position: CGPoint(x: 123, y: 352))
-        let g2 = graph.addVertex(key: "Lab 1", position: CGPoint(x: 123, y: 336))
-        let g3 = graph.addVertex(key: "Svincolo Sam", position: CGPoint(x: 131, y: 134))
-        let g4 = graph.addVertex(key: "Svincolo Pradella", position: CGPoint(x: 247, y: 137))
-        let g5 = graph.addVertex(key: "Lab 2", position: CGPoint(x: 247, y: 222))
-        let g6 = graph.addVertex(key: "Svincolo bagno ragazze", position: CGPoint(x: 246, y: 406))
-        let g7 = graph.addVertex(key: "Svincolo Ardagna", position: CGPoint(x: 130, y: 422))
-        let g8 = graph.addVertex(key: "Tesisti", position: CGPoint(x: 186, y: 286))
-        
-        graph.addEdge(source: g1, neighbor: g2, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g2, neighbor: g1, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g2, neighbor: g3, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g3, neighbor: g2, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g3, neighbor: g4, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g4, neighbor: g3, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g4, neighbor: g5, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g5, neighbor: g4, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g5, neighbor: g6, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g6, neighbor: g5, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g6, neighbor: g7, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g7, neighbor: g6, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g7, neighbor: g1, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g1, neighbor: g7, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g2, neighbor: g8, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g8, neighbor: g2, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g8, neighbor: g5, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: g5, neighbor: g8, weight: 1, direction: Direction.straight.rawValue)
+		let g1 = graph.addVertex(key: "Prof. Ardagna", position: CGPoint(x: 104, y: 402))
+		let g2 = graph.addVertex(key: "Prof. Baresi", position: CGPoint(x: 103, y: 348))
+		let g3 = graph.addVertex(key: "Prof. Sbattella", position: CGPoint(x: 104, y: 218))
+		let g4 = graph.addVertex(key: "PhD", position: CGPoint(x: 93, y: 125))
+		let g5 = graph.addVertex(key: "Prof. Guinea & Mottola", position: CGPoint(x: 84, y: 81))
+		let g6 = graph.addVertex(key: "Prof. Fuggetta", position: CGPoint(x: 121, y: 94))
+		let g7 = graph.addVertex(key: "Archive", position: CGPoint(x: 196, y: 150))
+		let g8 = graph.addVertex(key: "Prof. Morzenti", position: CGPoint(x: 252, y: 96))
+		let g9 = graph.addVertex(key: "Prof. Pradella", position: CGPoint(x: 289, y: 81))
+		let g10 = graph.addVertex(key: "Prof. Rossi", position: CGPoint(x: 283, y: 122))
+		let g11 = graph.addVertex(key: "Software lab", position: CGPoint(x: 184, y: 289))
+		let g12 = graph.addVertex(key: "Bathroom", position: CGPoint(x: 271, y: 403))
+		let g13 = graph.addVertex(key: "Printing room", position: CGPoint(x: 196, y: 408))
+		
+		//CORRIDOIO BARESI
+		let z0a = graph.addVertex(key: "z0a", position: CGPoint(x: 124, y: 366))
+		let z0b = graph.addVertex(key: "z0b", position: CGPoint(x: 124, y: 385))
+		//let z0c = graph.addVertex(key: "z0c", position: CGPoint(x: 124, y: 403))
+		let z0d = graph.addVertex(key: "z0d", position: CGPoint(x: 124, y: 423))
+		//let z1 = graph.addVertex(key: "z1", position: CGPoint(x: 124, y: 348))
+		let z2 = graph.addVertex(key: "z2", position: CGPoint(x: 124, y: 326))
+		let z3 = graph.addVertex(key: "z3", position: CGPoint(x: 124, y: 304))
+		let z4 = graph.addVertex(key: "z4", position: CGPoint(x: 124, y: 284))
+		let z5 = graph.addVertex(key: "z5", position: CGPoint(x: 124, y: 264))
+		let z6 = graph.addVertex(key: "z6", position: CGPoint(x: 124, y: 242))
+		let z7 = graph.addVertex(key: "z7", position: CGPoint(x: 124, y: 218))
+		let z8 = graph.addVertex(key: "z8", position: CGPoint(x: 124, y: 200))
+		let z9 = graph.addVertex(key: "z9", position: CGPoint(x: 124, y: 180))
+		let z10 = graph.addVertex(key: "z10", position: CGPoint(x: 124, y: 160))
+		let z11 = graph.addVertex(key: "z11", position: CGPoint(x: 124, y: 140))
+		//CORRIDOIO MORZENTI 
+		//let z12 = graph.addVertex(key: "z12", position: CGPoint(x: 124, y: 126))
+		let z13 = graph.addVertex(key: "z13", position: CGPoint(x: 112, y: 116))
+		let z14 = graph.addVertex(key: "z14", position: CGPoint(x: 100, y: 105))
+		let z15 = graph.addVertex(key: "z15", position: CGPoint(x: 89, y: 94))
+		let z16 = graph.addVertex(key: "z16", position: CGPoint(x: 142, y: 126))
+		let z17 = graph.addVertex(key: "z17", position: CGPoint(x: 160, y: 126))
+		let z18 = graph.addVertex(key: "z18", position: CGPoint(x: 178, y: 126))
+		//let z19 = graph.addVertex(key: "z19", position: CGPoint(x: 195, y: 126))
+		let z20 = graph.addVertex(key: "z20", position: CGPoint(x: 212, y: 126))
+		let z21 = graph.addVertex(key: "z21", position: CGPoint(x: 230, y: 126))
+		//let z22 = graph.addVertex(key: "z22", position: CGPoint(x: 247, y: 126))
+		let z23 = graph.addVertex(key: "z23", position: CGPoint(x: 258, y: 118))
+		//let z24 = graph.addVertex(key: "z24", position: CGPoint(x: 271, y: 107))
+		let z25 = graph.addVertex(key: "z25", position: CGPoint(x: 281, y: 96))
+		//CORRIDOIO ROSSI
+        let z26 = graph.addVertex(key: "z26", position: CGPoint(x: 247, y: 423))
+        let z27 = graph.addVertex(key: "z27", position: CGPoint(x: 247, y: 403))
+        let z28 = graph.addVertex(key: "z28", position: CGPoint(x: 247, y: 385))
+		let z29 = graph.addVertex(key: "z29", position: CGPoint(x: 247, y: 366))
+		let z30 = graph.addVertex(key: "z30", position: CGPoint(x: 247, y: 348))
+		let z31 = graph.addVertex(key: "z31", position: CGPoint(x: 247, y: 326))
+		let z32 = graph.addVertex(key: "z32", position: CGPoint(x: 247, y: 304))
+		let z33 = graph.addVertex(key: "z33", position: CGPoint(x: 247, y: 284))
+		let z34 = graph.addVertex(key: "z34", position: CGPoint(x: 247, y: 264))
+		let z35 = graph.addVertex(key: "z35", position: CGPoint(x: 247, y: 242))
+		let z36 = graph.addVertex(key: "z36", position: CGPoint(x: 247, y: 218))
+		let z37 = graph.addVertex(key: "z37", position: CGPoint(x: 247, y: 200))
+		let z38 = graph.addVertex(key: "z38", position: CGPoint(x: 247, y: 180))
+		let z39 = graph.addVertex(key: "z39", position: CGPoint(x: 247, y: 160))
+		let z40 = graph.addVertex(key: "z40", position: CGPoint(x: 247, y: 140))
+		//CORRIDOIO STAMPANTE
+		let z41 = graph.addVertex(key: "z41", position: CGPoint(x: 145, y: 433))
+		let z42 = graph.addVertex(key: "z42", position: CGPoint(x: 164, y: 433))
+		let z43 = graph.addVertex(key: "z43", position: CGPoint(x: 183, y: 433))
+		let z44 = graph.addVertex(key: "z44", position: CGPoint(x: 202, y: 433))
+		let z45 = graph.addVertex(key: "z45", position: CGPoint(x: 221, y: 433))
+		let z46 = graph.addVertex(key: "z46", position: CGPoint(x: 240, y: 433))
+		//INTERNO SALA TESISTI
+		let z47 = graph.addVertex(key: "z47", position: CGPoint(x: 149, y: 337))
+		let z48 = graph.addVertex(key: "z48", position: CGPoint(x: 167, y: 337))
+		let z49 = graph.addVertex(key: "z49", position: CGPoint(x: 184, y: 337))
+		let z50 = graph.addVertex(key: "z50", position: CGPoint(x: 184, y: 322))
+		let z51 = graph.addVertex(key: "z51", position: CGPoint(x: 184, y: 307))
+		let z52 = graph.addVertex(key: "z52", position: CGPoint(x: 184, y: 274))
+		let z53 = graph.addVertex(key: "z53", position: CGPoint(x: 184, y: 256))
+		let z54 = graph.addVertex(key: "z54", position: CGPoint(x: 184, y: 241))
+		let z55 = graph.addVertex(key: "z55", position: CGPoint(x: 184, y: 227))
+		let z56 = graph.addVertex(key: "z56", position: CGPoint(x: 207, y: 227))
+		let z57 = graph.addVertex(key: "z57", position: CGPoint(x: 226, y: 227))
+		
+		//archi CORRIDOIO BARESI
+		graph.addEdge(source: g2, neighbor: z2, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z2, neighbor: g2, weight: 1, direction: Direction.right.rawValue)
+        graph.addEdge(source: g2, neighbor: z0a, weight: 1, direction: Direction.right.rawValue)
+        graph.addEdge(source: z0a, neighbor: g2, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z2, neighbor: z0a, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z0a, neighbor: z2, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z0a, neighbor: z0b, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z0b, neighbor: z0a, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z0b, neighbor: z0d, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z0d, neighbor: z0b, weight: 1, direction: Direction.straight.rawValue)
+		//graph.addEdge(source: z0c, neighbor: z0d, weight: 1, direction: Direction.straight.rawValue)
+		//graph.addEdge(source: z0d, neighbor: z0c, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z0b, neighbor: g1, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: g1, neighbor: z0b, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: z0d, neighbor: g1, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: g1, neighbor: z0d, weight: 1, direction: Direction.right.rawValue)
+		//graph.addEdge(source: z1, neighbor: z2, weight: 1, direction: Direction.straight.rawValue)
+        //graph.addEdge(source: z2, neighbor: z1, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z2, neighbor: z3, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z3, neighbor: z2, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z3, neighbor: z4, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z4, neighbor: z3, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z4, neighbor: z5, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z5, neighbor: z4, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z5, neighbor: z6, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z6, neighbor: z5, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z6, neighbor: z7, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z7, neighbor: z6, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z7, neighbor: z8, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z8, neighbor: z7, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z8, neighbor: z9, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z9, neighbor: z8, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z9, neighbor: z10, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z10, neighbor: z9, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z10, neighbor: z11, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z11, neighbor: z10, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: g3, neighbor: z7, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z7, neighbor: g3, weight: 1, direction: Direction.left.rawValue)
+		
+		//archi ingresso sam
+        graph.addEdge(source: z11, neighbor: z13, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z13, neighbor: z11, weight: 1, direction: Direction.right.rawValue)
+		//graph.addEdge(source: z12, neighbor: z13, weight: 1, direction: Direction.left.rawValue)
+		//graph.addEdge(source: z13, neighbor: z12, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z13, neighbor: z14, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z14, neighbor: z13, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z14, neighbor: z15, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z15, neighbor: z14, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z13, neighbor: g4, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: g4, neighbor: z13, weight: 1, direction: Direction.right.rawValue)
+        graph.addEdge(source: z14, neighbor: g4, weight: 1, direction: Direction.right.rawValue)
+        graph.addEdge(source: g4, neighbor: z14, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z13, neighbor: g6, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: g6, neighbor: z13, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: z14, neighbor: g6, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: g6, neighbor: z14, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z15, neighbor: g5, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: g5, neighbor: z15, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z11, neighbor: z16, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z16, neighbor: z11, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z16, neighbor: z17, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z17, neighbor: z16, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z17, neighbor: z18, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z18, neighbor: z17, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z18, neighbor: z20, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z20, neighbor: z18, weight: 1, direction: Direction.straight.rawValue)
+		//graph.addEdge(source: z19, neighbor: z20, weight: 1, direction: Direction.straight.rawValue)
+		//graph.addEdge(source: z20, neighbor: z19, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z20, neighbor: z21, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z21, neighbor: z20, weight: 1, direction: Direction.straight.rawValue)
+		//graph.addEdge(source: z21, neighbor: z22, weight: 1, direction: Direction.straight.rawValue)
+		//graph.addEdge(source: z22, neighbor: z21, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z21, neighbor: z23, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z23, neighbor: z21, weight: 1, direction: Direction.right.rawValue)
+		//graph.addEdge(source: z23, neighbor: z24, weight: 1, direction: Direction.straight.rawValue)
+		//graph.addEdge(source: z24, neighbor: z23, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z23, neighbor: z25, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z25, neighbor: z23, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z18, neighbor: g7, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: g7, neighbor: z18, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: z20, neighbor: g7, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: g7, neighbor: z20, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z23, neighbor: g8, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: g8, neighbor: z23, weight: 1, direction: Direction.right.rawValue)
+        graph.addEdge(source: z25, neighbor: g8, weight: 1, direction: Direction.right.rawValue)
+        graph.addEdge(source: g8, neighbor: z25, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z23, neighbor: g10, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: g10, neighbor: z23, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: z25, neighbor: g10, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: g10, neighbor: z25, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z25, neighbor: g9, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: g9, neighbor: z25, weight: 1, direction: Direction.straight.rawValue)
+		
+		//archi stampante
+		graph.addEdge(source: z0d, neighbor: z41, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z41, neighbor: z0d, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z41, neighbor: z42, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z42, neighbor: z41, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z42, neighbor: z43, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z43, neighbor: z42, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z43, neighbor: z44, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z44, neighbor: z43, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z44, neighbor: z45, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z45, neighbor: z44, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z45, neighbor: z46, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z46, neighbor: z45, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z44, neighbor: g13, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: g13, neighbor: z44, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: z43, neighbor: g13, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: g13, neighbor: z43, weight: 1, direction: Direction.right.rawValue)
+		
+		//archi corridoio ROSSI
+		graph.addEdge(source: z26, neighbor: z46, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z46, neighbor: z26, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z26, neighbor: z27, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z27, neighbor: z26, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z27, neighbor: z28, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z28, neighbor: z27, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z28, neighbor: z29, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z29, neighbor: z28, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z29, neighbor: z30, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z30, neighbor: z29, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z30, neighbor: z31, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z31, neighbor: z30, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z31, neighbor: z32, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z32, neighbor: z31, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z32, neighbor: z33, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z33, neighbor: z32, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z33, neighbor: z34, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z34, neighbor: z33, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z34, neighbor: z35, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z35, neighbor: z34, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z35, neighbor: z36, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z36, neighbor: z35, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z36, neighbor: z37, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z37, neighbor: z36, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z37, neighbor: z38, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z38, neighbor: z37, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z38, neighbor: z39, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z39, neighbor: z38, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z39, neighbor: z40, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z40, neighbor: z39, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z40, neighbor: z21, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z21, neighbor: z40, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z27, neighbor: g12, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: g12, neighbor: z27, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: z28, neighbor: g12, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: g12, neighbor: z28, weight: 1, direction: Direction.right.rawValue)
+		
+		//archi sala tesisti
+		graph.addEdge(source: z0a, neighbor: z47, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z47, neighbor: z0a, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z2, neighbor: z47, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z47, neighbor: z2, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z47, neighbor: z48, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z48, neighbor: z47, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z48, neighbor: z49, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z49, neighbor: z48, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z49, neighbor: z50, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z50, neighbor: z49, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z50, neighbor: z51, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z51, neighbor: z50, weight: 1, direction: Direction.straight.rawValue)		
+		graph.addEdge(source: g11, neighbor: z51, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z51, neighbor: g11, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z52, neighbor: g11, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: g11, neighbor: z52, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z52, neighbor: z53, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z53, neighbor: z52, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z53, neighbor: z54, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z54, neighbor: z53, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z54, neighbor: z55, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z55, neighbor: z54, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z55, neighbor: z56, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z56, neighbor: z55, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z56, neighbor: z57, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z57, neighbor: z56, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z57, neighbor: z35, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z35, neighbor: z57, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z57, neighbor: z36, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z36, neighbor: z57, weight: 1, direction: Direction.right.rawValue)
         
         return graph
     }
@@ -615,8 +885,10 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
                             position?.y = Int(realRoomHeight)
                         }
                         
-                        updateMap(x: CGFloat(position!.x), y: CGFloat(position!.y), heading: CGFloat(180)+heading+CGFloat(85+90)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord. divido per 100 l'accelerazione per trasformare da mG a m/s^2                       }
-                        
+                        updateMap(x: CGFloat(position!.x), y: CGFloat(position!.y), heading: CGFloat(180)+heading+CGFloat(0)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord. divido per 100 l'accelerazione per trasformare da mG a m/s^2                       }
+                        if let bestGraph = bestGraph {
+                            navigation(position: normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!)), graph: bestGraph)
+                        }
                     }
                     lastString = lastPacket.replacingOccurrences(of: "R", with: "")
                 } else if !lastPacket.contains("R") && !initialPacket {
