@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreBluetooth
+import AVFoundation
 
 class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate, SelectPlaceViewControllerDelegate {
     
@@ -18,9 +19,11 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     @IBOutlet weak var errorMessageView: UIView!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var selectDestinationView: SelectDestinationView!
+    @IBOutlet weak var navigationView: NavigationView!
     
-    // View della freccia
+    // View della freccia e della bandiera
     var arrowView: UIView!
+    var flagView: UIView? = nil
     
     // Variabili necessarie per la gestione del bluetooth
     var centralManager:CBCentralManager!
@@ -48,20 +51,23 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     let realRoomHeight:CGFloat = 21750
     var imageWidth: CGFloat!
     var imageHeight: CGFloat!
-    var lastPosition: CGPoint?
+    //var lastPosition: CGPoint?
+    var lastPosition: CGPoint? = CGPoint(x: 250, y: 250)
     var lastHeading: CGFloat?
     var firstPosition = true
     
     // Variabile filtro di Kalman
     var kalmanFilter: KalmanFilter?
     
-    // Variabile grafo
+    // Variabili navigatore
     var allGraph: Graph!
     var bestGraph: Graph?
     var maximumDistance: CGFloat!
     var startingVertex: Vertex?
     var destinationVertex: Vertex?
     var originalImage: UIImage!
+    var sound: AVAudioPlayer?
+    var isLastStraight = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,18 +90,19 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         tap.numberOfTapsRequired = 2
         mapScrollView.addGestureRecognizer(tap)
         
-        // Setto view navigation
-        selectDestinationView.backgroundColor = Colors.mediumColor
-        selectDestinationView.startingButton.tintColor = Colors.darkColor
+        // Setto view navigation & stopNavigationButton
+        selectDestinationView.backgroundView.backgroundColor = Colors.mediumColor
         selectDestinationView.destinationButton.tintColor = Colors.darkColor
         selectDestinationView.navigateButton.isEnabled = false
+        navigationView.backgroundView.backgroundColor = Colors.mediumColor
+        navigationView.transform = CGAffineTransform(translationX: 0, y: self.view.bounds.height)
         
         maximumDistance = 2000*(imageView.image?.size.width)!/realRoomWidth
         print("maximum distance: \(maximumDistance)")
         
         self.allGraph = self.initializeGraph()
         originalImage = self.imageView.image!
-        self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
+        //self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
         
         // let kalmanPosition = CGPoint(x: 6000, y: 6500)
         // let kalmanPositionPixel = normalizePosition(meterX: kalmanPosition.x, meterY: kalmanPosition.y)
@@ -128,12 +135,11 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         
     }
     
-    func navigation(position: CGPoint, graph: Graph) {
-        
+    func getNearestVertex(position: CGPoint, graph: Graph) -> Vertex? {
         var lessDistance: CGFloat? = nil
         var nearestVertex: Vertex? = nil
         
-        for v in (bestGraph?.canvas)! {
+        for v in (graph.canvas) {
             let distance = CGPointDistance(from: position, to: v.position)
             print(distance)
             if lessDistance == nil {
@@ -149,17 +155,64 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             }
         }
         
+        return nearestVertex
+        
+    }
+    
+    func playSound(name: String) {
+        let url = Bundle.main.url(forResource: name, withExtension: "m4a")!
+        
+        do {
+            sound = try AVAudioPlayer(contentsOf: url)
+            guard let player = sound else { return }
+            
+            player.prepareToPlay()
+            player.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func navigation(position: CGPoint, heading: CGFloat, graph: Graph) {
+        
+        let nearestVertex = getNearestVertex(position: position, graph: bestGraph!)
+        
         if let nearestVertex = nearestVertex {
+            updateMap(x: nearestVertex.position.x, y: nearestVertex.position.y, heading: CGFloat(180)+heading)
+            
             if nearestVertex.neighbors.count != 0 {
                 print("il nodo più vicino è \(nearestVertex.key!). Indicazione: \(nearestVertex.neighbors[0].direction)")
-                errorMessageLabel.text = "il nodo più vicino è \(nearestVertex.key!). Indicazione: \(nearestVertex.neighbors[0].direction)"
+                navigationView.labelDirection.text = "il nodo più vicino è \(nearestVertex.key!). Indicazione: \(nearestVertex.neighbors[0].direction)"
+                navigationView.imageDirection.image = UIImage(named: nearestVertex.neighbors[0].direction)
+                
+                if !isLastStraight && nearestVertex.neighbors[0].direction.hashValue == Direction.straight.hashValue {
+                    isLastStraight = true
+                    playSound(name: nearestVertex.neighbors[0].direction)
+                } else if nearestVertex.neighbors[0].direction.hashValue != Direction.straight.hashValue {
+                    isLastStraight = false
+                    playSound(name: nearestVertex.neighbors[0].direction)
+                }
+                
             } else {
                 print("Sei arrivato! Nodo: \(nearestVertex.key!).")
-                errorMessageLabel.text = "Sei arrivato! Nodo: \(nearestVertex.key!)."
+                navigationView.labelDirection.text = "Sei arrivato! Nodo: \(nearestVertex.key!)."
+                playSound(name: "finish")
             }
         } else {
+            
+            updateMap(x: position.x, y: position.y, heading: CGFloat(180)+heading)
+            
             print("sei lontano dal percorso ottimale. Ricalcolo percorso.")
-            errorMessageLabel.text = "sei lontano dal percorso ottimale. Ricalcolo percorso."
+            navigationView.labelDirection.text = "sei lontano dal percorso ottimale. Ricalcolo percorso."
+            
+            let currentNearestPosition = getNearestVertex(position: position, graph: allGraph)
+            if let currentNearestPosition = currentNearestPosition {
+                if let destinationVertex = destinationVertex {
+                    
+                    self.imageView.image = originalImage
+                    searchBestPath(startingPoint: currentNearestPosition, destinationPoint: destinationVertex, graph: allGraph)
+                }
+            }
         }
     }
     
@@ -190,6 +243,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         bestGraph = allGraph.processDijkstra(source: startingPoint, destination: destinationPoint, vertices: graph.canvas)
         if let bestGraph = bestGraph {
             self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: bestGraph, color: UIColor.green)
+            addFlagToMap(position: destinationPoint.position)
         }
     }
     
@@ -422,6 +476,8 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		graph.addEdge(source: z40, neighbor: z39, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z40, neighbor: z21, weight: 1, direction: Direction.left.rawValue)
 		graph.addEdge(source: z21, neighbor: z40, weight: 1, direction: Direction.right.rawValue)
+        graph.addEdge(source: z40, neighbor: z23, weight: 1, direction: Direction.right.rawValue)
+        graph.addEdge(source: z23, neighbor: z40, weight: 1, direction: Direction.left.rawValue)
 		graph.addEdge(source: z27, neighbor: g12, weight: 1, direction: Direction.right.rawValue)
 		graph.addEdge(source: g12, neighbor: z27, weight: 1, direction: Direction.left.rawValue)
         graph.addEdge(source: z28, neighbor: g12, weight: 1, direction: Direction.left.rawValue)
@@ -471,35 +527,23 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     }
     
     func placeViewControllerDidSelect(value: Vertex?, kindOfButton: Int) {
-        if kindOfButton == 0 {
-            startingVertex = value
-            if let value = value {
-                selectDestinationView.startingButton.setTitle(value.key, for: .normal)
-            } else  {
-                selectDestinationView.startingButton.setTitle("Starting Point", for: .normal)
-            }
-        } else if kindOfButton == 1 {
-            destinationVertex = value
-            if let value = value {
-                selectDestinationView.destinationButton.setTitle(value.key, for: .normal)
-            } else {
-                selectDestinationView.destinationButton.setTitle("Destination Point", for: .normal)
-            }
+        destinationVertex = value
+        if let value = value {
+            selectDestinationView.destinationButton.setTitle(value.key, for: .normal)
+        } else {
+            selectDestinationView.destinationButton.setTitle("Destination Point", for: .normal)
         }
         
-        if let _ = startingVertex {
-            if let _ = destinationVertex {
-                selectDestinationView.navigateButton.isEnabled = true
-            } else {
-                selectDestinationView.navigateButton.isEnabled = false
-            }
+        if let _ = destinationVertex {
+            selectDestinationView.navigateButton.isEnabled = true
         } else {
             selectDestinationView.navigateButton.isEnabled = false
         }
     }
     
     func updateMap(x: CGFloat, y: CGFloat, heading: CGFloat) {
-        lastPosition = normalizePosition(meterX: x, meterY: y)
+        //lastPosition = normalizePosition(meterX: x, meterY: y)
+        lastPosition = CGPoint(x: x, y: y)
         
         lastHeading = heading
         
@@ -509,7 +553,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             arrowView.transform = CGAffineTransform(rotationAngle: lastHeading!)
             firstPosition = false
         } else {
-            UIView.animate(withDuration: 0.05, delay: 0, options: [], animations: {
+            UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
                 self.arrowView.transform = CGAffineTransform(rotationAngle: (self.lastHeading!*CGFloat.pi)/180)
                 self.arrowView.center = self.lastPosition!
             })
@@ -524,6 +568,20 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         arrowView.addSubview(arrowImage)
         arrowImage.frame = CGRect(x:0,y:0,width:22,height:22)
         imageView.addSubview(arrowView)
+    }
+    
+    //Funzione che genera la bandiera che comparirà sulla mappa per mostrare posizione di arrivo
+    func addFlagToMap(position: CGPoint) {
+        if flagView == nil {
+            flagView = UIView(frame: CGRect(x: 0, y: 0, width: 33, height: 33))
+            let flagImage = UIImageView()
+            flagImage.image = UIImage(named: "flag")
+            flagView?.addSubview(flagImage)
+            flagImage.frame = CGRect(x:0,y:0,width:33,height:33)
+            imageView.addSubview(flagView!)
+        }
+        flagView?.isHidden = false
+        flagView?.center = CGPoint(x: position.x+16, y: position.y-16)
     }
     
     // Funzione che normalizza X e Y passate da Pozyx così da proiettarle sulla mappa (conversione da mm a pixel)
@@ -606,7 +664,13 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     @IBAction func openDestinationSelection(_ sender: UIButton) {
         if let selectPlace = storyboard?.instantiateViewController(withIdentifier: "SelectPlace") {
             if let selectPlace = selectPlace as? SelectPlaceViewController {
-                selectPlace.canvas = allGraph.canvas
+                
+                for vertex in allGraph.canvas {
+                    if !(vertex.key?.hasPrefix("z"))! {
+                        selectPlace.canvas.append(vertex)
+                    }
+                }
+                
                 selectPlace.kindOfButton = sender.tag
                 selectPlace.delegate = self
                 self.navigationController?.pushViewController(selectPlace, animated: true)
@@ -616,15 +680,46 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     
     @IBAction func startNavigation(_ sender: UIButton) {
         self.imageView.image = originalImage
+        //self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
+        flagView?.isHidden = true
         
-        self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
-        if let a = startingVertex {
-            print(a.key!)
+        if let lastPosition = lastPosition {
+            startingVertex = getNearestVertex(position: lastPosition, graph: allGraph)
+            if let startingVertex = startingVertex {
+                searchBestPath(startingPoint: startingVertex, destinationPoint: destinationVertex!, graph: allGraph)
+                
+                UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+                    self.selectDestinationView.transform = CGAffineTransform(translationX: 0, y: self.view.bounds.size.height)
+                })
+                
+                UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+                    self.navigationView.transform = CGAffineTransform(translationX: 0, y: 0)
+                })
+            } else {
+                let ac = UIAlertController(title: "Position Error", message: "Error. It is not possible to retrieve your position.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+            }
+        } else {
+            let ac = UIAlertController(title: "Position Error", message: "Error. It is not possible to retrieve your position.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
         }
-        if let b = destinationVertex {
-            print(b.key!)
-        }
-        searchBestPath(startingPoint: startingVertex!, destinationPoint: destinationVertex!, graph: allGraph)
+        
+    }
+    
+    @IBAction func stopNavigation(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+            self.navigationView.transform = CGAffineTransform(translationX: 0, y: self.view.bounds.size.height)
+        })
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+            self.selectDestinationView.transform = CGAffineTransform(translationX: 0, y: 0)
+        })
+        
+        bestGraph = nil
+        self.imageView.image = originalImage
+        flagView?.isHidden = true
     }
     
     //************************ Inizio funzioni gestione connessione bluetooth ************************ //
@@ -753,6 +848,17 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             self.errorMessageView.isHidden = false
         })
         peripheral.discoverServices(nil)
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            sleep(5)
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                    self.errorMessageView.alpha = 0
+                    self.errorMessageLabel.alpha = 0
+                    self.errorMessageView.isHidden = true
+                })
+            }
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -885,9 +991,49 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
                             position?.y = Int(realRoomHeight)
                         }
                         
-                        updateMap(x: CGFloat(position!.x), y: CGFloat(position!.y), heading: CGFloat(180)+heading+CGFloat(0)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord. divido per 100 l'accelerazione per trasformare da mG a m/s^2                       }
                         if let bestGraph = bestGraph {
-                            navigation(position: normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!)), graph: bestGraph)
+//                            let newPosition = normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!))
+//                            fifoPositions.append(newPosition)
+//                            if fifoPositions.count >= 5 {
+//                                fifoPositions.remove(at: 0)
+//                            }
+//                            
+//                            var maximumDistance: CGFloat = 0
+//                            for k in 0..<fifoPositions.count {
+//                                for l in k+1..<fifoPositions.count {
+//                                    let distance = CGPointDistance(from: fifoPositions[k], to: fifoPositions[l])
+//                                    if maximumDistance < distance {
+//                                        maximumDistance = distance
+//                                    }
+//                                }
+//                            }
+//                            if maximumDistance < 5000*(imageView.image?.size.width)!/realRoomWidth {
+//                                navigation(position: normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!)), heading: heading, graph: bestGraph)
+//                            }
+                            
+                            navigation(position: normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!)), heading: heading, graph: bestGraph)
+                        } else {
+//                            let newPosition = normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!))
+//                            fifoPositions.append(newPosition)
+//                            if fifoPositions.count >= 5 {
+//                                fifoPositions.remove(at: 0)
+//                            }
+//                            
+//                            var maximumDistance: CGFloat = 0
+//                            for k in 0..<fifoPositions.count {
+//                                for l in k+1..<fifoPositions.count {
+//                                    let distance = CGPointDistance(from: fifoPositions[k], to: fifoPositions[l])
+//                                    if maximumDistance < distance {
+//                                        maximumDistance = distance
+//                                    }
+//                                }
+//                            }
+//                            if maximumDistance < 5000*(imageView.image?.size.width)!/realRoomWidth {
+//                                updateMap(x: CGFloat(newPosition.x), y: CGFloat(newPosition.y), heading: CGFloat(180)+heading+CGFloat(0)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord. divido per 100 l'accelerazione per trasformare da mG a m/s^2
+//                            }
+                            
+                            let newPosition = normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!))
+                            updateMap(x: newPosition.x, y: newPosition.y, heading: CGFloat(180)+heading+CGFloat(0)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord. divido per 100 l'accelerazione per trasformare da mG a m/s^2
                         }
                     }
                     lastString = lastPacket.replacingOccurrences(of: "R", with: "")

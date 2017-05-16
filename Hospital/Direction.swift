@@ -11,6 +11,6 @@ import Foundation
 enum Direction: String {
     case right = "right"
     case left = "left"
-    case straight = "straight"
+    case straight = "up"
     
 }

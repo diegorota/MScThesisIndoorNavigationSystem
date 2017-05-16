@@ -10,9 +10,9 @@ import UIKit
 
 class SelectDestinationView: UIView {
 
-    @IBOutlet weak var startingButton: UIButton!
     @IBOutlet weak var destinationButton: UIButton!
     @IBOutlet weak var navigateButton: UIButton!
+    @IBOutlet weak var backgroundView: UIView!
 
 
 }

@@ -142,7 +142,7 @@ class Graph {
         bestVertices.insert(source, at: 0)
         
         for v in bestVertices {
-            graph.addVertex(key: v.key!, position: v.position)
+            _ = graph.addVertex(key: v.key!, position: v.position)
         }
         
         for x in 0..<bestVertices.count-1 {
