@@ -173,6 +173,19 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         }
     }
     
+    func directionToString(direction: String) -> String {
+        switch direction {
+        case Direction.left.rawValue:
+            return "turn left"
+        case Direction.right.rawValue:
+            return "turn right"
+        case Direction.straight.rawValue:
+            return "go straight on"
+        default:
+            return "error"
+        }
+    }
+    
     func navigation(position: CGPoint, heading: CGFloat, graph: Graph) {
         
         let nearestVertex = getNearestVertex(position: position, graph: bestGraph!)
@@ -181,9 +194,19 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             updateMap(x: nearestVertex.position.x, y: nearestVertex.position.y, heading: CGFloat(180)+heading)
             
             if nearestVertex.neighbors.count != 0 {
-                print("il nodo più vicino è \(nearestVertex.key!). Indicazione: \(nearestVertex.neighbors[0].direction)")
-                navigationView.labelDirection.text = "il nodo più vicino è \(nearestVertex.key!). Indicazione: \(nearestVertex.neighbors[0].direction)"
+                
+                var direction = directionToString(direction: nearestVertex.neighbors[0].direction)
+                if nearestVertex.obstacle {
+                    direction = direction + ".\nObstacle!"
+                }
+                
+                print(direction)
+                navigationView.labelDirection.text = direction
                 navigationView.imageDirection.image = UIImage(named: nearestVertex.neighbors[0].direction)
+                
+                if nearestVertex.obstacle {
+                    playSound(name: "obstacle")
+                }
                 
                 if !isLastStraight && nearestVertex.neighbors[0].direction.hashValue == Direction.straight.hashValue {
                     isLastStraight = true
@@ -194,16 +217,18 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
                 }
                 
             } else {
-                print("Sei arrivato! Nodo: \(nearestVertex.key!).")
-                navigationView.labelDirection.text = "Sei arrivato! Nodo: \(nearestVertex.key!)."
+                var direction = "\(nearestVertex.key!). You are arrived!"
+                print(direction)
+                navigationView.labelDirection.text = direction
                 playSound(name: "finish")
             }
         } else {
             
             updateMap(x: position.x, y: position.y, heading: CGFloat(180)+heading)
             
-            print("sei lontano dal percorso ottimale. Ricalcolo percorso.")
-            navigationView.labelDirection.text = "sei lontano dal percorso ottimale. Ricalcolo percorso."
+            var direction = "Searching for the optimal route."
+            print(direction)
+            navigationView.labelDirection.text = direction
             
             let currentNearestPosition = getNearestVertex(position: position, graph: allGraph)
             if let currentNearestPosition = currentNearestPosition {
@@ -250,19 +275,19 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     func initializeGraph() -> Graph {
         let graph = Graph()
         
-		let g1 = graph.addVertex(key: "Prof. Ardagna", position: CGPoint(x: 104, y: 402))
-		let g2 = graph.addVertex(key: "Prof. Baresi", position: CGPoint(x: 103, y: 348))
-		let g3 = graph.addVertex(key: "Prof. Sbattella", position: CGPoint(x: 104, y: 218))
-		let g4 = graph.addVertex(key: "PhD", position: CGPoint(x: 93, y: 125))
-		let g5 = graph.addVertex(key: "Prof. Guinea & Mottola", position: CGPoint(x: 84, y: 81))
-		let g6 = graph.addVertex(key: "Prof. Fuggetta", position: CGPoint(x: 121, y: 94))
-		let g7 = graph.addVertex(key: "Archive", position: CGPoint(x: 196, y: 150))
-		let g8 = graph.addVertex(key: "Prof. Morzenti", position: CGPoint(x: 252, y: 96))
-		let g9 = graph.addVertex(key: "Prof. Pradella", position: CGPoint(x: 289, y: 81))
-		let g10 = graph.addVertex(key: "Prof. Rossi", position: CGPoint(x: 283, y: 122))
-		let g11 = graph.addVertex(key: "Software lab", position: CGPoint(x: 184, y: 289))
-		let g12 = graph.addVertex(key: "Bathroom", position: CGPoint(x: 271, y: 403))
-		let g13 = graph.addVertex(key: "Printing room", position: CGPoint(x: 196, y: 408))
+        let g1 = graph.addVertex(key: "Prof. Ardagna", position: CGPoint(x: 104, y: 402), isPOI: true)
+		let g2 = graph.addVertex(key: "Prof. Baresi", position: CGPoint(x: 103, y: 348), isPOI: true)
+		let g3 = graph.addVertex(key: "Prof. Sbattella", position: CGPoint(x: 104, y: 218), isPOI: true)
+		let g4 = graph.addVertex(key: "PhD", position: CGPoint(x: 93, y: 125), isPOI: true)
+		let g5 = graph.addVertex(key: "Prof. Guinea & Mottola", position: CGPoint(x: 84, y: 81), isPOI: true)
+		let g6 = graph.addVertex(key: "Prof. Fuggetta", position: CGPoint(x: 121, y: 94), isPOI: true)
+		let g7 = graph.addVertex(key: "Archive", position: CGPoint(x: 196, y: 150), isPOI: true)
+		let g8 = graph.addVertex(key: "Prof. Morzenti", position: CGPoint(x: 252, y: 96), isPOI: true)
+		let g9 = graph.addVertex(key: "Prof. Pradella", position: CGPoint(x: 289, y: 81), isPOI: true)
+		let g10 = graph.addVertex(key: "Prof. Rossi", position: CGPoint(x: 283, y: 122), isPOI: true)
+		let g11 = graph.addVertex(key: "Software lab", position: CGPoint(x: 184, y: 289), isPOI: true)
+		let g12 = graph.addVertex(key: "Bathroom", position: CGPoint(x: 271, y: 403), isPOI: true)
+		let g13 = graph.addVertex(key: "Printing room", position: CGPoint(x: 196, y: 408), isPOI: true)
 		
 		//CORRIDOIO BARESI
 		let z0a = graph.addVertex(key: "z0a", position: CGPoint(x: 124, y: 366))
@@ -286,10 +311,10 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		let z14 = graph.addVertex(key: "z14", position: CGPoint(x: 100, y: 105))
 		let z15 = graph.addVertex(key: "z15", position: CGPoint(x: 89, y: 94))
 		let z16 = graph.addVertex(key: "z16", position: CGPoint(x: 142, y: 126))
-		let z17 = graph.addVertex(key: "z17", position: CGPoint(x: 160, y: 126))
-		let z18 = graph.addVertex(key: "z18", position: CGPoint(x: 178, y: 126))
+        let z17 = graph.addVertex(key: "z17", position: CGPoint(x: 160, y: 126), obstacle: true)
+		let z18 = graph.addVertex(key: "z18", position: CGPoint(x: 178, y: 126), obstacle: true)
 		//let z19 = graph.addVertex(key: "z19", position: CGPoint(x: 195, y: 126))
-		let z20 = graph.addVertex(key: "z20", position: CGPoint(x: 212, y: 126))
+		let z20 = graph.addVertex(key: "z20", position: CGPoint(x: 212, y: 126), obstacle: true)
 		let z21 = graph.addVertex(key: "z21", position: CGPoint(x: 230, y: 126))
 		//let z22 = graph.addVertex(key: "z22", position: CGPoint(x: 247, y: 126))
 		let z23 = graph.addVertex(key: "z23", position: CGPoint(x: 258, y: 118))
@@ -394,10 +419,10 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		graph.addEdge(source: z16, neighbor: z11, weight: 1, direction: Direction.left.rawValue)
 		graph.addEdge(source: z16, neighbor: z17, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z17, neighbor: z16, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z17, neighbor: z18, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z18, neighbor: z17, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z18, neighbor: z20, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z20, neighbor: z18, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z17, neighbor: z18, weight: 3, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z18, neighbor: z17, weight: 3, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z18, neighbor: z20, weight: 3, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z20, neighbor: z18, weight: 3, direction: Direction.straight.rawValue)
 		//graph.addEdge(source: z19, neighbor: z20, weight: 1, direction: Direction.straight.rawValue)
 		//graph.addEdge(source: z20, neighbor: z19, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z20, neighbor: z21, weight: 1, direction: Direction.straight.rawValue)
@@ -666,7 +691,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             if let selectPlace = selectPlace as? SelectPlaceViewController {
                 
                 for vertex in allGraph.canvas {
-                    if !(vertex.key?.hasPrefix("z"))! {
+                    if vertex.isPOI {
                         selectPlace.canvas.append(vertex)
                     }
                 }

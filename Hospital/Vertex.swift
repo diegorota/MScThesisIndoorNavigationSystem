@@ -13,9 +13,13 @@ class Vertex {
     var key: String?
     var position: CGPoint
     var neighbors: Array<Edge>
+    var isPOI: Bool
+    var obstacle: Bool
     
     init() {
         self.neighbors = Array<Edge>()
         self.position = CGPoint()
+        self.isPOI = false
+        self.obstacle = false
     }
 }

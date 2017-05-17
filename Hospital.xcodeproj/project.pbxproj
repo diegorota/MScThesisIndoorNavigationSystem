@@ -33,6 +33,8 @@
 		486F818E1EC616CC0076E4B1 /* SelectDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F818D1EC616CC0076E4B1 /* SelectDestinationView.swift */; };
 		4892DA621ECB1EC100E25F49 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4892DA611ECB1EC100E25F49 /* NavigationView.swift */; };
 		48933CB51E7BD2D00006C3D8 /* CafeteriaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */; };
+		48AC8BB11ECC3D9B003FBE52 /* finish.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 48AC8BB01ECC3D9B003FBE52 /* finish.m4a */; };
+		48AC8BB31ECC3DF8003FBE52 /* obstacle.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 48AC8BB21ECC3DF8003FBE52 /* obstacle.m4a */; };
 		48AD540F1EC44CC200E16F29 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AD540E1EC44CC200E16F29 /* Path.swift */; };
 		48AF84B61EA785BA00B0A390 /* KalmanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AF84B51EA785BA00B0A390 /* KalmanFilter.swift */; };
 		48C6EE5E1E83D044004F403B /* PrescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C6EE5D1E83D044004F403B /* PrescriptionViewController.swift */; };
@@ -99,6 +101,8 @@
 		486F818D1EC616CC0076E4B1 /* SelectDestinationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDestinationView.swift; sourceTree = "<group>"; };
 		4892DA611ECB1EC100E25F49 /* NavigationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		48933CB41E7BD2D00006C3D8 /* CafeteriaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CafeteriaViewController.swift; sourceTree = "<group>"; };
+		48AC8BB01ECC3D9B003FBE52 /* finish.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = finish.m4a; sourceTree = "<group>"; };
+		48AC8BB21ECC3DF8003FBE52 /* obstacle.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = obstacle.m4a; sourceTree = "<group>"; };
 		48AD540E1EC44CC200E16F29 /* Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		48AF84B51EA785BA00B0A390 /* KalmanFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KalmanFilter.swift; sourceTree = "<group>"; };
 		48C6EE5D1E83D044004F403B /* PrescriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrescriptionViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +217,8 @@
 				48E75BEC1ECB465300A2CFCA /* left.m4a */,
 				48E75BED1ECB465400A2CFCA /* right.m4a */,
 				48E75BEE1ECB465400A2CFCA /* up.m4a */,
+				48AC8BB01ECC3D9B003FBE52 /* finish.m4a */,
+				48AC8BB21ECC3DF8003FBE52 /* obstacle.m4a */,
 				48F2A1391E7A9A31002A8DC0 /* json */,
 			);
 			path = Hospital;
@@ -397,10 +403,12 @@
 				48E75BF11ECB465400A2CFCA /* up.m4a in Resources */,
 				480510A71E793D2B003B4014 /* LaunchScreen.storyboard in Resources */,
 				480510A41E793D2B003B4014 /* Assets.xcassets in Resources */,
+				48AC8BB11ECC3D9B003FBE52 /* finish.m4a in Resources */,
 				48F2A13A1E7A9A31002A8DC0 /* json in Resources */,
 				48E75BF01ECB465400A2CFCA /* right.m4a in Resources */,
 				48E75BEF1ECB465400A2CFCA /* left.m4a in Resources */,
 				480510A21E793D2B003B4014 /* Main.storyboard in Resources */,
+				48AC8BB31ECC3DF8003FBE52 /* obstacle.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

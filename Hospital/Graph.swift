@@ -31,6 +31,40 @@ class Graph {
         
     }
     
+    func addVertex(key: String, position: CGPoint, isPOI: Bool) -> Vertex {
+        
+        let childVertex: Vertex = Vertex()
+        childVertex.key = key
+        childVertex.position = position
+        childVertex.isPOI = isPOI
+        canvas.append(childVertex)
+        return childVertex
+        
+    }
+    
+    func addVertex(key: String, position: CGPoint, isPOI: Bool, obstacle: Bool) -> Vertex {
+        
+        let childVertex: Vertex = Vertex()
+        childVertex.key = key
+        childVertex.position = position
+        childVertex.isPOI = isPOI
+        childVertex.obstacle = obstacle
+        canvas.append(childVertex)
+        return childVertex
+        
+    }
+    
+    func addVertex(key: String, position: CGPoint, obstacle: Bool) -> Vertex {
+        
+        let childVertex: Vertex = Vertex()
+        childVertex.key = key
+        childVertex.position = position
+        childVertex.obstacle = obstacle
+        canvas.append(childVertex)
+        return childVertex
+        
+    }
+    
     func addEdge(source: Vertex, neighbor: Vertex, weight: Int, direction: String) {
         
         // arco A -> B
