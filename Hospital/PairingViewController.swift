@@ -99,6 +99,7 @@ class PairingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        centralManager = CBCentralManager()
         if hourTimer != nil {
             hourTimer?.invalidate()
             hourTimer = nil

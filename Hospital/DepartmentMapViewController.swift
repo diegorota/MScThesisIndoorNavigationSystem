@@ -52,7 +52,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     var imageWidth: CGFloat!
     var imageHeight: CGFloat!
     //var lastPosition: CGPoint?
-    var lastPosition: CGPoint? = CGPoint(x: 250, y: 250)
+    var lastPosition: CGPoint? = CGPoint(x: 240, y: 440)
     var lastHeading: CGFloat?
     var firstPosition = true
     
@@ -76,6 +76,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapScrollView.delegate = self
+        
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
         
         self.errorMessageView.isHidden = true
@@ -101,7 +102,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         navigationView.backgroundView.backgroundColor = Colors.mediumColor
         navigationView.transform = CGAffineTransform(translationX: 0, y: self.view.bounds.height)
         
-        maximumDistance = 1500*(imageView.image?.size.width)!/realRoomWidth
+        maximumDistance = 2000*(imageView.image?.size.width)!/realRoomWidth
         print("maximum distance: \(maximumDistance)")
         
         self.allGraph = self.initializeGraph()
@@ -224,17 +225,16 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
                 var direction = directionToString(direction: nearestVertex.neighbors[0].direction)
                 if nearestVertex.obstacle {
                     direction = direction + ".\nObstacle!"
-                }
-                
-                print(direction)
-                navigationView.labelDirection.text = direction
-                navigationView.imageDirection.image = UIImage(named: nearestVertex.neighbors[0].direction)
-                
-                if nearestVertex.obstacle {
+                    navigationView.backgroundView.backgroundColor = UIColor.orange
                     if let obstacle = obstacle {
                         obstacle.play()
                     }
+                } else {
+                    navigationView.backgroundView.backgroundColor = Colors.mediumColor
                 }
+                print(direction)
+                navigationView.labelDirection.text = direction.uppercased()
+                navigationView.imageDirection.image = UIImage(named: nearestVertex.neighbors[0].direction)
                 
                 if lastDirection != nearestVertex.neighbors[0].direction && nearestVertex.neighbors[0].direction == Direction.straight.rawValue {
                     lastDirection = nearestVertex.neighbors[0].direction
@@ -256,7 +256,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             } else {
                 let direction = "\(nearestVertex.key!). You are arrived!"
                 print(direction)
-                navigationView.labelDirection.text = direction
+                navigationView.labelDirection.text = direction.uppercased()
                 
                 if let finish = finish {
                     finish.play()
@@ -268,16 +268,22 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             
             updateMap(x: position.x, y: position.y, heading: CGFloat(180)+heading)
             
-            let direction = "Searching for the optimal route."
+            navigationView.backgroundView.backgroundColor = UIColor.red
+            let direction = "Searching for the optimal route"
             print(direction)
-            navigationView.labelDirection.text = direction
+            navigationView.labelDirection.text = direction.uppercased()
             
-            let currentNearestPosition = getNearestVertex(position: position, graph: allGraph)
-            if let currentNearestPosition = currentNearestPosition {
-                if let destinationVertex = destinationVertex {
-                    
-                    self.imageView.image = originalImage
-                    searchBestPath(startingPoint: currentNearestPosition, destinationPoint: destinationVertex, graph: allGraph)
+            DispatchQueue.global(qos: .userInitiated).async {
+                sleep(3)
+                DispatchQueue.main.async {
+                    let currentNearestPosition = self.getNearestVertex(position: position, graph: self.allGraph)
+                    if let currentNearestPosition = currentNearestPosition {
+                        if let destinationVertex = self.destinationVertex {
+                            
+                            self.imageView.image = self.originalImage
+                            self.searchBestPath(startingPoint: currentNearestPosition, destinationPoint: destinationVertex, graph: self.allGraph)
+                        }
+                    }
                 }
             }
         }
@@ -311,6 +317,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         if let bestGraph = bestGraph {
             self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: bestGraph, color: UIColor.green)
             addFlagToMap(position: destinationPoint.position)
+            
         }
     }
     
@@ -465,10 +472,10 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         graph.addEdge(source: z16, neighbor: z13, weight: 1, direction: Direction.right.rawValue)
 		graph.addEdge(source: z16, neighbor: z17, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z17, neighbor: z16, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z17, neighbor: z18, weight: 3, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z18, neighbor: z17, weight: 3, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z18, neighbor: z20, weight: 3, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z20, neighbor: z18, weight: 3, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z17, neighbor: z18, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z18, neighbor: z17, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z18, neighbor: z20, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z20, neighbor: z18, weight: 1, direction: Direction.straight.rawValue)
 		//graph.addEdge(source: z19, neighbor: z20, weight: 1, direction: Direction.straight.rawValue)
 		//graph.addEdge(source: z20, neighbor: z19, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z20, neighbor: z21, weight: 1, direction: Direction.straight.rawValue)
@@ -507,20 +514,24 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		graph.addEdge(source: z44, neighbor: z43, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z44, neighbor: z45, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z45, neighbor: z44, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z45, neighbor: z46, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z46, neighbor: z45, weight: 1, direction: Direction.straight.rawValue)
+		//graph.addEdge(source: z45, neighbor: z46, weight: 1, direction: Direction.straight.rawValue)
+		//graph.addEdge(source: z46, neighbor: z45, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z44, neighbor: g13, weight: 1, direction: Direction.right.rawValue)
 		graph.addEdge(source: g13, neighbor: z44, weight: 1, direction: Direction.left.rawValue)
         graph.addEdge(source: z43, neighbor: g13, weight: 1, direction: Direction.left.rawValue)
         graph.addEdge(source: g13, neighbor: z43, weight: 1, direction: Direction.right.rawValue)
-        graph.addEdge(source: z45, neighbor: z46a, weight: 1, direction: Direction.right.rawValue)
-        graph.addEdge(source: z46a, neighbor: z45, weight: 1, direction: Direction.left.rawValue)
-        graph.addEdge(source: z46a, neighbor: z26, weight: 1, direction: Direction.straight.rawValue)
-        graph.addEdge(source: z26, neighbor: z46a, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: z45, neighbor: z46a, weight: 2, direction: Direction.right.rawValue)
+        graph.addEdge(source: z46a, neighbor: z45, weight: 2, direction: Direction.left.rawValue)
+        graph.addEdge(source: z46a, neighbor: z46, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: z46, neighbor: z46a, weight: 1, direction: Direction.straight.rawValue)
 		
 		//archi corridoio ROSSI
-		graph.addEdge(source: z26, neighbor: z46, weight: 1, direction: Direction.right.rawValue)
-		graph.addEdge(source: z46, neighbor: z26, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: z26, neighbor: z46, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: z46, neighbor: z26, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: z46, neighbor: z46a, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: z46a, neighbor: z46, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z26, neighbor: z45, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z45, neighbor: z26, weight: 1, direction: Direction.left.rawValue)
         graph.addEdge(source: z46a, neighbor: z46b, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: z46b, neighbor: z46a, weight: 1, direction: Direction.straight.rawValue)
         graph.addEdge(source: z46b, neighbor: z46c, weight: 1, direction: Direction.straight.rawValue)
@@ -567,8 +578,8 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		//archi sala tesisti
 		graph.addEdge(source: z0a, neighbor: z47, weight: 1, direction: Direction.right.rawValue)
 		graph.addEdge(source: z47, neighbor: z0a, weight: 1, direction: Direction.left.rawValue)
-		graph.addEdge(source: z2, neighbor: z47, weight: 1, direction: Direction.right.rawValue)
-		graph.addEdge(source: z47, neighbor: z2, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z2, neighbor: z47, weight: 1, direction: Direction.left.rawValue)
+		graph.addEdge(source: z47, neighbor: z2, weight: 1, direction: Direction.right.rawValue)
 		graph.addEdge(source: z47, neighbor: z48, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z48, neighbor: z47, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z48, neighbor: z49, weight: 1, direction: Direction.straight.rawValue)
@@ -738,7 +749,9 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.disconnect()
+        if self.isMovingFromParentViewController {
+            self.disconnect()
+        }
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
@@ -810,13 +823,15 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     
     //************************ Inizio funzioni gestione connessione bluetooth ************************ //
     func disconnect() {
-        if let arduinoPeripherals = self.arduinoPeripherals {
-            if let arduinoCharacteristic = self.arduinoCharacteristic {
-                arduinoPeripherals.setNotifyValue(false, for: arduinoCharacteristic)
+        DispatchQueue.global(qos: .userInteractive).async {
+            if let arduinoPeripherals = self.arduinoPeripherals {
+                if let arduinoCharacteristic = self.arduinoCharacteristic {
+                    arduinoPeripherals.setNotifyValue(false, for: arduinoCharacteristic)
+                }
+                self.centralManager?.cancelPeripheralConnection(arduinoPeripherals)
             }
-            self.centralManager?.cancelPeripheralConnection(arduinoPeripherals)
+            self.arduinoCharacteristic = nil
         }
-        self.arduinoCharacteristic = nil
     }
     
     func pauseScan() {
@@ -844,6 +859,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             }, completion: nil)
         }
     }
+    
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         
@@ -970,26 +986,32 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             print("****** DISCONNECTION DETAILS: \(error!.localizedDescription)")
         }
         arduinoPeripherals = nil
-        centralManager.scanForPeripherals(withServices: nil, options: nil)
-        initialPacket = true
-        kalmanFilter = nil
-        firstPosition = true
-        self.errorMessageLabel.text = "Searching for tags..."
-        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
-            self.errorMessageView.alpha = 1
-            self.errorMessageLabel.alpha = 1
-            self.errorMessageView.isHidden = false
-        })
         
-        UIView.animate(withDuration: 0.8, delay:0.0, options:[.autoreverse, .repeat], animations: {
-            self.errorMessageLabel.alpha = 0
-        }, completion: nil)
-        
-        let subViews = self.imageView.subviews
-        for subview in subViews{
-            if (subview == arrowView) {
-                subview.removeFromSuperview()
-                return
+        DispatchQueue.global(qos: .userInitiated).async {
+            sleep(10)
+            DispatchQueue.main.async {
+                self.centralManager.scanForPeripherals(withServices: nil, options: nil)
+                self.initialPacket = true
+                self.kalmanFilter = nil
+                self.firstPosition = true
+                self.errorMessageLabel.text = "Searching for tags..."
+                UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                    self.errorMessageView.alpha = 1
+                    self.errorMessageLabel.alpha = 1
+                    self.errorMessageView.isHidden = false
+                })
+                
+                UIView.animate(withDuration: 0.8, delay:0.0, options:[.autoreverse, .repeat], animations: {
+                    self.errorMessageLabel.alpha = 0
+                }, completion: nil)
+                
+                let subViews = self.imageView.subviews
+                for subview in subViews{
+                    if (subview == self.arrowView) {
+                        subview.removeFromSuperview()
+                        return
+                    }
+                }
             }
         }
         

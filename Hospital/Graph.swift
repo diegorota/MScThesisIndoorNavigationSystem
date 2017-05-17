@@ -152,7 +152,6 @@ class Graph {
                 let path = p as Path
                 if (bestPath.total == nil) && (path.destination.key == destination.key) || (bestPath.total != nil) && (path.total < bestPath.total) && (path.destination.key == destination.key){
                     bestPath = path
-                    print("ATTENZIONE: \(bestPath.destination.key!)")
                 }
             }
             if bestPath.total == nil {
@@ -176,7 +175,7 @@ class Graph {
         bestVertices.insert(source, at: 0)
         
         for v in bestVertices {
-            _ = graph.addVertex(key: v.key!, position: v.position)
+            _ = graph.addVertex(key: v.key!, position: v.position, isPOI: v.isPOI, obstacle: v.obstacle)
         }
         
         for x in 0..<bestVertices.count-1 {
