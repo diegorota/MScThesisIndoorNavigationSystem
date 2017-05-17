@@ -10,7 +10,7 @@ import UIKit
 import CoreBluetooth
 import AVFoundation
 
-class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate, SelectPlaceViewControllerDelegate {
+class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate, SelectPlaceViewControllerDelegate, AVAudioPlayerDelegate {
     
     let defaults = UserDefaults.standard
     
@@ -66,8 +66,12 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     var startingVertex: Vertex?
     var destinationVertex: Vertex?
     var originalImage: UIImage!
-    var sound: AVAudioPlayer?
-    var isLastStraight = false
+    var up: AVAudioPlayer?
+    var left: AVAudioPlayer?
+    var right: AVAudioPlayer?
+    var obstacle: AVAudioPlayer?
+    var finish: AVAudioPlayer?
+    var lastDirection: String  = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,41 +101,15 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         navigationView.backgroundView.backgroundColor = Colors.mediumColor
         navigationView.transform = CGAffineTransform(translationX: 0, y: self.view.bounds.height)
         
-        maximumDistance = 2000*(imageView.image?.size.width)!/realRoomWidth
+        maximumDistance = 1500*(imageView.image?.size.width)!/realRoomWidth
         print("maximum distance: \(maximumDistance)")
         
         self.allGraph = self.initializeGraph()
         originalImage = self.imageView.image!
         //self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
         
-        // let kalmanPosition = CGPoint(x: 6000, y: 6500)
-        // let kalmanPositionPixel = normalizePosition(meterX: kalmanPosition.x, meterY: kalmanPosition.y)
-        // updateMap(x: kalmanPosition.x, y: kalmanPosition.y, heading: 90)
-        // var lessDistance: CGFloat? = nil
-        // var nearestVertex: Vertex? = nil
-        
-//        for v in (bestGraph?.canvas)! {
-//            let distance = CGPointDistance(from: kalmanPositionPixel, to: v.position)
-//            print(distance)
-//            if lessDistance == nil {
-//                if distance < maximumDistance {
-//                    lessDistance = distance
-//                    nearestVertex = v
-//                }
-//            } else {
-//                if distance < lessDistance! && distance < maximumDistance {
-//                    lessDistance = distance
-//                    nearestVertex = v
-//                }
-//            }
-//        }
-//        
-//        if let nearestVertex = nearestVertex {
-//            print("il nodo più vicino è \(nearestVertex.key!). Indicazione: \(nearestVertex.neighbors[0].direction)")
-//        } else {
-//            print("sei lontano dal percorso ottimale. Ricalcolo percorso.")
-//        }
-        
+        // Setto audio navigatore
+        initializeSounds()
         
     }
     
@@ -159,17 +137,65 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         
     }
     
-    func playSound(name: String) {
-        let url = Bundle.main.url(forResource: name, withExtension: "m4a")!
+    func initializeSounds() {
+        let upUrl = URL.init(fileURLWithPath: Bundle.main.path(
+            forResource: "up",
+            ofType: "m4a")!)
         
         do {
-            sound = try AVAudioPlayer(contentsOf: url)
-            guard let player = sound else { return }
-            
-            player.prepareToPlay()
-            player.play()
-        } catch let error {
-            print(error.localizedDescription)
+            try up = AVAudioPlayer(contentsOf: upUrl)
+            up?.delegate = self
+            up?.prepareToPlay()
+        } catch let error as NSError {
+            print("audioPlayer error \(error.localizedDescription)")
+        }
+        
+        let rightUrl = URL.init(fileURLWithPath: Bundle.main.path(
+            forResource: "right",
+            ofType: "m4a")!)
+        
+        do {
+            try right = AVAudioPlayer(contentsOf: rightUrl)
+            right?.delegate = self
+            right?.prepareToPlay()
+        } catch let error as NSError {
+            print("audioPlayer error \(error.localizedDescription)")
+        }
+        
+        let leftUrl = URL.init(fileURLWithPath: Bundle.main.path(
+            forResource: "left",
+            ofType: "m4a")!)
+        
+        do {
+            try left = AVAudioPlayer(contentsOf: leftUrl)
+            left?.delegate = self
+            left?.prepareToPlay()
+        } catch let error as NSError {
+            print("audioPlayer error \(error.localizedDescription)")
+        }
+        
+        let obstacleUrl = URL.init(fileURLWithPath: Bundle.main.path(
+            forResource: "obstacle",
+            ofType: "m4a")!)
+        
+        do {
+            try obstacle = AVAudioPlayer(contentsOf: obstacleUrl)
+            obstacle?.delegate = self
+            obstacle?.prepareToPlay()
+        } catch let error as NSError {
+            print("audioPlayer error \(error.localizedDescription)")
+        }
+        
+        let finishUrl = URL.init(fileURLWithPath: Bundle.main.path(
+            forResource: "finish",
+            ofType: "m4a")!)
+        
+        do {
+            try finish = AVAudioPlayer(contentsOf: finishUrl)
+            finish?.delegate = self
+            finish?.prepareToPlay()
+        } catch let error as NSError {
+            print("audioPlayer error \(error.localizedDescription)")
         }
     }
     
@@ -189,7 +215,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     func navigation(position: CGPoint, heading: CGFloat, graph: Graph) {
         
         let nearestVertex = getNearestVertex(position: position, graph: bestGraph!)
-        
+    
         if let nearestVertex = nearestVertex {
             updateMap(x: nearestVertex.position.x, y: nearestVertex.position.y, heading: CGFloat(180)+heading)
             
@@ -205,28 +231,44 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
                 navigationView.imageDirection.image = UIImage(named: nearestVertex.neighbors[0].direction)
                 
                 if nearestVertex.obstacle {
-                    playSound(name: "obstacle")
+                    if let obstacle = obstacle {
+                        obstacle.play()
+                    }
                 }
                 
-                if !isLastStraight && nearestVertex.neighbors[0].direction.hashValue == Direction.straight.hashValue {
-                    isLastStraight = true
-                    playSound(name: nearestVertex.neighbors[0].direction)
-                } else if nearestVertex.neighbors[0].direction.hashValue != Direction.straight.hashValue {
-                    isLastStraight = false
-                    playSound(name: nearestVertex.neighbors[0].direction)
+                if lastDirection != nearestVertex.neighbors[0].direction && nearestVertex.neighbors[0].direction == Direction.straight.rawValue {
+                    lastDirection = nearestVertex.neighbors[0].direction
+                    if let up = up {
+                        up.play()
+                    }
+                } else if lastDirection != nearestVertex.neighbors[0].direction && nearestVertex.neighbors[0].direction == Direction.left.rawValue {
+                    lastDirection = nearestVertex.neighbors[0].direction
+                    if let left = left {
+                        left.play()
+                    }
+                } else if lastDirection != nearestVertex.neighbors[0].direction && nearestVertex.neighbors[0].direction == Direction.right.rawValue {
+                    lastDirection = nearestVertex.neighbors[0].direction
+                    if let right = right {
+                        right.play()
+                    }
                 }
                 
             } else {
-                var direction = "\(nearestVertex.key!). You are arrived!"
+                let direction = "\(nearestVertex.key!). You are arrived!"
                 print(direction)
                 navigationView.labelDirection.text = direction
-                playSound(name: "finish")
+                
+                if let finish = finish {
+                    finish.play()
+                }
+                stopNavigation()
+                
             }
         } else {
             
             updateMap(x: position.x, y: position.y, heading: CGFloat(180)+heading)
             
-            var direction = "Searching for the optimal route."
+            let direction = "Searching for the optimal route."
             print(direction)
             navigationView.labelDirection.text = direction
             
@@ -286,7 +328,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		let g9 = graph.addVertex(key: "Prof. Pradella", position: CGPoint(x: 289, y: 81), isPOI: true)
 		let g10 = graph.addVertex(key: "Prof. Rossi", position: CGPoint(x: 283, y: 122), isPOI: true)
 		let g11 = graph.addVertex(key: "Software lab", position: CGPoint(x: 184, y: 289), isPOI: true)
-		let g12 = graph.addVertex(key: "Bathroom", position: CGPoint(x: 271, y: 403), isPOI: true)
+        let g12 = graph.addVertex(key: "Bathroom", position: CGPoint(x: 271, y: 480), isPOI: true)
 		let g13 = graph.addVertex(key: "Printing room", position: CGPoint(x: 196, y: 408), isPOI: true)
 		
 		//CORRIDOIO BARESI
@@ -308,8 +350,8 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		//CORRIDOIO MORZENTI 
 		//let z12 = graph.addVertex(key: "z12", position: CGPoint(x: 124, y: 126))
 		let z13 = graph.addVertex(key: "z13", position: CGPoint(x: 112, y: 116))
-		let z14 = graph.addVertex(key: "z14", position: CGPoint(x: 100, y: 105))
-		let z15 = graph.addVertex(key: "z15", position: CGPoint(x: 89, y: 94))
+		//let z14 = graph.addVertex(key: "z14", position: CGPoint(x: 100, y: 105))
+		let z14 = graph.addVertex(key: "z14", position: CGPoint(x: 89, y: 94))
 		let z16 = graph.addVertex(key: "z16", position: CGPoint(x: 142, y: 126))
         let z17 = graph.addVertex(key: "z17", position: CGPoint(x: 160, y: 126), obstacle: true)
 		let z18 = graph.addVertex(key: "z18", position: CGPoint(x: 178, y: 126), obstacle: true)
@@ -343,6 +385,9 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		let z44 = graph.addVertex(key: "z44", position: CGPoint(x: 202, y: 433))
 		let z45 = graph.addVertex(key: "z45", position: CGPoint(x: 221, y: 433))
 		let z46 = graph.addVertex(key: "z46", position: CGPoint(x: 240, y: 433))
+        let z46a = graph.addVertex(key: "z46a", position: CGPoint(x: 240, y: 456))
+        let z46b = graph.addVertex(key: "z46b", position: CGPoint(x: 240, y: 468))
+        let z46c = graph.addVertex(key: "z46c", position: CGPoint(x: 240, y: 480))
 		//INTERNO SALA TESISTI
 		let z47 = graph.addVertex(key: "z47", position: CGPoint(x: 149, y: 337))
 		let z48 = graph.addVertex(key: "z48", position: CGPoint(x: 167, y: 337))
@@ -398,13 +443,13 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		
 		//archi ingresso sam
         graph.addEdge(source: z11, neighbor: z13, weight: 1, direction: Direction.left.rawValue)
-		graph.addEdge(source: z13, neighbor: z11, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z13, neighbor: z16, weight: 1, direction: Direction.left.rawValue)
 		//graph.addEdge(source: z12, neighbor: z13, weight: 1, direction: Direction.left.rawValue)
 		//graph.addEdge(source: z13, neighbor: z12, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z13, neighbor: z14, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z14, neighbor: z13, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z14, neighbor: z15, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z15, neighbor: z14, weight: 1, direction: Direction.straight.rawValue)
+		//graph.addEdge(source: z14, neighbor: z15, weight: 1, direction: Direction.straight.rawValue)
+		//graph.addEdge(source: z15, neighbor: z14, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z13, neighbor: g4, weight: 1, direction: Direction.left.rawValue)
 		graph.addEdge(source: g4, neighbor: z13, weight: 1, direction: Direction.right.rawValue)
         graph.addEdge(source: z14, neighbor: g4, weight: 1, direction: Direction.right.rawValue)
@@ -413,10 +458,11 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		graph.addEdge(source: g6, neighbor: z13, weight: 1, direction: Direction.left.rawValue)
         graph.addEdge(source: z14, neighbor: g6, weight: 1, direction: Direction.left.rawValue)
         graph.addEdge(source: g6, neighbor: z14, weight: 1, direction: Direction.right.rawValue)
-		graph.addEdge(source: z15, neighbor: g5, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: g5, neighbor: z15, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z14, neighbor: g5, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: g5, neighbor: z14, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z11, neighbor: z16, weight: 1, direction: Direction.right.rawValue)
 		graph.addEdge(source: z16, neighbor: z11, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: z16, neighbor: z13, weight: 1, direction: Direction.right.rawValue)
 		graph.addEdge(source: z16, neighbor: z17, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z17, neighbor: z16, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z17, neighbor: z18, weight: 3, direction: Direction.straight.rawValue)
@@ -467,10 +513,20 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		graph.addEdge(source: g13, neighbor: z44, weight: 1, direction: Direction.left.rawValue)
         graph.addEdge(source: z43, neighbor: g13, weight: 1, direction: Direction.left.rawValue)
         graph.addEdge(source: g13, neighbor: z43, weight: 1, direction: Direction.right.rawValue)
+        graph.addEdge(source: z45, neighbor: z46a, weight: 1, direction: Direction.right.rawValue)
+        graph.addEdge(source: z46a, neighbor: z45, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: z46a, neighbor: z26, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: z26, neighbor: z46a, weight: 1, direction: Direction.straight.rawValue)
 		
 		//archi corridoio ROSSI
 		graph.addEdge(source: z26, neighbor: z46, weight: 1, direction: Direction.right.rawValue)
 		graph.addEdge(source: z46, neighbor: z26, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: z46a, neighbor: z46b, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: z46b, neighbor: z46a, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: z46b, neighbor: z46c, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: z46c, neighbor: z46b, weight: 1, direction: Direction.straight.rawValue)
+        graph.addEdge(source: z46c, neighbor: g12, weight: 1, direction: Direction.left.rawValue)
+        graph.addEdge(source: g12, neighbor: z46c, weight: 1, direction: Direction.right.rawValue)
 		graph.addEdge(source: z26, neighbor: z27, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z27, neighbor: z26, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z27, neighbor: z28, weight: 1, direction: Direction.straight.rawValue)
@@ -503,10 +559,10 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		graph.addEdge(source: z21, neighbor: z40, weight: 1, direction: Direction.right.rawValue)
         graph.addEdge(source: z40, neighbor: z23, weight: 1, direction: Direction.right.rawValue)
         graph.addEdge(source: z23, neighbor: z40, weight: 1, direction: Direction.left.rawValue)
-		graph.addEdge(source: z27, neighbor: g12, weight: 1, direction: Direction.right.rawValue)
-		graph.addEdge(source: g12, neighbor: z27, weight: 1, direction: Direction.left.rawValue)
-        graph.addEdge(source: z28, neighbor: g12, weight: 1, direction: Direction.left.rawValue)
-        graph.addEdge(source: g12, neighbor: z28, weight: 1, direction: Direction.right.rawValue)
+//		graph.addEdge(source: z27, neighbor: g12, weight: 1, direction: Direction.right.rawValue)
+//		graph.addEdge(source: g12, neighbor: z27, weight: 1, direction: Direction.left.rawValue)
+//        graph.addEdge(source: z28, neighbor: g12, weight: 1, direction: Direction.left.rawValue)
+//        graph.addEdge(source: g12, neighbor: z28, weight: 1, direction: Direction.right.rawValue)
 		
 		//archi sala tesisti
 		graph.addEdge(source: z0a, neighbor: z47, weight: 1, direction: Direction.right.rawValue)
@@ -531,8 +587,8 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		graph.addEdge(source: z54, neighbor: z53, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z54, neighbor: z55, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z55, neighbor: z54, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z55, neighbor: z56, weight: 1, direction: Direction.straight.rawValue)
-		graph.addEdge(source: z56, neighbor: z55, weight: 1, direction: Direction.straight.rawValue)
+		graph.addEdge(source: z55, neighbor: z56, weight: 1, direction: Direction.right.rawValue)
+		graph.addEdge(source: z56, neighbor: z55, weight: 1, direction: Direction.left.rawValue)
 		graph.addEdge(source: z56, neighbor: z57, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z57, neighbor: z56, weight: 1, direction: Direction.straight.rawValue)
 		graph.addEdge(source: z57, neighbor: z35, weight: 1, direction: Direction.right.rawValue)
@@ -705,6 +761,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     
     @IBAction func startNavigation(_ sender: UIButton) {
         self.imageView.image = originalImage
+        lastDirection = ""
         //self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
         flagView?.isHidden = true
         
@@ -734,6 +791,10 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     }
     
     @IBAction func stopNavigation(_ sender: UIButton) {
+        stopNavigation()
+    }
+    
+    func stopNavigation() {
         UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
             self.navigationView.transform = CGAffineTransform(translationX: 0, y: self.view.bounds.size.height)
         })
@@ -753,9 +814,9 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
             if let arduinoCharacteristic = self.arduinoCharacteristic {
                 arduinoPeripherals.setNotifyValue(false, for: arduinoCharacteristic)
             }
-            centralManager?.cancelPeripheralConnection(arduinoPeripherals)
+            self.centralManager?.cancelPeripheralConnection(arduinoPeripherals)
         }
-        arduinoCharacteristic = nil
+        self.arduinoCharacteristic = nil
     }
     
     func pauseScan() {
@@ -1017,46 +1078,8 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
                         }
                         
                         if let bestGraph = bestGraph {
-//                            let newPosition = normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!))
-//                            fifoPositions.append(newPosition)
-//                            if fifoPositions.count >= 5 {
-//                                fifoPositions.remove(at: 0)
-//                            }
-//                            
-//                            var maximumDistance: CGFloat = 0
-//                            for k in 0..<fifoPositions.count {
-//                                for l in k+1..<fifoPositions.count {
-//                                    let distance = CGPointDistance(from: fifoPositions[k], to: fifoPositions[l])
-//                                    if maximumDistance < distance {
-//                                        maximumDistance = distance
-//                                    }
-//                                }
-//                            }
-//                            if maximumDistance < 5000*(imageView.image?.size.width)!/realRoomWidth {
-//                                navigation(position: normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!)), heading: heading, graph: bestGraph)
-//                            }
-                            
                             navigation(position: normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!)), heading: heading, graph: bestGraph)
                         } else {
-//                            let newPosition = normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!))
-//                            fifoPositions.append(newPosition)
-//                            if fifoPositions.count >= 5 {
-//                                fifoPositions.remove(at: 0)
-//                            }
-//                            
-//                            var maximumDistance: CGFloat = 0
-//                            for k in 0..<fifoPositions.count {
-//                                for l in k+1..<fifoPositions.count {
-//                                    let distance = CGPointDistance(from: fifoPositions[k], to: fifoPositions[l])
-//                                    if maximumDistance < distance {
-//                                        maximumDistance = distance
-//                                    }
-//                                }
-//                            }
-//                            if maximumDistance < 5000*(imageView.image?.size.width)!/realRoomWidth {
-//                                updateMap(x: CGFloat(newPosition.x), y: CGFloat(newPosition.y), heading: CGFloat(180)+heading+CGFloat(0)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord. divido per 100 l'accelerazione per trasformare da mG a m/s^2
-//                            }
-                            
                             let newPosition = normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!))
                             updateMap(x: newPosition.x, y: newPosition.y, heading: CGFloat(180)+heading+CGFloat(0)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord. divido per 100 l'accelerazione per trasformare da mG a m/s^2
                         }
