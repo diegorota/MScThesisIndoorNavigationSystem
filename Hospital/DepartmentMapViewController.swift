@@ -107,7 +107,27 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         
         self.allGraph = self.initializeGraph()
         originalImage = self.imageView.image!
-        //self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
+        self.imageView.image = self.drawLines(size: self.imageView.image!.size, image: self.imageView.image!, graph: self.allGraph, color: UIColor.blue)
+        
+        for node in allGraph.canvas {
+            if node.isPOI {
+                let nodeView = UIView(frame: CGRect(x: node.position.x-5, y: node.position.y-5, width: 10, height: 10))
+                let nodeImage = UIImageView()
+                nodeImage.image = UIImage(named: "nodo")?.withRenderingMode(.alwaysTemplate)
+                nodeImage.tintColor = UIColor.red
+                nodeView.addSubview(nodeImage)
+                nodeImage.frame = CGRect(x:0,y:0,width:10,height:10)
+                imageView.addSubview(nodeView)
+            } else {
+                let nodeView = UIView(frame: CGRect(x: node.position.x-2.5, y: node.position.y-2.5, width: 5, height: 5))
+                let nodeImage = UIImageView()
+                nodeImage.image = UIImage(named: "nodo")?.withRenderingMode(.alwaysTemplate)
+                nodeImage.tintColor = UIColor.orange
+                nodeView.addSubview(nodeImage)
+                nodeImage.frame = CGRect(x:0,y:0,width:5,height:5)
+                imageView.addSubview(nodeView)
+            }
+        }
         
         // Setto audio navigatore
         initializeSounds()
@@ -297,7 +317,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         for vertex in graph.canvas {
             for edge in vertex.neighbors {
                 if let context = UIGraphicsGetCurrentContext() {
-                    context.setLineWidth(5.0)
+                    context.setLineWidth(2.0)
                     context.setStrokeColor(color.cgColor)
                     context.move(to: vertex.position)
                     context.addLine(to: edge.neighbor.position)
