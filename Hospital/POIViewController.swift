@@ -51,9 +51,9 @@ class POIViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let cell = tableView.dequeueReusableCell(withIdentifier: "POICell", for: indexPath)
         
         if isSearching {
-            cell.textLabel?.text = filteredPOI[indexPath.row].name
+            cell.textLabel?.text = filteredPOI[indexPath.row].name + " - " + filteredPOI[indexPath.row].manager
         } else {
-            cell.textLabel?.text = POIList[indexPath.row].name
+            cell.textLabel?.text = POIList[indexPath.row].name + " - " + POIList[indexPath.row].manager
         }
         cell.textLabel?.textColor = Colors.darkColor
         return cell
