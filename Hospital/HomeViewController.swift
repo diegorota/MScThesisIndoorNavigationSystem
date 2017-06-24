@@ -237,10 +237,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let cell = collectionView.cellForItem(at: indexPath)
             cell?.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }) { [unowned self] (finished: Bool) in
-            if indexPath.item != self.tiles.count {
+            if indexPath.item != self.tiles.count && indexPath.item != 5 {
                 if let newView = self.storyboard?.instantiateViewController(withIdentifier: "TabBar") as? UITabBarController {
                     newView.selectedIndex = indexPath.row-1
                     self.navigationController?.pushViewController(newView, animated: true)
+                }
+            } else if indexPath.item == 5 {
+                if let map = self.storyboard?.instantiateViewController(withIdentifier: "DepartmentMap") {
+                    self.navigationController?.pushViewController(map, animated: true)
                 }
             } else {
                 if let newView = self.storyboard?.instantiateViewController(withIdentifier: "News") as? NewsViewController {

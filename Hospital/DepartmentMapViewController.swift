@@ -72,6 +72,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
     var obstacle: AVAudioPlayer?
     var finish: AVAudioPlayer?
     var lastDirection: String  = ""
+    let headingDelta = 180
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -238,7 +239,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         let nearestVertex = getNearestVertex(position: position, graph: bestGraph!)
     
         if let nearestVertex = nearestVertex {
-            updateMap(x: nearestVertex.position.x, y: nearestVertex.position.y, heading: CGFloat(180)+heading)
+            updateMap(x: nearestVertex.position.x, y: nearestVertex.position.y, heading: CGFloat(headingDelta)+heading)
             
             if nearestVertex.neighbors.count != 0 {
                 
@@ -274,19 +275,22 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
                 }
                 
             } else {
-                let direction = "\(nearestVertex.key!). You are arrived!"
+                let direction = "\(nearestVertex.key!). You have arrived!"
                 print(direction)
                 navigationView.labelDirection.text = direction.uppercased()
                 
                 if let finish = finish {
                     finish.play()
                 }
-                stopNavigation()
+                
+                let timer: Timer
+                timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(stopNav), userInfo: nil, repeats: false)
+                //stopNavigation()
                 
             }
         } else {
             
-            updateMap(x: position.x, y: position.y, heading: CGFloat(180)+heading)
+            updateMap(x: position.x, y: position.y, heading: CGFloat(headingDelta)+heading)
             
             navigationView.backgroundView.backgroundColor = UIColor.red
             let direction = "Searching for the optimal route"
@@ -390,31 +394,32 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
 		//let z24 = graph.addVertex(key: "z24", position: CGPoint(x: 271, y: 107))
 		let z25 = graph.addVertex(key: "z25", position: CGPoint(x: 281, y: 96))
 		//CORRIDOIO ROSSI
-        let z26 = graph.addVertex(key: "z26", position: CGPoint(x: 247, y: 423))
-        let z27 = graph.addVertex(key: "z27", position: CGPoint(x: 247, y: 403))
-        let z28 = graph.addVertex(key: "z28", position: CGPoint(x: 247, y: 385))
-		let z29 = graph.addVertex(key: "z29", position: CGPoint(x: 247, y: 366))
-		let z30 = graph.addVertex(key: "z30", position: CGPoint(x: 247, y: 348))
-		let z31 = graph.addVertex(key: "z31", position: CGPoint(x: 247, y: 326))
-		let z32 = graph.addVertex(key: "z32", position: CGPoint(x: 247, y: 304))
-		let z33 = graph.addVertex(key: "z33", position: CGPoint(x: 247, y: 284))
-		let z34 = graph.addVertex(key: "z34", position: CGPoint(x: 247, y: 264))
-		let z35 = graph.addVertex(key: "z35", position: CGPoint(x: 247, y: 242))
-		let z36 = graph.addVertex(key: "z36", position: CGPoint(x: 247, y: 218))
-		let z37 = graph.addVertex(key: "z37", position: CGPoint(x: 247, y: 200))
-		let z38 = graph.addVertex(key: "z38", position: CGPoint(x: 247, y: 180))
-		let z39 = graph.addVertex(key: "z39", position: CGPoint(x: 247, y: 160))
-		let z40 = graph.addVertex(key: "z40", position: CGPoint(x: 247, y: 140))
+        let x = 10
+        let z26 = graph.addVertex(key: "z26", position: CGPoint(x: 247+x, y: 423))
+        let z27 = graph.addVertex(key: "z27", position: CGPoint(x: 247+x, y: 403))
+        let z28 = graph.addVertex(key: "z28", position: CGPoint(x: 247+x, y: 385))
+		let z29 = graph.addVertex(key: "z29", position: CGPoint(x: 247+x, y: 366))
+		let z30 = graph.addVertex(key: "z30", position: CGPoint(x: 247+x, y: 348))
+		let z31 = graph.addVertex(key: "z31", position: CGPoint(x: 247+x, y: 326))
+		let z32 = graph.addVertex(key: "z32", position: CGPoint(x: 247+x, y: 304))
+		let z33 = graph.addVertex(key: "z33", position: CGPoint(x: 247+x, y: 284))
+		let z34 = graph.addVertex(key: "z34", position: CGPoint(x: 247+x, y: 264))
+		let z35 = graph.addVertex(key: "z35", position: CGPoint(x: 247+x, y: 242))
+		let z36 = graph.addVertex(key: "z36", position: CGPoint(x: 247+x, y: 218))
+		let z37 = graph.addVertex(key: "z37", position: CGPoint(x: 247+x, y: 200))
+		let z38 = graph.addVertex(key: "z38", position: CGPoint(x: 247+x, y: 180))
+		let z39 = graph.addVertex(key: "z39", position: CGPoint(x: 247+x, y: 160))
+		let z40 = graph.addVertex(key: "z40", position: CGPoint(x: 247+x, y: 140))
 		//CORRIDOIO STAMPANTE
 		let z41 = graph.addVertex(key: "z41", position: CGPoint(x: 145, y: 433))
 		let z42 = graph.addVertex(key: "z42", position: CGPoint(x: 164, y: 433))
 		let z43 = graph.addVertex(key: "z43", position: CGPoint(x: 183, y: 433))
 		let z44 = graph.addVertex(key: "z44", position: CGPoint(x: 202, y: 433))
 		let z45 = graph.addVertex(key: "z45", position: CGPoint(x: 221, y: 433))
-		let z46 = graph.addVertex(key: "z46", position: CGPoint(x: 240, y: 433))
-        let z46a = graph.addVertex(key: "z46a", position: CGPoint(x: 240, y: 456))
-        let z46b = graph.addVertex(key: "z46b", position: CGPoint(x: 240, y: 468))
-        let z46c = graph.addVertex(key: "z46c", position: CGPoint(x: 240, y: 480))
+		let z46 = graph.addVertex(key: "z46", position: CGPoint(x: 247+x, y: 433))
+        let z46a = graph.addVertex(key: "z46a", position: CGPoint(x: 247+x, y: 456))
+        let z46b = graph.addVertex(key: "z46b", position: CGPoint(x: 247+x, y: 468))
+        let z46c = graph.addVertex(key: "z46c", position: CGPoint(x: 247+x, y: 480))
 		//INTERNO SALA TESISTI
 		let z47 = graph.addVertex(key: "z47", position: CGPoint(x: 149, y: 337))
 		let z48 = graph.addVertex(key: "z48", position: CGPoint(x: 167, y: 337))
@@ -827,6 +832,10 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
         stopNavigation()
     }
     
+    func stopNav() {
+        stopNavigation()
+    }
+    
     func stopNavigation() {
         UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
             self.navigationView.transform = CGAffineTransform(translationX: 0, y: self.view.bounds.size.height)
@@ -1124,7 +1133,7 @@ class DepartmentMapViewController: UIViewController, UIScrollViewDelegate, CBCen
                             navigation(position: normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!)), heading: heading, graph: bestGraph)
                         } else {
                             let newPosition = normalizePosition(meterX: CGFloat((position?.x)!), meterY: CGFloat((position?.y)!))
-                            updateMap(x: newPosition.x, y: newPosition.y, heading: CGFloat(180)+heading+CGFloat(0)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord. divido per 100 l'accelerazione per trasformare da mG a m/s^2
+                            updateMap(x: newPosition.x, y: newPosition.y, heading: CGFloat(headingDelta)+heading+CGFloat(0)) //85 è lo sfasamento del nostro sistema di riferiemnto verso il nord. divido per 100 l'accelerazione per trasformare da mG a m/s^2
                         }
                     }
                     lastString = lastPacket.replacingOccurrences(of: "R", with: "")
